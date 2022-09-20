@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+#executable
+cub3D
+
 # Object files
 *.o
 *.ko
