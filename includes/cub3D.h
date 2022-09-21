@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "libft.h"				// libft
+# include "mlx.h"               // minilibx
 # include <stdio.h>				// printf(), perror()
 # include <errno.h>				// errno (macro)
 # include <string.h>			// strerror()
@@ -22,5 +23,22 @@
 # include <fcntl.h>				// open()
 # include <stdlib.h> 			// exit()
 # include "ansi_color_codes.h"	// colours 🌈
+
+# define KEY_ESC	65307       // ESC keycode
+
+typedef struct s_mlx_struct
+{
+	void	*pointer;
+	void	*window;
+}				t_mlx_struct;
+
+// 									window.c
+void	window(t_mlx_struct *mlx);
+
+// 									destroy.c
+int		destroy(t_mlx_struct *mlx);
+
+// 									key_press.c
+int		keystrokes_management(int keycode, t_mlx_struct *mlx);
 
 #endif
