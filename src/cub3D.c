@@ -34,10 +34,9 @@ void	print_err_exit(int errcode)
 
 int	main(int argc, char **argv)
 {
-	int	fd;
+	int				fd;
 	t_mlx_struct	mlx;
 
-	
 	if (argc != 2)
 		print_err_exit(1);
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
