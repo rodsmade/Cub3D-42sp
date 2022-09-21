@@ -22,6 +22,7 @@ DESTROY_PATH	= destroy/
 KEYSTROKES_PATH = keystrokes/
 
 SRCS			=	cub3D.c 						\
+					error_handling.c				\
 					$(WINDOW_PATH)window.c			\
 					$(DESTROY_PATH)destroy.c		\
 					$(KEYSTROKES_PATH)keystrokes.c	\
