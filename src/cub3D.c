@@ -6,30 +6,29 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/21 10:51:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:11:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-char *errcode_to_string(int errcode)
+char	*get_error_message(int errcode)
 {
-	char *strings[] = {
-		BGRAY "Undefined error message" RESET,
-		"Run: " BWHITE "./cub3d " RESET UPURPLE "PATH_TO_MAP" RESET,
-		"File extension must be " UPURPLE ".cub" RESET
-	};
-	return (strings[errcode]);
+	static char	*error_messages[3] = {\
+		BGRAY "Undefined error message" RESET, \
+		"Run: " BWHITE "./cub3d " RESET UPURPLE "PATH_TO_MAP" RESET, \
+		"File extension must be " UPURPLE ".cub" RESET};
+
+	return (error_messages[errcode]);
 }
 
 void	print_err_exit(int errcode)
 {
 	printf(PURPLEB " ❌ Error " RESET "\n");
 	if (!errno)
-		printf("%s\n", errcode_to_string(errcode));
+		printf("%s\n", get_error_message(errcode));
 	else
 		perror(NULL);
-	// cleanup();
 	exit(errcode || errno);
 }
 
