@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/21 10:32:20 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:29:21 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,20 @@
 
 # define KEY_ESC	65307       // ESC keycode
 
-typedef struct s_mlx_struct
+typedef struct s_mlx_img
 {
 	void	*pointer;
-	void	*window;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+}				t_mlx_img;
+
+typedef struct s_mlx_struct
+{
+	void		*pointer;
+	void		*window;
+	t_mlx_img	*img;
 }				t_mlx_struct;
 
 // 									window.c
