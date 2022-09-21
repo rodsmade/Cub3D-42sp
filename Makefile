@@ -5,10 +5,13 @@ CFLAGS			=	-g -Wall -Werror -Wextra
 RM				=	rm -f
 VALGRIND		=	valgrind --leak-check=full --show-leak-kinds=all \
 						--track-origins=yes -q --tool=memcheck
-INCLUDES_DIR	=	./includes ./libs/libft
+INCLUDES_DIR	=	./includes ./libs/libft ./libs/minilibx-linux
 SRC_DIR			=	./src
 OBJ_DIR			=	./obj
 
+MLIBX_PATH		=	./libs/minilibx-linux
+MLIBX			=	$(MLIBX_PATH)/libmlx.a
+MLX_FLAGS		=	-L$(MLIBX_PATH) -lmlx -lXext -lX11
 LIBFT_PATH		=	./libs/libft
 LIBFT			=	$(LIBFT_PATH)/libft.a
 LIBFT_FLAGS 	=	-L$(LIBFT_PATH) -lft
@@ -21,22 +24,27 @@ SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
 
 all:	$(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBFT_FLAGS)
+$(NAME): $(LIBFT) $(MLIBX_PATH) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBFT_FLAGS) $(MLX_FLAGS)
+
+$(MLIBX_PATH):
+	make -C $(MLIBX_PATH)
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ $(LIBFT_FLAGS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS)
 
 clean:
+	# make -C clean $(MLIBX_PATH)
 	make clean -C $(LIBFT_PATH)
 	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	make fclean -C $(LIBFT_PATH)
+	# make clean $(MLIBX_PATH)
 	$(RM) $(NAME)
 
 re:	fclean all
