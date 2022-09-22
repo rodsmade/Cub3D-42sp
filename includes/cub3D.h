@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/21 19:47:35 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:50:49 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdlib.h> 			// exit()
 # include "ansi_color_codes.h"	// colours 🌈
 
+// ------------------------------------------------		MACROS		-----------
 # define KEY_ESC	65307		// ESC keycode
 
 // ------------------------------------------------		STRUCTS		-----------
@@ -39,15 +40,19 @@ typedef struct s_mlx_struct
 // ------------------------------------------------		ENUMS		-----------
 
 enum e_http_method {
-	SYSCALL_ERR,
-	WRONG_ARG_NO,
-	FILE_EXT_ERR
+	SYSCALL_ERROR,
+	WRONG_ARGS_NO,
+	FILE_EXTENSION_ERROR,
+	INVALID_TEXTURE_PARAMS
 };
-
 
 // ------------------------------------------------		PROTOTYPES	-----------
 // error_handling.c
 void	print_err_exit(int errcode);
+
+// input_validation.c
+void	validate_args(int argc, char *argv[], int *input_fd);
+void	validate_input_file(int fd);
 
 // window.c
 void	window(t_mlx_struct *mlx);
