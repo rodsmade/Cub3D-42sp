@@ -25,6 +25,7 @@
 # include "ansi_color_codes.h"	// colours 🌈
 
 # define KEY_ESC	65307       // ESC keycode
+# define IMG_TEST			"./img/blueMacaw.xpm"
 
 typedef struct s_mlx_img
 {

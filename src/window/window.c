@@ -18,10 +18,10 @@ static void	image(t_mlx_struct *mlx)
 	int y;
 
 	mlx->img = malloc(sizeof(t_mlx_img));
-	x = 36;
-	y = 36;
+	x = 150;
+	y = 150;
 	mlx->img->pointer = mlx_xpm_file_to_image
-		(mlx->pointer, "./img/blueMacaw.xpm", &x, &y);
+		(mlx->pointer, IMG_TEST, &x, &y);
 	mlx_put_image_to_window(mlx->pointer, mlx->window, mlx->img->pointer, 250, 250);
 }
 
