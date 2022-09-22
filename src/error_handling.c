@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/21 21:19:00 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/22 11:47:13 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ static char	*get_error_message(int errcode)
 		BGRAY "Undefined error message" RESET, \
 		"Run: " BWHITE "./cub3d " RESET UPURPLE "PATH_TO_MAP" RESET, \
 		"File extension must be " UPURPLE ".cub" RESET, \
-		"Wrong texture parameter. Must be either " UPURPLE "NO" RESET ", " \
-			UPURPLE "SO" RESET ", " UPURPLE "EA" RESET " or " \
-			UPURPLE "WE" RESET ", followed by a space and the path to " \
-			"the texture file." \
+		"Invalid texture parameter. Must be either " UPURPLE "NO" RESET ", " \
+			UPURPLE "SO" RESET ", " UPURPLE "EA" RESET ", " UPURPLE "WE" RESET \
+			", " UPURPLE "F" RESET " or " UPURPLE "C" RESET \
+			", followed by a space and the path to the texture file.", \
+		"Missing parameter. Provide " UPURPLE "4 texture file paths" RESET \
+			" and " UPURPLE "2 colours." RESET, \
+		"Redundant parameter found. Parameter duplicates not allowed."
 		};
-
 	return (error_messages[errcode]);
 }
 

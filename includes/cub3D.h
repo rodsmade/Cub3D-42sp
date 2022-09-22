@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/21 20:50:49 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/22 11:46:08 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <fcntl.h>				// open()
 # include <stdlib.h> 			// exit()
 # include "ansi_color_codes.h"	// colours 🌈
+# include <stdbool.h>			// bool type
 
 // ------------------------------------------------		MACROS		-----------
 # define KEY_ESC	65307		// ESC keycode
@@ -39,11 +40,13 @@ typedef struct s_mlx_struct
 
 // ------------------------------------------------		ENUMS		-----------
 
-enum e_http_method {
+enum e_err_codes {
 	SYSCALL_ERROR,
 	WRONG_ARGS_NO,
 	FILE_EXTENSION_ERROR,
-	INVALID_TEXTURE_PARAMS
+	INVALID_TEXTURE_PARAMS,
+	MISSING_PARAMETER,
+	REDUNDANT_PARAMETER_FOUND
 };
 
 // ------------------------------------------------		PROTOTYPES	-----------

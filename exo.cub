@@ -1,1 +1,7 @@
-EA ./north_texture
+NO               ./north_texture
+F ./north_texture
+SO               ./north_texture
+EA               ./north_texture
+WE               ./north_texture
+C               ./north_texture
+./north_texture
