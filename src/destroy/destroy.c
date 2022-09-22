@@ -19,6 +19,7 @@ int	destroy(t_mlx_struct *mlx)
 	mlx_clear_window(mlx->pointer, mlx->window);
 	mlx_destroy_window(mlx->pointer, mlx->window);
 	mlx_destroy_display(mlx->pointer);
+	mlx_destroy_image(game->mlx_ptr, mlx->img->pointer);
 	free(mlx->pointer);
 	exit (42);
 }

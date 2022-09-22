@@ -12,25 +12,24 @@
 
 #include "cub3D.h"
 
+static int	put_image(t_mlx_struct *mlx)
+{
+	mlx_put_image_to_window(mlx->pointer, mlx->window,
+		mlx->img->pointer, 250, 250);
+	return (0);
+}
+
 static void	image(t_mlx_struct *mlx)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	mlx->img = malloc(sizeof(t_mlx_img));
-	x = 16;
-	y = 16;
+	x = 32;
+	y = 32;
 	mlx->img->pointer = mlx_xpm_file_to_image
 		(mlx->pointer, IMG_TEST, &x, &y);
-	while (x < 150) 
-	{
-		while (y < 50)
-		{
-			mlx_put_image_to_window(mlx->pointer, mlx->window, mlx->img->pointer, x, y);
-			y++;
-		}
-		x++;
-	}
+	mlx_loop_hook(mlx->pointer, put_image, mlx);
 }
 
 void	window(t_mlx_struct *mlx)
