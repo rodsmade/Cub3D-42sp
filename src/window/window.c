@@ -18,13 +18,13 @@ static void	image(t_mlx_struct *mlx)
 	int y;
 
 	mlx->img = malloc(sizeof(t_mlx_img));
-	x = 0;
-	y = 0;
+	x = 16;
+	y = 16;
 	mlx->img->pointer = mlx_xpm_file_to_image
 		(mlx->pointer, IMG_TEST, &x, &y);
 	while (x < 150) 
 	{
-		while (y < 150)
+		while (y < 50)
 		{
 			mlx_put_image_to_window(mlx->pointer, mlx->window, mlx->img->pointer, x, y);
 			y++;
