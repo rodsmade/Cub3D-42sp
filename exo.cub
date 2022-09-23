@@ -1,5 +1,5 @@
 NO               ./north_texture
-F ./north_texture
+F 255
 SO               ./north_texture
 EA               ./north_texture
 WE               ./north_texture

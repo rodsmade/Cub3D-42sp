@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/22 11:46:08 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:37:29 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ enum e_err_codes {
 	FILE_EXTENSION_ERROR,
 	INVALID_TEXTURE_PARAMS,
 	MISSING_PARAMETER,
-	REDUNDANT_PARAMETER_FOUND
+	REDUNDANT_PARAMETER_FOUND,
+	INVALID_COLOUR_PARAM
 };
 
 // ------------------------------------------------		PROTOTYPES	-----------

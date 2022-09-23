@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/22 12:21:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/22 22:01:32 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,12 @@ int	get_colour_index(char d)
 	return (-1);
 }
 
+void	redundant_parameter_exit(char *line)
+{
+	ft_free_ptr((void *)&line);
+	print_err_exit(REDUNDANT_PARAMETER_FOUND);
+}
+
 void	check_for_valid_path(char *line, t_textures *textures)
 {
 	int	i;
@@ -99,10 +105,7 @@ void	check_for_valid_path(char *line, t_textures *textures)
 	if (textures->fds[get_direction_index(line[0])] == -42)
 		(textures->params_count)++;
 	else
-	{
-		ft_free_ptr((void *)&line);
-		print_err_exit(REDUNDANT_PARAMETER_FOUND);
-	}
+		redundant_parameter_exit(line);
 	i = 2 + jump_spaces(&line[2]);
 	fd = open(&line[i], O_RDONLY);
 	if (fd == -1)
@@ -116,18 +119,40 @@ void	check_for_valid_path(char *line, t_textures *textures)
 
 void	check_for_valid_colour(char *line, t_textures *textures)
 {
-	(void) line;
-	(void) textures;
+	int	i;
+	int	n;
+
 	if (textures->colours[get_colour_index(line[0])][0] == -42)
 		(textures->params_count)++;
 	else
-	{
-		ft_free_ptr((void *)&line);
-		print_err_exit(REDUNDANT_PARAMETER_FOUND);
-	}
-	printf("colour check yet to be implemented\n");
+		redundant_parameter_exit(line);
+	i = 1 + jump_spaces(&line[1]);
+	if (!ft_isdigit(line[i]))
+		print_err_exit(INVALID_COLOUR_PARAM);
+	n = 0;
+	i--;
+	while (ft_isdigit(line[++i]))
+		n++;
+	if (n > 3)
+		print_err_exit(INVALID_COLOUR_PARAM);
+	char	temp_a[3];
+	int		temp_i;
+	ft_strlcpy(temp_a, &line[i - n], n + 1);
+	temp_i = ft_atoi(temp_a);
+	if (temp_i > 255 || temp_i < 0)
+		print_err_exit(INVALID_COLOUR_PARAM);
+	textures->colours[get_colour_index(line[0])][0] = temp_i;
+	// test failed, check again.
+
+	// i = 1 + jump_spaces(&line[1]);
+	// if (line[i] != ',')
+	// 	print_err_exit(INVALID_COLOUR_PARAM);
+
+
+
+
 	// TODO: implement actual colour logic:
-	textures->colours[get_colour_index(line[0])][0] = 0;
+	// textures->colours[get_colour_index(line[0])][0] = 0;
 	return ;
 }
 

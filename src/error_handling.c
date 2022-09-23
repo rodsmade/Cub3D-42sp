@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/22 11:47:13 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:40:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ static char	*get_error_message(int errcode)
 			", followed by a space and the path to the texture file.", \
 		"Missing parameter. Provide " UPURPLE "4 texture file paths" RESET \
 			" and " UPURPLE "2 colours." RESET, \
-		"Redundant parameter found. Parameter duplicates not allowed."
+		"Redundant parameter found. Parameter duplicates not allowed.", \
+		"Invalid colour format. Use: " UPURPLE "R, G, B" RESET \
+			", each value ranging from 0 to 255."
 		};
 	return (error_messages[errcode]);
 }
