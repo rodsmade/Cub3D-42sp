@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/22 22:01:32 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/26 11:46:41 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,42 +117,80 @@ void	check_for_valid_path(char *line, t_textures *textures)
 	return ;
 }
 
-void	check_for_valid_colour(char *line, t_textures *textures)
+void check_duplicate_parameter(char *line, t_textures *textures)
 {
-	int	i;
-	int	n;
-
 	if (textures->colours[get_colour_index(line[0])][0] == -42)
 		(textures->params_count)++;
 	else
 		redundant_parameter_exit(line);
-	i = 1 + jump_spaces(&line[1]);
-	if (!ft_isdigit(line[i]))
+	return ;
+}
+
+void check_parameter_count(char *line, char **colours_array)
+{
+	int	comma_count;
+	int	params_count;
+	int	i;
+
+	comma_count = 0;
+	i = -1;
+	while (line[++i])
+		if (line[i] == ',')
+			comma_count++;
+	if (comma_count != 2)
 		print_err_exit(INVALID_COLOUR_PARAM);
-	n = 0;
-	i--;
-	while (ft_isdigit(line[++i]))
-		n++;
-	if (n > 3)
+	params_count = 0;
+	i = -1;
+	while (colours_array[++i])
+		params_count++;
+	if (params_count != 3)
 		print_err_exit(INVALID_COLOUR_PARAM);
-	char	temp_a[3];
-	int		temp_i;
-	ft_strlcpy(temp_a, &line[i - n], n + 1);
-	temp_i = ft_atoi(temp_a);
-	if (temp_i > 255 || temp_i < 0)
+	return ;
+}
+
+void	check_conversion_chars(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] != '+' && str[i] != '-' && !ft_isdigit(str[i]))
+			print_err_exit(INVALID_COLOUR_PARAM);
+	}
+	return ;
+}
+
+int	convert_colour_to_int(char *colour)
+{
+	int	colour_code;
+	char *trimmed;
+
+	trimmed = ft_strtrim(colour, " \t\v\r");
+	ft_free_ptr((void*)&colour);
+	check_conversion_chars(trimmed);
+	colour_code = ft_atoi(trimmed);
+	if (colour_code < 0 || colour_code > 255)
 		print_err_exit(INVALID_COLOUR_PARAM);
-	textures->colours[get_colour_index(line[0])][0] = temp_i;
-	// test failed, check again.
+	ft_free_ptr((void *)&trimmed);
+	return (colour_code);
+}
 
-	// i = 1 + jump_spaces(&line[1]);
-	// if (line[i] != ',')
-	// 	print_err_exit(INVALID_COLOUR_PARAM);
+void	check_for_valid_colour(char *line, t_textures *textures)
+{
+	int		i;
+	char	**colours_array;
 
-
-
-
-	// TODO: implement actual colour logic:
-	// textures->colours[get_colour_index(line[0])][0] = 0;
+	check_duplicate_parameter(line, textures);
+	colours_array = ft_split(&line[1], ',');
+	check_parameter_count(line, colours_array);
+	i = -1;
+	while (colours_array[++i])
+		textures->colours[get_colour_index(line[0])][i] = convert_colour_to_int(colours_array[i]);
+	printf("%c colour: [%i], [%i], [%i]\n", line[0],
+			textures->colours[get_colour_index(line[0])][0],
+			textures->colours[get_colour_index(line[0])][1],
+			textures->colours[get_colour_index(line[0])][2]);
 	return ;
 }
 

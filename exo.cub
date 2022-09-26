@@ -1,7 +1,6 @@
 NO               ./north_texture
-F 255
 SO               ./north_texture
 EA               ./north_texture
 WE               ./north_texture
-C               ./north_texture
-./north_texture
+F            42, 55, 57
+C 255, 255, 255
