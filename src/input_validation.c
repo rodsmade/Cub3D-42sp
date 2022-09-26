@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/26 11:46:41 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:03:42 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ char *get_next_line_trimmed(int input_fd)
 	return (line_read);
 }
 
-void	validate_texture_parameters(int input_fd)
+void	validate_map_parameters(int input_fd)
 {
 	static t_textures	textures;
 	// line tem q estar dentro do structzão
@@ -242,7 +242,7 @@ void	validate_texture_parameters(int input_fd)
 	line = get_next_line_trimmed(input_fd);
 	while (line)
 	{
-		if (ft_strncmp(line, "\n", 2) != 0)
+		if (line[0])
 		{
 			// achou algo diferente de \n
 			if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E' || line[0] == 'W' || line[0] == 'F' || line[0] == 'C')
@@ -259,21 +259,11 @@ void	validate_texture_parameters(int input_fd)
 	// sai dessa função com line na posição onde (inicia o mapa)
 }
 
-void	open_texture_files(void)
-{
-	
-}
-
-void	validate_map(void)
-{
-	
-}
-
 void	validate_input_file(int input_fd)
 {
-	validate_texture_parameters(input_fd);
-	open_texture_files();
-	validate_map();
+	validate_map_parameters(input_fd);
+	// open_texture_files();
+	// validate_map();
 }
 //  Except for the map content, each type of element can be separated by one or more empty line(s).
 //  Except for the map, each type of information from an element can be separated by one or more space(s).
