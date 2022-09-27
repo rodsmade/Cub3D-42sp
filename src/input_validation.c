@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/26 20:03:42 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:51:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	check_for_valid_path(char *line, t_textures *textures)
 	int	i;
 	int	fd;
 
-	printf("line: >>%s<<\n", line);
+	// printf("line: >>%s<<\n", line);
 	if (textures->fds[get_direction_index(line[0])] == -42)
 		(textures->params_count)++;
 	else
@@ -187,10 +187,10 @@ void	check_for_valid_colour(char *line, t_textures *textures)
 	i = -1;
 	while (colours_array[++i])
 		textures->colours[get_colour_index(line[0])][i] = convert_colour_to_int(colours_array[i]);
-	printf("%c colour: [%i], [%i], [%i]\n", line[0],
-			textures->colours[get_colour_index(line[0])][0],
-			textures->colours[get_colour_index(line[0])][1],
-			textures->colours[get_colour_index(line[0])][2]);
+	// printf("%c colour: [%i], [%i], [%i]\n", line[0],
+	// 		textures->colours[get_colour_index(line[0])][0],
+	// 		textures->colours[get_colour_index(line[0])][1],
+	// 		textures->colours[get_colour_index(line[0])][2]);
 	return ;
 }
 
