@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 08:58:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/27 09:14:05 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/27 11:27:49 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 bool	is_direction_identifier(char identifier[2])
 {
 	return (ft_strncmp(identifier, "NO", 2) == 0
-			|| ft_strncmp(identifier, "SO", 2) == 0
-			|| ft_strncmp(identifier, "WE", 2) == 0
-			|| ft_strncmp(identifier, "EA", 2) == 0);
+		|| ft_strncmp(identifier, "SO", 2) == 0
+		|| ft_strncmp(identifier, "WE", 2) == 0
+		|| ft_strncmp(identifier, "EA", 2) == 0);
 }
 
 int	get_direction_index(char d)
@@ -42,13 +42,13 @@ int	get_colour_index(char c)
 	return (-1);
 }
 
-bool	is_valid_parameter_char(char  c)
+bool	is_valid_parameter_char(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W'
-			|| c == 'F' || c == 'C');
+		|| c == 'F' || c == 'C');
 }
 
-bool has_valid_param_identifier(char *str)
+bool	has_valid_param_identifier(char *str)
 {
 	return (ft_strncmp(str, "NO ", 3) == 0
 		|| ft_strncmp(str, "SO ", 3) == 0
