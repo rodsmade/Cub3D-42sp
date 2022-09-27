@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
 /*   Updated: 2022/09/27 12:25:49 by roaraujo         ###   ########.fr       */
@@ -28,14 +28,26 @@
 # include <stdbool.h>			// bool type
 
 // ------------------------------------------------		MACROS		-----------
+
 # define KEY_ESC	65307		// ESC keycode
+# define IMG_TEST			"./img/blueMacaw.xpm"
 
 // ------------------------------------------------		STRUCTS		-----------
 
-typedef struct s_mlx_struct
+typedef struct s_mlx_img
 {
 	void	*pointer;
-	void	*window;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+}				t_mlx_img;
+
+typedef struct s_mlx_struct
+{
+	void		*pointer;
+	void		*window;
+	t_mlx_img	*img;
 }				t_mlx_struct;
 
 typedef struct s_map_parameters
