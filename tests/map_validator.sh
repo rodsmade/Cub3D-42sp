@@ -127,7 +127,7 @@ fi
 
 06_test_floor_colour_format_F_space_255_comma_255_comma_255_must_return_exit_code_0() {
 # ARRANGE
-INPUT_FILE='./valid_maps/06_valid_colour_parameters.cub'
+INPUT_FILE='./valid_maps/06_valid_floor_colour_parameters.cub'
 EXPECTED_EXIT_CODE=0
 LOG_FILE='test_06_err'
 
@@ -215,6 +215,96 @@ else
 fi
 }
 
+12_test_ceiling_colour_format_C_space_255_comma_255_comma_255_must_return_exit_code_0() {
+# ARRANGE
+INPUT_FILE='./valid_maps/12_valid_ceiling_colour_parameters.cub'
+EXPECTED_EXIT_CODE=0
+LOG_FILE='test_12_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 12_test_ceiling_colour_format_C_space_255_comma_255_comma_255_must_return_exit_code_0\n"
+else
+	printf "$BRED[NOK]$RESET 12_test_ceiling_colour_format_C_space_255_comma_255_comma_255_must_return_exit_code_0\n"
+fi
+}
+
+13_test_ceiling_colour_format_C_many_spaces_255_space_comma_255_space_comma_255_must_return_exit_code_0() {
+# ARRANGE
+INPUT_FILE='./valid_maps/13_ceiling_colour_elements_separated_by_many_spaces.cub'
+EXPECTED_EXIT_CODE=0
+LOG_FILE='test_13_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 13_test_ceiling_colour_format_C_many_spaces_255_space_comma_255_space_comma_255_must_return_exit_code_0\n"
+else
+	printf "$BRED[NOK]$RESET 13_test_ceiling_colour_format_C_many_spaces_255_space_comma_255_space_comma_255_must_return_exit_code_0\n"
+fi
+}
+
+14_test_ceiling_colour_format_C_space_255_comma_255_comma_255_comma_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/14_ceiling_colour_elements_with_trailing_commas.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_14_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 14_test_ceiling_colour_format_C_space_255_comma_255_comma_255_comma_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 14_test_ceiling_colour_format_C_space_255_comma_255_comma_255_comma_must_return_exit_code_1\n"
+fi
+}
+
+15_test_ceiling_colour_format_C_space_255_comma_255_comma_256_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/15_ceiling_colour_elements_value_above_range.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_15_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 15_test_ceiling_colour_format_C_space_255_comma_255_comma_256_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 15_test_ceiling_colour_format_C_space_255_comma_255_comma_256_must_return_exit_code_1\n"
+fi
+}
+
+16_test_ceiling_colour_format_C_space_255_comma_255_comma_negative_1_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/16_ceiling_colour_elements_value_bellow_range.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_16_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 16_test_ceiling_colour_format_C_space_255_comma_255_comma_negative_1_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 16_test_ceiling_colour_format_C_space_255_comma_255_comma_negative_1_must_return_exit_code_1\n"
+fi
+}
+
+17_test_ceiling_colour_format_C_space_255_comma_255_comma_2SS_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/17_ceiling_colour_elements_value_alfanumeric.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_17_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 17_test_ceiling_colour_format_C_space_255_comma_255_comma_2SS_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 17_test_ceiling_colour_format_C_space_255_comma_255_comma_2SS_must_return_exit_code_1\n"
+fi
+}
+
 
 ##########################################################	EXECUTE TESTS	####
 # CLEAR INITIAL TERMINAL WINDOW
@@ -241,7 +331,7 @@ else
 		printf "\n${BYEL}${REDB}${BHWHT}Error: Name of executable is wrong! [Correct naming \"cub3D\"]${BYEL}\n${RESET}"
 		exit 1
 	else
-		printf "\n${BGRN}Cub3D successfully made!\n\n${RESET}"
+		printf "\n${BGRN}Cub3D successfully built!\n\n${RESET}"
 	fi
 fi
 
@@ -258,3 +348,9 @@ fi
 09_test_floor_colour_format_F_space_255_comma_255_comma_256_must_return_exit_code_1
 10_test_floor_colour_format_F_space_255_comma_255_comma_negative_1_must_return_exit_code_1
 11_test_floor_colour_format_F_space_255_comma_255_comma_2SS_must_return_exit_code_1
+12_test_ceiling_colour_format_C_space_255_comma_255_comma_255_must_return_exit_code_0
+13_test_ceiling_colour_format_C_many_spaces_255_space_comma_255_space_comma_255_must_return_exit_code_0
+14_test_ceiling_colour_format_C_space_255_comma_255_comma_255_comma_must_return_exit_code_1
+15_test_ceiling_colour_format_C_space_255_comma_255_comma_256_must_return_exit_code_1
+16_test_ceiling_colour_format_C_space_255_comma_255_comma_negative_1_must_return_exit_code_1
+17_test_ceiling_colour_format_C_space_255_comma_255_comma_2SS_must_return_exit_code_1
