@@ -305,6 +305,335 @@ else
 fi
 }
 
+18_test_missing_NO_texture_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/18_missing_NO_texture.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_18_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 18_test_missing_NO_texture_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 18_test_missing_NO_texture_must_return_exit_code_1\n"
+fi
+}
+
+19_test_misplaced_NO_texture_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/19_misplaced_NO_texture.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_19_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 19_test_misplaced_NO_texture_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 19_test_misplaced_NO_texture_must_return_exit_code_1\n"
+fi
+}
+
+20_test_missing_SO_texture_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/20_missing_SO_texture.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_20_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 20_test_missing_SO_texture_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 20_test_missing_SO_texture_must_return_exit_code_1\n"
+fi
+}
+
+21_test_misplaced_SO_texture_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/21_misplaced_SO_texture.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_21_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 21_test_misplaced_SO_texture_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 21_test_misplaced_SO_texture_must_return_exit_code_1\n"
+fi
+}
+
+22_test_missing_EA_texture_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/22_missing_EA_texture.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_22_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 22_test_missing_EA_texture_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 22_test_missing_EA_texture_must_return_exit_code_1\n"
+fi
+}
+
+23_test_misplaced_EA_texture_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/23_misplaced_EA_texture.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_23_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 23_test_misplaced_EA_texture_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 23_test_misplaced_EA_texture_must_return_exit_code_1\n"
+fi
+}
+
+24_test_missing_WE_texture_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/24_missing_WE_texture.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_24_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 24_test_missing_WE_texture_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 24_test_missing_WE_texture_must_return_exit_code_1\n"
+fi
+}
+
+25_test_misplaced_WE_texture_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/25_misplaced_WE_texture.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_25_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 25_test_misplaced_WE_texture_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 25_test_misplaced_WE_texture_must_return_exit_code_1\n"
+fi
+}
+
+26_test_missing_F_colour_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/26_missing_F_colour.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_26_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 26_test_missing_F_colour_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 26_test_missing_F_colour_must_return_exit_code_1\n"
+fi
+}
+
+27_test_misplaced_F_colour_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/27_misplaced_F_colour.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_27_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 27_test_misplaced_F_colour_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 27_test_misplaced_F_colour_must_return_exit_code_1\n"
+fi
+}
+
+28_test_missing_C_colour_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/28_missing_C_colour.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_28_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 28_test_missing_C_colour_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 28_test_missing_C_colour_must_return_exit_code_1\n"
+fi
+}
+
+29_test_misplaced_C_colour_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/29_misplaced_C_colour.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_29_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 29_test_misplaced_C_colour_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 29_test_misplaced_C_colour_must_return_exit_code_1\n"
+fi
+}
+
+30_test_scrambled_parameters_order_must_return_exit_code_0() {
+# ARRANGE
+INPUT_FILE='./valid_maps/30_scrambled_parameters_order.cub'
+EXPECTED_EXIT_CODE=0
+LOG_FILE='test_30_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 30_test_scrambled_parameters_order_must_return_exit_code_0\n"
+else
+	printf "$BRED[NOK]$RESET 30_test_scrambled_parameters_order_must_return_exit_code_0\n"
+fi
+}
+
+31_test_many_line_breaks_between_parameters_must_return_exit_code_0() {
+# ARRANGE
+INPUT_FILE='./valid_maps/31_many_line_breaks_between_parameters.cub'
+EXPECTED_EXIT_CODE=0
+LOG_FILE='test_31_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 31_test_many_line_breaks_between_parameters_must_return_exit_code_0\n"
+else
+	printf "$BRED[NOK]$RESET 31_test_many_line_breaks_between_parameters_must_return_exit_code_0\n"
+fi
+}
+
+32_test_too_many_F_colour_elements_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/32_too_many_floor_colour_elements.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_32_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 32_test_too_many_F_colour_elements_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 32_test_too_many_F_colour_elements_must_return_exit_code_1\n"
+fi
+}
+
+33_test_too_few_F_colour_elements_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/33_too_few_floor_colour_elements.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_33_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 33_test_too_few_F_colour_elements_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 33_test_too_few_F_colour_elements_must_return_exit_code_1\n"
+fi
+}
+
+34_test_empty_F_colour_element_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/34_empty_floor_colour_element.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_34_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 34_test_empty_F_colour_element_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 34_test_empty_F_colour_element_must_return_exit_code_1\n"
+fi
+}
+
+35_test_all_empty_F_colour_elements_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/35_all_empty_floor_colour_elements.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_35_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 35_test_all_empty_F_colour_elements_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 35_test_all_empty_F_colour_elements_must_return_exit_code_1\n"
+fi
+}
+
+36_test_too_many_C_colour_elements_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/36_too_many_ceiling_colour_elements.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_36_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 36_test_too_many_C_colour_elements_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 36_test_too_many_C_colour_elements_must_return_exit_code_1\n"
+fi
+}
+
+37_test_too_few_C_colour_elements_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/37_too_few_ceiling_colour_elements.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_37_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 37_test_too_few_C_colour_elements_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 37_test_too_few_C_colour_elements_must_return_exit_code_1\n"
+fi
+}
+
+38_test_empty_C_colour_element_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/38_empty_ceiling_colour_element.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_38_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 38_test_empty_C_colour_element_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 38_test_empty_C_colour_element_must_return_exit_code_1\n"
+fi
+}
+
+39_test_all_empty_C_colour_elements_must_return_exit_code_1() {
+# ARRANGE
+INPUT_FILE='./valid_maps/39_all_empty_ceiling_colour_elements.cub'
+EXPECTED_EXIT_CODE=1
+LOG_FILE='test_39_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 39_test_all_empty_C_colour_elements_must_return_exit_code_1\n"
+else
+	printf "$BRED[NOK]$RESET 39_test_all_empty_C_colour_elements_must_return_exit_code_1\n"
+fi
+}
 
 ##########################################################	EXECUTE TESTS	####
 # CLEAR INITIAL TERMINAL WINDOW
@@ -354,3 +683,27 @@ fi
 15_test_ceiling_colour_format_C_space_255_comma_255_comma_256_must_return_exit_code_1
 16_test_ceiling_colour_format_C_space_255_comma_255_comma_negative_1_must_return_exit_code_1
 17_test_ceiling_colour_format_C_space_255_comma_255_comma_2SS_must_return_exit_code_1
+18_test_missing_NO_texture_must_return_exit_code_1
+17_test_ceiling_colour_format_C_space_255_comma_255_comma_2SS_must_return_exit_code_1
+18_test_missing_NO_texture_must_return_exit_code_1
+19_test_misplaced_NO_texture_must_return_exit_code_1
+20_test_missing_SO_texture_must_return_exit_code_1
+21_test_misplaced_SO_texture_must_return_exit_code_1
+22_test_missing_EA_texture_must_return_exit_code_1
+23_test_misplaced_EA_texture_must_return_exit_code_1
+24_test_missing_WE_texture_must_return_exit_code_1
+25_test_misplaced_WE_texture_must_return_exit_code_1
+26_test_missing_F_colour_must_return_exit_code_1
+27_test_misplaced_F_colour_must_return_exit_code_1
+28_test_missing_C_colour_must_return_exit_code_1
+29_test_misplaced_C_colour_must_return_exit_code_1
+30_test_scrambled_parameters_order_must_return_exit_code_0
+31_test_many_line_breaks_between_parameters_must_return_exit_code_0
+32_test_too_many_F_colour_elements_must_return_exit_code_1
+33_test_too_few_F_colour_elements_must_return_exit_code_1
+34_test_empty_F_colour_element_must_return_exit_code_1
+35_test_all_empty_F_colour_elements_must_return_exit_code_1
+36_test_too_many_C_colour_elements_must_return_exit_code_1
+37_test_too_few_C_colour_elements_must_return_exit_code_1
+38_test_empty_C_colour_element_must_return_exit_code_1
+39_test_all_empty_C_colour_elements_must_return_exit_code_1
