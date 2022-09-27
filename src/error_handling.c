@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/22 21:40:11 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/27 11:03:10 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,15 @@ static char	*get_error_message(int errcode)
 	return (error_messages[errcode]);
 }
 
-void	print_err_exit(int errcode)
+void free_map_params(t_map_parameters *map_params)
 {
+	ft_free_ptr((void *)&map_params->line);
+	return ;
+}
+
+void	print_err_exit(int errcode, t_map_parameters *map_params)
+{
+	free_map_params(map_params);
 	printf(PURPLEB " ❌ Error " RESET "\n");
 	if (!errno)
 		printf("%s\n", get_error_message(errcode));

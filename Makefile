@@ -23,7 +23,9 @@ KEYSTROKES_PATH = keystrokes/
 
 SRCS			=	cub3D.c 						\
 					error_handling.c				\
+					init_data.c				\
 					input_validation.c				\
+					params_utils.c					\
 					$(WINDOW_PATH)window.c			\
 					$(DESTROY_PATH)destroy.c		\
 					$(KEYSTROKES_PATH)keystrokes.c	\

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/22 21:37:29 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/27 11:00:43 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,18 @@ typedef struct s_mlx_struct
 	void	*window;
 }				t_mlx_struct;
 
+typedef struct s_map_parameters 
+{
+	int		fds[4];
+	int		colours[2][3];
+	int		params_count;
+	char	*line;
+}		t_map_parameters;
+
 // ------------------------------------------------		ENUMS		-----------
 
+enum e_colours {CEILING, FLOOR};
+enum e_directions {NO, SO, EA, WE};
 enum e_err_codes {
 	SYSCALL_ERROR,
 	WRONG_ARGS_NO,
@@ -52,11 +62,14 @@ enum e_err_codes {
 
 // ------------------------------------------------		PROTOTYPES	-----------
 // error_handling.c
-void	print_err_exit(int errcode);
+void	print_err_exit(int errcode, t_map_parameters *map_params);
+
+// init_data.c
+void	init_map_parameters(t_map_parameters *map_parameters);
 
 // input_validation.c
-void	validate_args(int argc, char *argv[], int *input_fd);
-void	validate_input_file(int fd);
+void	validate_args(int argc, char *argv[], int *input_fd, t_map_parameters *map_params);
+void	validate_input_file(int fd, t_map_parameters *map_params);
 
 // window.c
 void	window(t_mlx_struct *mlx);
@@ -66,5 +79,12 @@ int		destroy(t_mlx_struct *mlx);
 
 // key_press.c
 int		keystrokes_management(int keycode, t_mlx_struct *mlx);
+
+// params_utils.c
+bool	is_direction_identifier(char identifier[2]);
+int		get_direction_index(char d);
+int		get_colour_index(char c);
+bool	is_valid_parameter_char(char  c);
+bool has_valid_param_identifier(char *str);
 
 #endif

@@ -635,6 +635,8 @@ else
 fi
 }
 
+# TODO: CHECAR DUPLICATAS DE PARAMETROS
+
 ##########################################################	EXECUTE TESTS	####
 # CLEAR INITIAL TERMINAL WINDOW
 clear
