@@ -520,4 +520,7 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 // gnl
 char			*get_next_line(int fd);
 
+// extra
+void			ft_free_ptr(void **ptr);
+
 #endif

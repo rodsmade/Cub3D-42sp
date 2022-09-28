@@ -1,0 +1,6 @@
+NO ./textures/north_texture.xpm
+SO ./textures/invalid_south_texture.xpm
+EA ./textures/east_texture.xpm
+WE ./textures/west_texture.xpm
+F 42, 55, 57
+C 255, 255, 255
