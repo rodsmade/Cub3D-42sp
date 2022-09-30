@@ -133,7 +133,7 @@ test_case '40_test_duplicate_NO_texture_parameter_must_return_exit_code_1' './ma
 test_case '41_test_duplicate_SO_texture_parameter_must_return_exit_code_1' './maps/invalid/41_duplicate_SO_parameter.cub' 1 'test_41_err'
 test_case '42_test_duplicate_EA_texture_parameter_must_return_exit_code_1' './maps/invalid/42_duplicate_EA_parameter.cub' 1 'test_42_err'
 test_case '43_test_duplicate_WE_texture_parameter_must_return_exit_code_1' './maps/invalid/43_duplicate_WE_parameter.cub' 1 'test_43_err'
-test_case '44_test_valid_square_map_must_return_exit_code_0' './maps/invalid/44_valid_square_map.cub' 0 'test_44_err'
+# test_case '44_test_valid_square_map_must_return_exit_code_0' './maps/invalid/44_valid_square_map.cub' 0 'test_44_err'
 
 # ESQUECI DE ESCREVER TESTE DE FORMATO ERRADO D: .cub
 
