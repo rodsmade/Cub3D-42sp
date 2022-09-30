@@ -695,6 +695,21 @@ else
 fi
 }
 
+44_test_valid_square_map_must_return_exit_code_0() {
+# ARRANGE
+INPUT_FILE='./maps/invalid/44_valid_square_map.cub'
+EXPECTED_EXIT_CODE=0
+LOG_FILE='test_44_err'
+
+# ASSERT
+../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
+if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN[OK]$RESET 44_test_valid_square_map_must_return_exit_code_0\n"
+else
+	printf "$BRED[NOK]$RESET 44_test_valid_square_map_must_return_exit_code_0\n"
+fi
+}
+
 
 ##########################################################	EXECUTE TESTS	####
 # CLEAR INITIAL TERMINAL WINDOW
@@ -772,3 +787,7 @@ fi
 41_test_duplicate_SO_texture_parameter_must_return_exit_code_1
 42_test_duplicate_EA_texture_parameter_must_return_exit_code_1
 43_test_duplicate_WE_texture_parameter_must_return_exit_code_1
+44_test_valid_square_map_must_return_exit_code_0
+
+
+# ESQUECI DE ESCREVER TESTE DE FORMATO ERRADO D: .cub
