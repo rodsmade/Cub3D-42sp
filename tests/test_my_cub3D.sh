@@ -81,6 +81,10 @@ else
 	fi
 fi
 
+# CREATE LOGS FOLDER
+printf "\n${BHWHT}Making logs directory...\n"
+echo "$ mkdir -p logs" && mkdir -p logs
+
 # RUN TESTS
 test_case '00_test_texture_params_format_ID_space_VALID_PATH_must_return_exit_code_0' './maps/valid/00_valid_texture_parameters.cub' 0 'test_00_err'
 test_case '01_test_texture_params_format_ID_many_spaces_VALID_PATH_must_return_exit_code_0' './maps/valid/01_texture_ids_separated_by_many_spaces.cub' 0 'test_01_err'
