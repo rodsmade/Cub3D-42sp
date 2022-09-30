@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/27 12:00:15 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:38:22 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,12 @@ void	validate_map_parameters(int input_fd, t_map_parameters *map_params)
 		ft_free_ptr((void *)&(map_params->line));
 		(map_params->line) = get_next_line_trimmed(input_fd);
 	}
-	ft_free_ptr((void *)&(map_params->line));
 	if (map_params->params_count != 6)
 		print_err_exit(MISSING_PARAMETER, map_params);
 }
 
 void	validate_input_file(int input_fd, t_map_parameters *map_params)
-/*
-	idealmente vai ter tb as funçoes:
-		open_texture_files()
-		validate_map()
-*/
 {
 	validate_map_parameters(input_fd, map_params);
+	validate_map(input_fd, map_params);
 }
