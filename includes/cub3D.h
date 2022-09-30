@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/27 12:25:49 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:35:41 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_mlx_struct
 
 typedef struct s_map_parameters
 {
-	int		fds[4];
+	int		texture_fds[4];
 	int		colours[2][3];
 	int		params_count;
 	char	*line;
@@ -97,6 +97,9 @@ void	check_duplicate_parameter(t_map_parameters *map_params);
 void	check_colour_params_count(char **colours_array,
 			t_map_parameters *map_params);
 void	check_for_valid_colour(t_map_parameters *map_params);
+
+// map_params_checks.c
+void	validate_map(int input_fd, t_map_parameters *map_params);
 
 // params_utils.c
 bool	is_direction_identifier(char identifier[2]);

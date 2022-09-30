@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:36:31 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/27 20:58:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:34:39 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_for_valid_path(t_map_parameters *map_params)
 	int	i;
 	int	fd;
 
-	if (map_params->fds[get_direction_index(map_params->line[0])] == -42)
+	if (map_params->texture_fds[get_direction_index(map_params->line[0])] == -42)
 		(map_params->params_count)++;
 	else
 		print_err_exit(REDUNDANT_PARAMETER_FOUND, map_params);
@@ -25,7 +25,7 @@ void	check_for_valid_path(t_map_parameters *map_params)
 	fd = open(&(map_params->line[i]), O_RDONLY);
 	if (fd == -1)
 		print_err_exit(SYSCALL_ERROR, map_params);
-	map_params->fds[get_direction_index(map_params->line[0])] = fd;
+	map_params->texture_fds[get_direction_index(map_params->line[0])] = fd;
 	return ;
 }
 
