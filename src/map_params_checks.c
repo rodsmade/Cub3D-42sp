@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:36:31 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/27 12:04:30 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/27 20:58:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ void	check_for_valid_colour(t_map_parameters *map_params)
 	check_colour_params_count(colours_array, map_params);
 	i = -1;
 	while (colours_array[++i])
+	{
 		map_params->colours[get_colour_index(map_params->line[0])][i] = \
 			convert_colour_to_int(colours_array[i], map_params);
+	}
+	ft_free_ptr((void *)&colours_array);
 	return ;
 }
