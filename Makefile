@@ -27,6 +27,7 @@ SRCS			=	cub3D.c							\
 					input_validation_utils.c		\
 					input_validation.c				\
 					map_params_checks.c				\
+					map_validation.c				\
 					params_utils.c					\
 					$(WINDOW_PATH)window.c			\
 					$(DESTROY_PATH)destroy.c		\
