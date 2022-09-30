@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/29 21:38:22 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/30 20:15:25 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	retrieve_parameter(t_map_parameters *map_params)
 
 void	validate_map_parameters(int input_fd, t_map_parameters *map_params)
 {
-	init_map_parameters(map_params);
 	(map_params->line) = get_next_line_trimmed(input_fd);
 	while ((map_params->line))
 	{
