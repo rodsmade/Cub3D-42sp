@@ -81,6 +81,9 @@ else
 	fi
 fi
 
+printf "\n${BHWHT}Copying cub3D binary to current directory...\n"
+printf "cp ../cub3D ./cub3D" && cp ../cub3D ./cub3D
+
 # CREATE LOGS FOLDER
 printf "\n${BHWHT}Making logs directory...\n"
 echo "$ mkdir -p logs" && mkdir -p logs
@@ -88,10 +91,10 @@ echo "$ mkdir -p logs" && mkdir -p logs
 # RUN TESTS
 test_case '00_test_texture_params_format_ID_space_VALID_PATH_must_return_exit_code_0' './maps/valid/00_valid_texture_parameters.cub' 0 'test_00_err'
 test_case '01_test_texture_params_format_ID_many_spaces_VALID_PATH_must_return_exit_code_0' './maps/valid/01_texture_ids_separated_by_many_spaces.cub' 0 'test_01_err'
-test_case '02_test_NO_texture_param_format_ID_space_VALID_PATH_must_return_exit_code_1' './maps/invalid/02_valid_NO_texture_parameter.cub' 1 'test_02_err'
-test_case '03_test_SO_texture_param_format_ID_space_VALID_PATH_must_return_exit_code_1' './maps/invalid/03_valid_SO_texture_parameter.cub' 1 'test_03_err'
-test_case '04_test_EA_texture_param_format_ID_space_VALID_PATH_must_return_exit_code_1' './maps/invalid/04_valid_EA_texture_parameter.cub' 1 'test_04_err'
-test_case '05_test_WE_texture_param_format_ID_space_VALID_PATH_must_return_exit_code_1' './maps/invalid/05_valid_WE_texture_parameter.cub' 1 'test_05_err'
+test_case '02_test_NO_texture_param_format_ID_space_INVALID_PATH_must_return_exit_code_1' './maps/invalid/02_valid_NO_texture_parameter.cub' 1 'test_02_err'
+test_case '03_test_SO_texture_param_format_ID_space_INVALID_PATH_must_return_exit_code_1' './maps/invalid/03_valid_SO_texture_parameter.cub' 1 'test_03_err'
+test_case '04_test_EA_texture_param_format_ID_space_INVALID_PATH_must_return_exit_code_1' './maps/invalid/04_valid_EA_texture_parameter.cub' 1 'test_04_err'
+test_case '05_test_WE_texture_param_format_ID_space_INVALID_PATH_must_return_exit_code_1' './maps/invalid/05_valid_WE_texture_parameter.cub' 1 'test_05_err'
 test_case '06_test_floor_colour_format_F_space_255_comma_255_comma_255_must_return_exit_code_0' './maps/valid/06_valid_floor_colour_parameters.cub' 0 'test_06_err'
 test_case '07_test_floor_colour_format_F_many_spaces_255_space_comma_255_space_comma_255_must_return_exit_code_0' './maps/valid/07_floor_colour_elements_separated_by_many_spaces.cub' 0 'test_07_err'
 test_case '08_test_floor_colour_format_F_space_255_comma_255_comma_255_comma_must_return_exit_code_1' './maps/invalid/08_floor_colour_elements_with_trailing_commas.cub' 1 'test_08_err'
@@ -133,3 +136,9 @@ test_case '43_test_duplicate_WE_texture_parameter_must_return_exit_code_1' './ma
 test_case '44_test_valid_square_map_must_return_exit_code_0' './maps/invalid/44_valid_square_map.cub' 0 'test_44_err'
 
 # ESQUECI DE ESCREVER TESTE DE FORMATO ERRADO D: .cub
+
+# CLEAN UP
+printf "\nCleaning up...\n"
+rm ./cub3D
+
+printf "\nTests completed.\n"
