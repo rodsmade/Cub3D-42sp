@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/29 22:15:37 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:32:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static char	*get_error_message(int errcode)
 			" and " UPURPLE "2 colours." RESET, \
 		"Redundant parameter found. Parameter duplicates not allowed.", \
 		"Invalid colour format. Use: " UPURPLE "R, G, B" RESET \
-			", each value ranging from 0 to 255."
+			", each value ranging from 0 to 255.", \
+		"Invalid map."
 	};
 
 	return (error_messages[errcode]);

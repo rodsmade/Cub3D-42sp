@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/29 22:21:22 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:45:16 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void	save_map(int input_fd, t_map_parameters *map_params)
 	ft_free_ptr((void *)&map_stringified);
 }
 
+bool	is_valid_map(char** map)
+{
+	(void) map;
+	return false;
+}
+
 void	validate_map(int input_fd, t_map_parameters *map_params)
 {
 	int	i;
@@ -44,5 +50,7 @@ void	validate_map(int input_fd, t_map_parameters *map_params)
 		printf("linha do mapa: >>%s<<\n", map_params->map[i]);
 	}
 	close(input_fd);
+	if (!is_valid_map(map_params->map))
+		print_err_exit(INVALID_MAP, map_params);
 	return ;
 }
