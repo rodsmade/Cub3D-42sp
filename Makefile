@@ -23,6 +23,7 @@ KEYSTROKES_PATH = keystrokes/
 
 SRCS			=	cub3D.c							\
 					error_handling.c				\
+					free_memory.c					\
 					init_data.c						\
 					input_validation_utils.c		\
 					input_validation.c				\

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/29 21:35:41 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:16:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,15 @@ typedef struct s_map_parameters
 	int		colours[2][3];
 	int		params_count;
 	char	*line;
+	char	*    *map;
 }		t_map_parameters;
 
 // ------------------------------------------------		ENUMS		-----------
 
-enum e_colours {ceiling, floor};
+enum e_colours {
+	CEILING,
+	FLOOR
+};
 enum e_directions {
 	NO,
 	SO,
@@ -87,6 +91,9 @@ void	window(t_mlx_struct *mlx);
 
 // destroy.c
 int		destroy(t_mlx_struct *mlx);
+
+// free_memory.c
+void	free_map_params(t_map_parameters *map_params);
 
 // key_press.c
 int		keystrokes_management(int keycode, t_mlx_struct *mlx);
