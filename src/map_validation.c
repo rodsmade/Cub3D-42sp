@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/29 22:45:16 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:37:33 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+bool	is_map_surrounded_by_one(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if ((i == 0 || !map[i + 1]) && map[i][j] != '1')
+				return false;
+			if ((j == 0 || !map[i][j + 1]) && map[i][j] != '1')
+				return false;
+			j++;
+		}
+		i++;
+	}
+	return true;
+}
+
+bool	is_valid_map(char** map)
+{
+	if (!is_map_surrounded_by_one(map))
+		return false;
+	return true;
+}
 
 void	save_map(int input_fd, t_map_parameters *map_params)
 {
@@ -29,12 +58,6 @@ void	save_map(int input_fd, t_map_parameters *map_params)
 	}
 	map_params->map = ft_split(map_stringified, '\n');
 	ft_free_ptr((void *)&map_stringified);
-}
-
-bool	is_valid_map(char** map)
-{
-	(void) map;
-	return false;
 }
 
 void	validate_map(int input_fd, t_map_parameters *map_params)
