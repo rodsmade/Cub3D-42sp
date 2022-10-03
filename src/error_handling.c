@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/29 22:32:01 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:27:18 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*get_error_message(int errcode)
 {
-	static char	*error_messages[] = {\
+	char	*error_messages[] = {\
 		BGRAY "Undefined error message" RESET, \
 		"Run: " BWHITE "./cub3d " RESET UPURPLE "PATH_TO_MAP" RESET, \
 		"File extension must be " UPURPLE ".cub" RESET, \
