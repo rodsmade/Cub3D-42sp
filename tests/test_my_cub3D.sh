@@ -135,6 +135,7 @@ test_case '42_test_duplicate_EA_texture_parameter_must_return_exit_code_1' './ma
 test_case '43_test_duplicate_WE_texture_parameter_must_return_exit_code_1' './maps/invalid/43_duplicate_WE_parameter.cub' 1 'test_43_err'
 test_case '44_test_valid_square_map_surrounded_by_ones_must_return_exit_code_0' './maps/valid/44_valid_square_map.cub' 0 'test_44_err'
 test_case '45_test_invalid_square_map_not_surrounded_by_ones_must_return_exit_code_1' './maps/invalid/45_invalid_square_map.cub' 1 'test_45_err'
+test_case '46_test_if_line_start_with_spaces_must_return_exit_code_0' './maps/valid/46_valid_T_map.cub' 0 'test_46_err'
 
 # ESQUECI DE ESCREVER TESTE DE FORMATO ERRADO D: .cub
 

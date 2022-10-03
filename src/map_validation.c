@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/30 22:37:33 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/03 10:50:39 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ bool	is_map_surrounded_by_one(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if ((i == 0 || !map[i + 1]) && map[i][j] != '1')
+			if ((i == 0 || !map[i + 1]) && (map[i][j] != '1'
+				&& map[i][j] != ' '))
 				return false;
-			if ((j == 0 || !map[i][j + 1]) && map[i][j] != '1')
+			if ((j == 0 || !map[i][j + 1]) && (map[i][j] != '1'
+				&& map[i][j] != ' '))
 				return false;
 			j++;
 		}
@@ -36,6 +38,7 @@ bool	is_map_surrounded_by_one(char **map)
 
 bool	is_valid_map(char** map)
 {
+
 	if (!is_map_surrounded_by_one(map))
 		return false;
 	return true;
