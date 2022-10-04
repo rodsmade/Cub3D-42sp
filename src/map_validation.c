@@ -6,17 +6,11 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/03 19:02:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:05:34 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-typedef struct s_position
-{
-	int		line;
-	int		column;
-}		t_position;
 
 bool	is_map_surrounded_by_one(char **map)
 {
@@ -100,92 +94,58 @@ void	print_locale(char **map, int line, int column)
 	printf("]\n");
 }
 
-bool	t_position_compare(t_position *a, t_position *b)
+void	decide_where_to_go_next(t_map_parameters *map_params, t_position *prev_pos, t_position curr_pos, t_position *next_pos)
 {
-	if (!a && !b)
-		return (true);
-	if ((a && !b) || (!a && b))
-		return (false);
-	if (a->line == b->line && a->column == b->column)
-		return (true);
-	return (false);
+	t_position next_move;
+
+	if (curr_pos.line > 0 && (map_params->map)[curr_pos.line - 1][curr_pos.column] == '1')
+	{
+		next_move = t_position_create_tuple(curr_pos.line - 1, curr_pos.column);
+		if (t_position_compare_ptr(&next_move, prev_pos) == false)
+			return (t_position_copy(next_pos, next_move));
+	}
+	if ((map_params->map)[curr_pos.line][curr_pos.column + 1] && (map_params->map)[curr_pos.line][curr_pos.column + 1] == '1')
+	{
+		next_move = t_position_create_tuple(curr_pos.line, curr_pos.column + 1);
+		if (t_position_compare_ptr(&next_move, prev_pos) == false)
+			return (t_position_copy(next_pos, next_move));
+	}
+	if ((map_params->map)[curr_pos.line + 1] && (map_params->map)[curr_pos.line + 1][curr_pos.column] == '1')
+	{
+		next_move = t_position_create_tuple(curr_pos.line + 1, curr_pos.column);
+		if (t_position_compare_ptr(&next_move, prev_pos) == false)
+			return (t_position_copy(next_pos, next_move));
+	}
+	if (curr_pos.column > 0 && (map_params->map)[curr_pos.line][curr_pos.column - 1] == '1')
+	{
+		next_move = t_position_create_tuple(curr_pos.line, curr_pos.column - 1);
+		if (t_position_compare_ptr(&next_move, prev_pos) == false)
+			return (t_position_copy(next_pos, next_move));
+	}
+	print_err_exit(INVALID_MAP, map_params);
 }
 
-void	decide_where_to_go_next(char ***map, t_position *prev_pos, t_position curr_pos, t_position *next_pos)
+void	find_starting_point(t_position *pivot, t_map_parameters *map_params)
 {
-	// check north
-	if (curr_pos.line > 0 && (*map)[curr_pos.line - 1][curr_pos.column] == '1')
-	{
-		next_pos->line = curr_pos.line - 1;
-		next_pos->column = curr_pos.column;
-		if (!t_position_compare(prev_pos, next_pos))
-		{
-			printf(" ⭫ ");
-			return ;
-		}
-	}
-	// check east
-	if ((*map)[curr_pos.line][curr_pos.column + 1] && (*map)[curr_pos.line][curr_pos.column + 1] == '1')
-	{
-		next_pos->line = curr_pos.line;
-		next_pos->column = curr_pos.column + 1;
-		if (!t_position_compare(prev_pos, next_pos))
-		{
-			printf(" ⭬  ");
-			return ;
-		}
-	}
-	// check south
-	if ((*map)[curr_pos.line + 1] && (*map)[curr_pos.line + 1][curr_pos.column] == '1')
-	{
-		next_pos->line = curr_pos.line + 1;
-		next_pos->column = curr_pos.column;
-		if (!t_position_compare(prev_pos, next_pos))
-		{
-			printf(" ⭭ ");
-			return ;
-		}
-	}
-	// check west
-	if (curr_pos.column > 0 && (*map)[curr_pos.line][curr_pos.column - 1] == '1')
-	{
-		next_pos->line = curr_pos.line;
-		next_pos->column = curr_pos.column - 1;
-		if (!t_position_compare(prev_pos, next_pos))
-		{
-			printf(" ⭪  ");
-			return ;
-		}
-	}
-	// provavlemente precisa dar um free aqui pq se a parada virar null nunca vai dar
-	next_pos = NULL;
-	return ;
-}
-
-void	find_starting_point(t_position *pivot, char ***map)
-{
+	// tvz declarar int *i, j e usar pra ficar mais claro dentro do loop
 	pivot->line = -1;
-	while ((*map)[++pivot->line])
+	while ((map_params->map)[++(pivot->line)])
 	{
 		pivot->column = -1;
-		while ((*map)[pivot->line][++pivot->column])
+		while ((map_params->map)[pivot->line][++pivot->column])
 		{
-			if ((*map)[pivot->line][pivot->column] == '1')
+			if ((map_params->map)[pivot->line][pivot->column] == '1')
 				break;
 		}
-		if ((*map)[pivot->line][pivot->column] && (*map)[pivot->line][pivot->column] == '1')
+		if ((map_params->map)[pivot->line][pivot->column] && (map_params->map)[pivot->line][pivot->column] == '1')
 			break;
 	}
+	if (!(map_params->map)[pivot->line][pivot->column])
+		print_err_exit(INVALID_MAP, map_params);
 	// print_locale((*map), (*line), (*column));
 }
 
-void	t_position_copy(t_position *dst, t_position src)
-{
-	dst->line = src.line;
-	dst->column = src.column;
-}
-
-void	trace_contour(char ***map)
+void	trace_contour(t_map_parameters *map_params)
 {
 	t_position	starting_point;
 	t_position	*pivot;
@@ -197,52 +157,29 @@ void	trace_contour(char ***map)
 	pivot = malloc(sizeof(*pivot));
 	if (!came_from || !goes_to || !pivot)
 		return ;
-	find_starting_point(pivot, map);
-	t_position_copy(&starting_point, *pivot);
-	decide_where_to_go_next(map, NULL, *pivot, goes_to);
-	while (goes_to && !t_position_compare(goes_to, &starting_point))
+	find_starting_point(&starting_point, map_params);
+	decide_where_to_go_next(map_params, NULL, starting_point, goes_to);
+	t_position_copy(pivot, starting_point);
+	while (goes_to && !t_position_compare_ptr(goes_to, &starting_point))
 	{
 		t_position_copy(came_from, *pivot);
 		t_position_copy(pivot, *goes_to);
-		decide_where_to_go_next(map, came_from, *pivot, goes_to);
+		decide_where_to_go_next(map_params, came_from, *pivot, goes_to);
 	}
-	printf("\n");
-	if (!goes_to)
-	{
-		printf ("mapa errado ??\n");
-		return ;
-	}
-}
-
-/*
-// antiga:
-void	trace_contour(char ***map)
-{
-	// char	*pivot;
-	char	*came_from;
-	char	*goes_to;
-	int		line;
-	int		column;
-
-	find_starting_point(&line, &column, map);
-	// pivot = &((*map)[line][column]);
-	came_from = NULL;
-	goes_to = decide_where_to_go_next(map, line, column);
-	if (!goes_to || goes_to == came_from)
-	{
-		printf (RED "mapa errado ??" RESET "\n");
-		return ;
-	}
+	if (t_position_compare_ptr(goes_to, &starting_point))
+		printf ("✅ mapa válido\n");
 	else
-		printf("1\n");
+		print_err_exit(INVALID_MAP, map_params);
 }
-*/
 
-bool	is_valid_map(char*** map)
+bool	is_valid_map(t_map_parameters *map_params)
 {
 	// if (!is_map_surrounded_by_one(map))
 	// 	return false;
-	trace_contour(map);
+	// TODO:
+	// validate_chars(map);
+	// validate_map_size(map);
+	trace_contour(map_params);
 	return true;
 }
 
@@ -284,7 +221,7 @@ void	validate_map(int input_fd, t_map_parameters *map_params)
 	ft_free_ptr((void *)&map_params->line);
 	// print_map_read(map_params);
 	close(input_fd);
-	if (!is_valid_map(&(map_params->map)))
+	if (!is_valid_map(map_params))
 		print_err_exit(INVALID_MAP, map_params);
 	return ;
 }
