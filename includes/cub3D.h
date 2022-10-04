@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/29 22:31:46 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/04 10:27:40 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ typedef struct s_map_parameters
 	char	*line;
 	char	*    *map;
 }		t_map_parameters;
+
+
+typedef struct s_position
+{
+	int		line;
+	int		column;
+}		t_position;
 
 // ------------------------------------------------		ENUMS		-----------
 
@@ -115,5 +122,11 @@ int		get_direction_index(char d);
 int		get_colour_index(char c);
 bool	is_valid_parameter_char(char c);
 bool	has_valid_param_identifier(char *str);
+
+// t_position_utils.c
+t_position	t_position_create_tuple(int line, int column);
+bool		t_position_compare(t_position a, t_position b);
+bool		t_position_compare_ptr(t_position *a, t_position *b);
+void		t_position_copy(t_position *destination, const t_position source);
 
 #endif
