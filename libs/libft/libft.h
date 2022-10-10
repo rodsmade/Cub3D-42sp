@@ -524,5 +524,6 @@ char			*get_next_line(int fd);
 void			ft_free_ptr(void **ptr);
 void			ft_free_arr(void ***arr);
 char			*ft_charjoin(const char* str, const char c);
+int				ft_matrixlen(char **matrix);
 
 #endif
