@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/04 10:27:40 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:40:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef struct s_map_parameters
 	int		colours[2][3];
 	int		params_count;
 	char	*line;
-	char	*    *map;
+	char	**map;
+	char	**map_copy_for_debug;
 }		t_map_parameters;
 
 
@@ -78,6 +79,10 @@ enum e_err_codes {
 };
 
 // ------------------------------------------------		PROTOTYPES	-----------
+// tests_debug ********** APAGAR DPS ***************
+void	debug_print_map_read(char **map);
+void	debug_copy_map(t_map_parameters *map_params);
+
 // error_handling.c
 void	print_err_exit(int errcode, t_map_parameters *map_params);
 
