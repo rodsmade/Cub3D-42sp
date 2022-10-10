@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/03 20:27:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:54:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static char	*get_error_message(int errcode)
 
 void	print_err_exit(int errcode, t_map_parameters *map_params)
 {
+	// debug_print_map_read(map_params->map_copy_for_debug);
 	free_map_params(map_params);
 	printf(PURPLEB " ❌ Error " RESET "\n");
 	if (!errno)

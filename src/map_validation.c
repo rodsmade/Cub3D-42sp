@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/04 12:05:34 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:42:25 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,25 @@ void	print_locale(char **map, int line, int column)
 	printf("]\n");
 }
 
+bool	line_above_is_long_enough(t_position curr_pos, t_map_parameters *map_params)
+{
+	if (curr_pos.line > 0)
+		return (ft_strlen(map_params->map[curr_pos.line - 1]) >= (size_t) curr_pos.column + 1);
+	return (false);
+}
+
+bool	line_below_is_long_enough(t_position curr_pos, t_map_parameters *map_params)
+{
+	if (curr_pos.line < ft_matrixlen(map_params->map) - 1)
+		return (ft_strlen(map_params->map[curr_pos.line + 1]) >= (size_t) curr_pos.column + 1);
+	return (false);
+}
+
 void	decide_where_to_go_next(t_map_parameters *map_params, t_position *prev_pos, t_position curr_pos, t_position *next_pos)
 {
 	t_position next_move;
 
-	if (curr_pos.line > 0 && (map_params->map)[curr_pos.line - 1][curr_pos.column] == '1')
+	if (line_above_is_long_enough(curr_pos, map_params) && (map_params->map)[curr_pos.line - 1][curr_pos.column] == '1')
 	{
 		next_move = t_position_create_tuple(curr_pos.line - 1, curr_pos.column);
 		if (t_position_compare_ptr(&next_move, prev_pos) == false)
@@ -110,7 +124,7 @@ void	decide_where_to_go_next(t_map_parameters *map_params, t_position *prev_pos,
 		if (t_position_compare_ptr(&next_move, prev_pos) == false)
 			return (t_position_copy(next_pos, next_move));
 	}
-	if ((map_params->map)[curr_pos.line + 1] && (map_params->map)[curr_pos.line + 1][curr_pos.column] == '1')
+	if (line_below_is_long_enough(curr_pos, map_params) && (map_params->map)[curr_pos.line + 1][curr_pos.column] == '1')
 	{
 		next_move = t_position_create_tuple(curr_pos.line + 1, curr_pos.column);
 		if (t_position_compare_ptr(&next_move, prev_pos) == false)
@@ -126,8 +140,8 @@ void	decide_where_to_go_next(t_map_parameters *map_params, t_position *prev_pos,
 }
 
 void	find_starting_point(t_position *pivot, t_map_parameters *map_params)
+// tvz declarar int *i, j e usar pra ficar mais claro dentro do loop
 {
-	// tvz declarar int *i, j e usar pra ficar mais claro dentro do loop
 	pivot->line = -1;
 	while ((map_params->map)[++(pivot->line)])
 	{
@@ -159,12 +173,14 @@ void	trace_contour(t_map_parameters *map_params)
 		return ;
 	find_starting_point(&starting_point, map_params);
 	decide_where_to_go_next(map_params, NULL, starting_point, goes_to);
+	map_params->map_copy_for_debug[starting_point.line][starting_point.column] = '-';
 	t_position_copy(pivot, starting_point);
 	while (goes_to && !t_position_compare_ptr(goes_to, &starting_point))
 	{
 		t_position_copy(came_from, *pivot);
 		t_position_copy(pivot, *goes_to);
 		decide_where_to_go_next(map_params, came_from, *pivot, goes_to);
+		map_params->map_copy_for_debug[pivot->line][pivot->column] = '-';
 	}
 	if (t_position_compare_ptr(goes_to, &starting_point))
 		printf ("✅ mapa válido\n");
@@ -202,25 +218,15 @@ void	save_map(int input_fd, t_map_parameters *map_params)
 	ft_free_ptr((void *)&map_stringified);
 }
 
-void	print_map_read(t_map_parameters *map_params)
-{
-	int	i;
-
-	i = -1;
-	while(map_params->map[++i])
-	{
-		printf("linha do mapa: >>%s<<\n", map_params->map[i]);
-	}
-}
-
 void	validate_map(int input_fd, t_map_parameters *map_params)
 {
 	(void) input_fd;
 
 	save_map(input_fd, map_params);
 	ft_free_ptr((void *)&map_params->line);
-	// print_map_read(map_params);
+	// debug_print_map_read(map_params);
 	close(input_fd);
+	debug_copy_map(map_params);
 	if (!is_valid_map(map_params))
 		print_err_exit(INVALID_MAP, map_params);
 	return ;
