@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/10 22:15:59 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/11 20:29:47 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ bool	line_below_is_long_enough(t_position curr_pos, t_map_parameters *data)
 void	decide_where_to_go_next(t_map_parameters *data, t_position *prev_pos, t_position curr_pos, t_position *next_pos)
 /* pra debugar colocar a seguinte linha antes de retornar: 
 	data->map_copy_for_debug[curr_pos.line][curr_pos.column] = '-';
+
+adicionar sangria no mapa pra facilitar a vida na validação;
+só validar um mapa fechado sem buracos dentro;
+        1111111111111
+    11111000000000001
+    10000000000000001
+    11111111111111111
 */
 {
 	t_position	next_move;
@@ -111,6 +118,102 @@ void	trace_contour(t_map_parameters *data)
 		print_err_exit(INVALID_MAP, data);
 }
 
+int	find_longest_line_length(char **map)
+{
+	int	max_length;
+	int	line_length;
+	int	i;
+
+	max_length = 0;
+	i = -1;
+	while (map[++i])
+	{
+		line_length = (int) ft_strlen(map[i]);
+		if (line_length > max_length)
+			max_length = line_length;
+	}
+	return (max_length);
+}
+
+char	*ft_alloc_string(int str_size, int init_value)
+/**
+ * @brief allocs `str_size` bytes for a string, appends a terminating '\0', and
+ * initialises every byte in the string to `init_value`.
+ */
+{
+	char	*str;
+	int		i;
+
+	str = malloc((str_size + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (++i < str_size)
+		str[i] = init_value;
+	str[i] = '\0';
+	return (str);
+}
+
+void	pad_lines_on_top_and_bottom(int map_length, t_map_parameters *data)
+{
+	char	**temp_map;
+	int		map_size;
+	int		i;
+
+	temp_map = data->map;
+	map_size = ft_matrixlen(temp_map);
+	data->map = malloc((map_size + 2 + 1) * sizeof(char *));
+	if (!data->map)
+		print_err_exit(MEMORY_ALLOCATION, data);
+	data->map[0] = ft_alloc_string(map_length, ' ');
+	i = -1;
+	while (temp_map[++i])
+		data->map[i + 1] = ft_strdup(temp_map[i]);
+	data->map[map_size + 2 - 1] = ft_alloc_string(map_length, ' ');
+	data->map[map_size + 2] = NULL;
+	ft_free_arr((void *)&temp_map);
+}
+
+void	pad_line_with_spaces(char **curr_line, int map_length, t_map_parameters *data)
+{
+	int		old_line_len;
+	char	*padded_line;
+	char	*temp;
+
+	temp = *curr_line;
+	old_line_len = ft_strlen(*curr_line);
+	padded_line = ft_alloc_string(map_length, ' ');
+	if (!padded_line)
+		print_err_exit(MEMORY_ALLOCATION, data);
+	ft_memcpy(padded_line, *curr_line, old_line_len);
+	*curr_line = padded_line;
+	ft_free_ptr((void *)&temp);
+	return ;
+}
+
+void	pad_columns(int map_length, t_map_parameters *data)
+{
+	int		i;
+
+	i = -1;
+	while (data->map[++i])
+		if ((int) ft_strlen(data->map[i]) < map_length)
+			pad_line_with_spaces(&(data->map[i]), map_length, data);
+		
+	return ;
+}
+
+void	pad_map(t_map_parameters *data)
+{
+	int		map_length;
+
+	map_length = find_longest_line_length(data->map);
+	pad_lines_on_top_and_bottom(map_length, data);
+	pad_columns(map_length, data);
+	debug_print_map_read(data->map);
+	print_err_exit(MEMORY_ALLOCATION, data);
+}
+
 void	save_map(t_map_parameters *map_params)
 {
 	char	*map_stringified;
@@ -130,6 +233,7 @@ void	save_map(t_map_parameters *map_params)
 	ft_free_ptr((void *)&map_stringified);
 	ft_free_ptr((void *)&map_params->line);
 	close(map_params->input_fd);
+	pad_map(map_params);
 }
 
 void	validate_map(t_map_parameters *map_params)

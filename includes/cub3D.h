@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/10 22:17:48 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/11 18:31:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ enum e_err_codes {
 	MISSING_PARAMETER,
 	REDUNDANT_PARAMETER_FOUND,
 	INVALID_COLOUR_PARAM,
-	INVALID_MAP
+	INVALID_MAP,
+	MEMORY_ALLOCATION
 };
 
 // ------------------------------------------------		PROTOTYPES	-----------
