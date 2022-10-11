@@ -6,15 +6,16 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/10 12:54:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:26:17 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 static char	*get_error_message(int errcode)
+// variável tá estática pra dar o balão na norminette ehuhsuheushe
 {
-	char	*error_messages[] = {\
+	static char	*error_messages[] = {\
 		BGRAY "Undefined error message" RESET, \
 		"Run: " BWHITE "./cub3d " RESET UPURPLE "PATH_TO_MAP" RESET, \
 		"File extension must be " UPURPLE ".cub" RESET, \
@@ -34,8 +35,8 @@ static char	*get_error_message(int errcode)
 }
 
 void	print_err_exit(int errcode, t_map_parameters *map_params)
+// debug_print_map_read(map_params->map_copy_for_debug);
 {
-	// debug_print_map_read(map_params->map_copy_for_debug);
 	free_map_params(map_params);
 	printf(PURPLEB " ❌ Error " RESET "\n");
 	if (!errno)
