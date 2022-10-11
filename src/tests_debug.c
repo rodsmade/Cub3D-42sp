@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:38:20 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/10 21:30:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/11 20:38:25 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	debug_print_map_read(char **map)
 		printf(">>%s<<\n", map[i]);
 }
 
-void	debug_copy_map(t_map_parameters *data)
+void	debug_copy_map(t_data *data)
 {
 	int	map_line_count;
 	int	i;

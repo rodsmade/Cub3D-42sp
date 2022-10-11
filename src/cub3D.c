@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/10 22:18:10 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/11 20:39:26 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	main(int argc, char **argv)
 {
 	// t_mlx_struct		mlx;
-	t_map_parameters	map_params;
+	t_data	data;
 
-	init_map_parameters(&map_params);
-	validate_args(argc, argv, &map_params);
-	validate_input_file(&map_params);
+	init_data(&data);
+	validate_args(argc, argv, &data);
+	validate_input_file(&data);
 	// mlx.pointer = mlx_init();
 	// window(&mlx);
 	// mlx_loop(mlx.pointer);
-	free_map_params(&map_params);
+	free_data(&data);
 	return (0);
 }

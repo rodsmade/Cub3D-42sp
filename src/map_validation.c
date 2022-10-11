@@ -6,13 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/11 20:29:47 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/11 20:41:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-bool	line_above_is_long_enough(t_position curr_pos, t_map_parameters *data)
+bool	line_above_is_long_enough(t_position curr_pos, t_data *data)
 {
 	if (curr_pos.line > 0)
 		return (ft_strlen(data->map[curr_pos.line - 1])
@@ -20,7 +20,7 @@ bool	line_above_is_long_enough(t_position curr_pos, t_map_parameters *data)
 	return (false);
 }
 
-bool	line_below_is_long_enough(t_position curr_pos, t_map_parameters *data)
+bool	line_below_is_long_enough(t_position curr_pos, t_data *data)
 {
 	if (curr_pos.line < ft_matrixlen(data->map) - 1)
 		return (ft_strlen(data->map[curr_pos.line + 1])
@@ -28,7 +28,7 @@ bool	line_below_is_long_enough(t_position curr_pos, t_map_parameters *data)
 	return (false);
 }
 
-void	decide_where_to_go_next(t_map_parameters *data, t_position *prev_pos, t_position curr_pos, t_position *next_pos)
+void	decide_where_to_go_next(t_data *data, t_position *prev_pos, t_position curr_pos, t_position *next_pos)
 /* pra debugar colocar a seguinte linha antes de retornar: 
 	data->map_copy_for_debug[curr_pos.line][curr_pos.column] = '-';
 
@@ -69,31 +69,31 @@ só validar um mapa fechado sem buracos dentro;
 	print_err_exit(INVALID_MAP, data);
 }
 
-void	find_starting_point(t_position *pivot, t_map_parameters *map_params)
+void	find_starting_point(t_position *pivot, t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while ((map_params->map)[++(i)])
+	while ((data->map)[++(i)])
 	{
 		j = -1;
-		while ((map_params->map)[i][++j])
+		while ((data->map)[i][++j])
 		{
-			if ((map_params->map)[i][j] == '1')
+			if ((data->map)[i][j] == '1')
 				break ;
 		}
-		if ((map_params->map)[i][j] && (map_params->map)[i][j] == '1')
+		if ((data->map)[i][j] && (data->map)[i][j] == '1')
 			break ;
 	}
-	if (!(map_params->map)[i][j])
-		print_err_exit(INVALID_MAP, map_params);
+	if (!(data->map)[i][j])
+		print_err_exit(INVALID_MAP, data);
 	pivot->line = i;
 	pivot->column = j;
 	return ;
 }
 
-void	trace_contour(t_map_parameters *data)
+void	trace_contour(t_data *data)
 {
 	t_position	starting_point;
 	t_position	*pivot;
@@ -154,7 +154,7 @@ char	*ft_alloc_string(int str_size, int init_value)
 	return (str);
 }
 
-void	pad_lines_on_top_and_bottom(int map_length, t_map_parameters *data)
+void	pad_lines_on_top_and_bottom(int map_length, t_data *data)
 {
 	char	**temp_map;
 	int		map_size;
@@ -174,7 +174,7 @@ void	pad_lines_on_top_and_bottom(int map_length, t_map_parameters *data)
 	ft_free_arr((void *)&temp_map);
 }
 
-void	pad_line_with_spaces(char **curr_line, int map_length, t_map_parameters *data)
+void	pad_line_with_spaces(char **curr_line, int map_length, t_data *data)
 {
 	int		old_line_len;
 	char	*padded_line;
@@ -191,7 +191,7 @@ void	pad_line_with_spaces(char **curr_line, int map_length, t_map_parameters *da
 	return ;
 }
 
-void	pad_columns(int map_length, t_map_parameters *data)
+void	pad_columns(int map_length, t_data *data)
 {
 	int		i;
 
@@ -203,7 +203,7 @@ void	pad_columns(int map_length, t_map_parameters *data)
 	return ;
 }
 
-void	pad_map(t_map_parameters *data)
+void	pad_map(t_data *data)
 {
 	int		map_length;
 
@@ -214,39 +214,39 @@ void	pad_map(t_map_parameters *data)
 	print_err_exit(MEMORY_ALLOCATION, data);
 }
 
-void	save_map(t_map_parameters *map_params)
+void	save_map(t_data *data)
 {
 	char	*map_stringified;
 	char	*temp;
 
-	map_params->line = ft_charjoin(map_params->line, '\n');
+	data->line = ft_charjoin(data->line, '\n');
 	map_stringified = ft_strdup("");
-	while (map_params->line)
+	while (data->line)
 	{
 		temp = map_stringified;
-		map_stringified = ft_strjoin(map_stringified, map_params->line);
+		map_stringified = ft_strjoin(map_stringified, data->line);
 		ft_free_ptr((void *)&temp);
-		ft_free_ptr((void *)&map_params->line);
-		map_params->line = get_next_line(map_params->input_fd);
+		ft_free_ptr((void *)&data->line);
+		data->line = get_next_line(data->input_fd);
 	}
-	map_params->map = ft_split(map_stringified, '\n');
+	data->map = ft_split(map_stringified, '\n');
 	ft_free_ptr((void *)&map_stringified);
-	ft_free_ptr((void *)&map_params->line);
-	close(map_params->input_fd);
-	pad_map(map_params);
+	ft_free_ptr((void *)&data->line);
+	close(data->input_fd);
+	pad_map(data);
 }
 
-void	validate_map(t_map_parameters *map_params)
+void	validate_map(t_data *data)
 /*
 	funções de debug q puxei pra cá pra ñ deletar e perder a ref:
-		debug_print_map_read(map_params);
-		debug_copy_map(map_params);
+		debug_print_map_read(data);
+		debug_copy_map(data);
 	TODO:
 		validate_chars(map);
 		validate_map_size(map);
 */
 {
-	save_map(map_params);
-	trace_contour(map_params);
+	save_map(data);
+	trace_contour(data);
 	return ;
 }

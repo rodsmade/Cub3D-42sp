@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/11 18:31:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/11 20:41:10 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_mlx_struct
 	void	*window;
 }				t_mlx_struct;
 
-typedef struct s_map_parameters
+typedef struct s_data
 {
 	int		input_fd;
 	int		texture_fds[4];
@@ -47,7 +47,7 @@ typedef struct s_map_parameters
 	char	*line;
 	char	**map;
 	char	**map_copy_for_debug;
-}		t_map_parameters;
+}		t_data;
 
 typedef struct s_position
 {
@@ -82,22 +82,22 @@ enum e_err_codes {
 // ------------------------------------------------		PROTOTYPES	-----------
 // tests_debug ********** APAGAR DPS ***************
 void		debug_print_map_read(char **map);
-void		debug_copy_map(t_map_parameters *map_params);
+void		debug_copy_map(t_data *data);
 
 // error_handling.c
-void		print_err_exit(int errcode, t_map_parameters *map_params);
+void		print_err_exit(int errcode, t_data *data);
 
 // init_data.c
-void		init_map_parameters(t_map_parameters *map_parameters);
+void		init_data(t_data *data);
 
 // input_validation_utils.c
 char		*get_next_line_trimmed(int input_fd);
 int			jump_spaces(const char *str);
-int			convert_colour_to_int(char *colour, t_map_parameters *map_params);
+int			convert_colour_to_int(char *colour, t_data *data);
 
 // input_validation.c
-void		validate_args(int argc, char *argv[], t_map_parameters *map_params);
-void		validate_input_file(t_map_parameters *map_params);
+void		validate_args(int argc, char *argv[], t_data *data);
+void		validate_input_file(t_data *data);
 
 // window.c
 void		window(t_mlx_struct *mlx);
@@ -106,20 +106,19 @@ void		window(t_mlx_struct *mlx);
 int			destroy(t_mlx_struct *mlx);
 
 // free_memory.c
-void		free_map_params(t_map_parameters *map_params);
+void		free_data(t_data *data);
 
 // key_press.c
 int			keystrokes_management(int keycode, t_mlx_struct *mlx);
 
 // map_params_checks.c
-void		check_for_valid_path(t_map_parameters *map_params);
-void		check_duplicate_parameter(t_map_parameters *map_params);
-void		check_colour_params_count(char **colours_array,
-				t_map_parameters *map_params);
-void		check_for_valid_colour(t_map_parameters *map_params);
+void		check_for_valid_path(t_data *data);
+void		check_duplicate_parameter(t_data *data);
+void		check_colour_params_count(char **colours_array, t_data *data);
+void		check_for_valid_colour(t_data *data);
 
-// map_params_checks.c
-void		validate_map(t_map_parameters *map_params);
+// map_validation.c
+void		validate_map(t_data *data);
 
 // params_utils.c
 bool		is_direction_identifier(char identifier[2]);
