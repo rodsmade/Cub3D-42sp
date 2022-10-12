@@ -6,61 +6,38 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/11 20:41:35 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:11:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-bool	line_above_is_long_enough(t_position curr_pos, t_data *data)
-{
-	if (curr_pos.line > 0)
-		return (ft_strlen(data->map[curr_pos.line - 1])
-			>= (size_t) curr_pos.column + 1);
-	return (false);
-}
-
-bool	line_below_is_long_enough(t_position curr_pos, t_data *data)
-{
-	if (curr_pos.line < ft_matrixlen(data->map) - 1)
-		return (ft_strlen(data->map[curr_pos.line + 1])
-			>= (size_t) curr_pos.column + 1);
-	return (false);
-}
-
 void	decide_where_to_go_next(t_data *data, t_position *prev_pos, t_position curr_pos, t_position *next_pos)
 /* pra debugar colocar a seguinte linha antes de retornar: 
 	data->map_copy_for_debug[curr_pos.line][curr_pos.column] = '-';
-
-adicionar sangria no mapa pra facilitar a vida na validação;
-só validar um mapa fechado sem buracos dentro;
-        1111111111111
-    11111000000000001
-    10000000000000001
-    11111111111111111
 */
 {
 	t_position	next_move;
 
-	if (line_above_is_long_enough(curr_pos, data) && (data->map)[curr_pos.line - 1][curr_pos.column] == '1')
+	if ((data->map)[curr_pos.line - 1][curr_pos.column] == '1')
 	{
 		next_move = t_position_create_tuple(curr_pos.line - 1, curr_pos.column);
 		if (t_position_compare_ptr(&next_move, prev_pos) == false)
 			return (t_position_copy(next_pos, next_move));
 	}
-	if ((data->map)[curr_pos.line][curr_pos.column + 1] && (data->map)[curr_pos.line][curr_pos.column + 1] == '1')
+	if ((data->map)[curr_pos.line][curr_pos.column + 1] == '1')
 	{
 		next_move = t_position_create_tuple(curr_pos.line, curr_pos.column + 1);
 		if (t_position_compare_ptr(&next_move, prev_pos) == false)
 			return (t_position_copy(next_pos, next_move));
 	}
-	if (line_below_is_long_enough(curr_pos, data) && (data->map)[curr_pos.line + 1][curr_pos.column] == '1')
+	if ((data->map)[curr_pos.line + 1][curr_pos.column] == '1')
 	{
 		next_move = t_position_create_tuple(curr_pos.line + 1, curr_pos.column);
 		if (t_position_compare_ptr(&next_move, prev_pos) == false)
 			return (t_position_copy(next_pos, next_move));
 	}
-	if (curr_pos.column > 0 && (data->map)[curr_pos.line][curr_pos.column - 1] == '1')
+	if ((data->map)[curr_pos.line][curr_pos.column - 1] == '1')
 	{
 		next_move = t_position_create_tuple(curr_pos.line, curr_pos.column - 1);
 		if (t_position_compare_ptr(&next_move, prev_pos) == false)
@@ -93,7 +70,7 @@ void	find_starting_point(t_position *pivot, t_data *data)
 	return ;
 }
 
-void	trace_contour(t_data *data)
+void	trace_outer_walls(t_data *data)
 {
 	t_position	starting_point;
 	t_position	*pivot;
@@ -137,8 +114,8 @@ int	find_longest_line_length(char **map)
 
 char	*ft_alloc_string(int str_size, int init_value)
 /**
- * @brief allocs `str_size` bytes for a string, appends a terminating '\0', and
- * initialises every byte in the string to `init_value`.
+ * @brief allocates `str_size` bytes for a string, appends a terminating '\0',
+ * and initialises every byte in the string to `init_value`.
  */
 {
 	char	*str;
@@ -191,14 +168,33 @@ void	pad_line_with_spaces(char **curr_line, int map_length, t_data *data)
 	return ;
 }
 
+void	add_leading_and_trailing_spaces(char **line, int map_length, t_data *data)
+{
+	char	*temp;
+
+	temp = *line;
+	*line = malloc((map_length + 2 + 1) * sizeof(char));
+	if (!*line)
+		print_err_exit(MEMORY_ALLOCATION, data);
+	(*line)[0] = ' ';
+	ft_memcpy(*line + 1, temp, map_length);
+	(*line)[map_length + 1] = ' ';
+	(*line)[map_length + 2] = '\0';
+	ft_free_ptr((void *)&temp);
+	return ;
+}
+
 void	pad_columns(int map_length, t_data *data)
 {
 	int		i;
 
 	i = -1;
 	while (data->map[++i])
+	{
 		if ((int) ft_strlen(data->map[i]) < map_length)
 			pad_line_with_spaces(&(data->map[i]), map_length, data);
+		add_leading_and_trailing_spaces(&(data->map[i]), map_length, data);
+	}
 		
 	return ;
 }
@@ -242,11 +238,11 @@ void	validate_map(t_data *data)
 		debug_print_map_read(data);
 		debug_copy_map(data);
 	TODO:
-		validate_chars(map);
 		validate_map_size(map);
+		validate_chars(map);
 */
 {
 	save_map(data);
-	trace_contour(data);
+	trace_outer_walls(data);
 	return ;
 }
