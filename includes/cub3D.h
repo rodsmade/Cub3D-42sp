@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/09/27 12:25:49 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:24:00 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 
 # define KEY_ESC	65307		// ESC keycode
 # define IMG_TEST			"./img/blueMacaw.xpm"
+# define WIDTH	1024
+# define HEIGHT 720
 
 // ------------------------------------------------		STRUCTS		-----------
 
@@ -57,6 +59,20 @@ typedef struct s_map_parameters
 	int		params_count;
 	char	*line;
 }		t_map_parameters;
+
+typedef struct s_data
+{
+	double			posX;
+	double			posY;
+	double			dirX;
+	double			dirY;
+	double			planeX;
+	double			planeY;
+	double			moveSpeed;
+	double			rotSpeed;
+	t_mlx_struct	*mlx;
+}				t_data;
+
 
 // ------------------------------------------------		ENUMS		-----------
 
@@ -116,5 +132,8 @@ int		get_direction_index(char d);
 int		get_colour_index(char c);
 bool	is_valid_parameter_char(char c);
 bool	has_valid_param_identifier(char *str);
+
+// raycasting.c
+int	raycasting(t_data *data);
 
 #endif
