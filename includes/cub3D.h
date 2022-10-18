@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/18 16:29:40 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/18 16:30:58 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,6 @@ bool	has_valid_param_identifier(char *str);
 
 // raycasting.c
 int	raycasting(t_data *data);
+void	calc_rayCasting(t_data *data);
 
 #endif
