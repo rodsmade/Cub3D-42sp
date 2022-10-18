@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/18 15:24:00 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/18 16:29:40 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdlib.h> 			// exit()
 # include "ansi_color_codes.h"	// colours 🌈
 # include <stdbool.h>			// bool type
+# include <math.h>				// math functions
 
 // ------------------------------------------------		MACROS		-----------
 
@@ -33,6 +34,7 @@
 # define IMG_TEST			"./img/blueMacaw.xpm"
 # define WIDTH	1024
 # define HEIGHT 720
+# define PI 3.142857
 
 // ------------------------------------------------		STRUCTS		-----------
 
@@ -71,12 +73,13 @@ typedef struct s_data
 	double			moveSpeed;
 	double			rotSpeed;
 	t_mlx_struct	*mlx;
+	t_map_parameters *map;
 }				t_data;
 
 
 // ------------------------------------------------		ENUMS		-----------
 
-enum e_colours {ceiling, floor};
+enum e_colours {CEILING, FLOOR};
 enum e_directions {
 	NO,
 	SO,

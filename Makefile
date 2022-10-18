@@ -20,6 +20,8 @@ INCLUDES		=	$(addprefix -I,$(INCLUDES_DIR))
 WINDOW_PATH		= window/
 DESTROY_PATH	= destroy/
 KEYSTROKES_PATH = keystrokes/
+RAYCASTING_PATH = rayCasting/
+
 
 SRCS			=	cub3D.c							\
 					error_handling.c				\
@@ -31,6 +33,10 @@ SRCS			=	cub3D.c							\
 					$(WINDOW_PATH)window.c			\
 					$(DESTROY_PATH)destroy.c		\
 					$(KEYSTROKES_PATH)keystrokes.c	\
+					$(RAYCASTING_PATH)rayCasting.c	\
+					$(RAYCASTING_PATH)calc_rayCasting.c	\
+
+
 
 OBJS			:=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
