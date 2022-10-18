@@ -57,6 +57,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(WINDOW_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(DESTROY_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(KEYSTROKES_PATH))
+	@mkdir -p $(addprefix $(OBJ_DIR)/,$(RAYCASTING_PATH))
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS)
 
 clean:
