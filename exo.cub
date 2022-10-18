@@ -1,7 +1,7 @@
-NO ./north_texture.xpm
-SO ./south_texture.xpm
-EA ./east_texture.xpm
-WE ./west_texture.xpm
+NO ./tests/textures/north_texture.xpm
+SO ./tests/textures/south_texture.xpm
+EA ./tests/textures/east_texture.xpm
+WE ./tests/textures/west_texture.xpm
 F 42, 55, 57
 C 255, 255, 255
 
