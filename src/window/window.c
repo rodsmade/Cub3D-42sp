@@ -35,7 +35,7 @@
 void	window(t_mlx_struct *mlx)
 {
 	mlx->window = mlx_new_window(mlx->pointer, WIDTH, HEIGHT, "cub3D");
-	// image_test(mlx);
+	// image_test(mlx);4
 	mlx_hook(mlx->window, 17, 0L, destroy, mlx);
 	mlx_hook(mlx->window, 3, 1L << 1, keystrokes_management, mlx);
 }
