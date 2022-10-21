@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/19 18:01:55 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:54:45 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	calc_rayCasting(t_data *data)
 		// was a NS or a EW wall hit?
 		int	side;
 
+		// calculate step and initial side_dist
 		if (ray_dir_x < 0)
 		{
 			step_x = -1;
