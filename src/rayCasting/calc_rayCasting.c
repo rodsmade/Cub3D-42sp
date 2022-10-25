@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/25 15:23:05 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:07:17 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,29 @@ static void	ray_direction(t_ray *ray)
 		}
 }
 
+static void	ray_hit(t_ray *ray)
+{
+	while (ray->hit == 0)
+	{
+		// jump to next map square, OR in x-direction, OR in y-direction
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		//check if ray has hit a wall
+		if (world_map[ray->map_x][ray->map_y] > 0)
+			ray->hit = 1;
+	}
+}
+
 void	calc_rayCasting(t_ray *ray, int x)
 {
 	// that loop draw a whole frame and read the input every time
@@ -70,28 +93,9 @@ void	calc_rayCasting(t_ray *ray, int x)
 		// calculate step and initial side_dist
 		ray_direction(ray);
 		// dda algorithm ()
-		ray->hit = 0;
-		while (ray->hit == 0)
-		{
-			// jump to next map square, OR in x-direction, OR in y-direction
-			if (ray->side_dist_x < ray->side_dist_y)
-			{
-				ray->side_dist_x += ray->delta_dist_x;
-				ray->map_x += ray->step_x;
-				ray->side = 0;
-			}
-			else
-			{
-				ray->side_dist_y += ray->delta_dist_y;
-				ray->map_y += ray->step_y;
-				ray->side = 1;
-			}
-			//check if ray has hit a wall
-			if (world_map[ray->map_x][ray->map_y] > 0)
-				ray->hit = 1;
-		}
-
+		ray_hit(ray);
 		// this step above is for calculate the size of wall and if you need change the whay of see the game, change here (fish eye)
+
 		if (ray->side == 0)
 			ray->perp_wall_dist = (ray->map_x - ray->pos_x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
 		else
