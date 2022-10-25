@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/25 14:45:08 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:32:34 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ typedef struct s_ray
 	int				hit;
 	int				side;
 	double			perp_wall_dist;
-
+	int				line_height;
+	int				color;
+	int				draw_start;
+	int				draw_end;
 	t_mlx_struct	*mlx;
 	t_map_parameters *map;
 }				t_ray;
