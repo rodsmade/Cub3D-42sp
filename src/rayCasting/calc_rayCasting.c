@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/25 14:59:46 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:23:05 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,9 @@ static void	init_ray(t_ray *ray, int x)
 	ray->hit = 0;
 }
 
-void	calc_rayCasting(t_ray *ray, int x)
+static void	ray_direction(t_ray *ray)
 {
-	// that loop draw a whole frame and read the input every time
-	while (x < WIDTH)
-	{
-		init_ray(ray, x);
-		// calculate step and initial side_dist
-		if (ray->ray_dir_x < 0)
+	if (ray->ray_dir_x < 0)
 		{
 			ray->step_x = -1;
 			ray->side_dist_x = (ray->pos_x - ray->map_x) * ray->delta_dist_x;
@@ -64,7 +59,16 @@ void	calc_rayCasting(t_ray *ray, int x)
 			ray->step_y = 1;
 			ray->side_dist_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_dist_y;
 		}
+}
 
+void	calc_rayCasting(t_ray *ray, int x)
+{
+	// that loop draw a whole frame and read the input every time
+	while (x < WIDTH)
+	{
+		init_ray(ray, x);
+		// calculate step and initial side_dist
+		ray_direction(ray);
 		// dda algorithm ()
 		ray->hit = 0;
 		while (ray->hit == 0)
