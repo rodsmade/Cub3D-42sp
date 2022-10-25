@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/18 17:18:59 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/24 23:58:58 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,35 @@ typedef struct s_map_parameters
 	char	*line;
 }		t_map_parameters;
 
-typedef struct s_data
+typedef struct s_ray
 {
-	double			posX;
-	double			posY;
-	double			dirX;
-	double			dirY;
-	double			planeX;
-	double			planeY;
-	double			moveSpeed;
-	double			rotSpeed;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			move_speed;
+	double			rot_speed;
+	double			camera_x;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	int				map_x;
+	int				map_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	double			perp_wall_dist;
+
 	t_mlx_struct	*mlx;
 	t_map_parameters *map;
-}				t_data;
+}				t_ray;
+
 
 
 // ------------------------------------------------		ENUMS		-----------
@@ -139,7 +155,7 @@ bool	is_valid_parameter_char(char c);
 bool	has_valid_param_identifier(char *str);
 
 // raycasting.c
-int	raycasting(t_data *data);
-void	calc_rayCasting(t_data *data);
+int	raycasting(t_ray *ray);
+void	calc_rayCasting(t_ray *ray);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/19 17:58:16 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/24 23:53:19 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,35 @@ int	world_map[24][24] = {
 int	main(int argc, char **argv)
 {
 	t_mlx_struct			mlx;
-	t_data					data;
+	t_ray					ray;
 	static t_map_parameters	map_params;
 	int						input_fd;
 
-	data.mlx = malloc(sizeof(t_mlx_struct));
+	ray.mlx = malloc(sizeof(t_mlx_struct));
 	validate_args(argc, argv, &input_fd, &map_params);
 	validate_input_file(input_fd, &map_params);
 	mlx.pointer = mlx_init();
 	window(&mlx);
 
-	// start data content
-	data.posX = 12; 	// start position
-	data.posY = 5;		// start position
-	data.dirX = -1;		// initial direction vector
-	data.dirY = 0;		// initial direction vector
-	data.planeX = 0;
-	data.planeY = 0.66;
-	data.moveSpeed = 0.05;
-	data.rotSpeed = 0.05;
-	data.mlx->pointer = mlx.pointer;
-	data.mlx->window = mlx.window;
+	for(int i = 0; i < 1; i++) {
+		dprintf(2, "%s\n", map_params.line);
+		dprintf(2, "oieee\n");
+	}
 
-	mlx_loop_hook(mlx.pointer, &raycasting, &data);
+	// start ray content
+	ray.pos_x = 12; 		// start position
+	ray.pos_y = 5;			// start position
+	ray.dir_x = -1;			// initial direction vector
+	ray.dir_y = 0;			// initial direction vector
+	ray.plane_x = 0;		// camera plane
+	ray.plane_y = 0.66;		// camera plane iss 66º
+	ray.move_speed = 0.05;
+	ray.rot_speed = 0.05;
+	ray.hit = 0;
+	ray.mlx->pointer = mlx.pointer;
+	ray.mlx->window = mlx.window;
+
+	mlx_loop_hook(mlx.pointer, &raycasting, &ray);
 	mlx_loop(mlx.pointer);
 	return (0);
 }

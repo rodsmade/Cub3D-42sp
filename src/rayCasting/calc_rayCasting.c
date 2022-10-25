@@ -6,109 +6,117 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/19 19:54:45 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/25 00:06:35 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	ver_line(t_data *data, int x, int y1, int y2, int color)
+static void	ver_line(t_ray *ray, int x, int y1, int y2, int color)
 {
 	int y;
 
 	y = y1;
 	while (y <= y2)
 	{
-		mlx_pixel_put(data->mlx->pointer, data->mlx->window, x, y, color);
+		mlx_pixel_put(ray->mlx->pointer, ray->mlx->window, x, y, color);
 		y++;
 	}
 }
 
-void	calc_rayCasting(t_data *data)
+void	calc_rayCasting(t_ray *ray)
 {
-	int	screen_iterator;
+	int	x;
 
-	screen_iterator = 0;
-	while (screen_iterator < WIDTH)
+	x = 0;
+	// that loop draw a whole frame and read the input every time
+	while (x < WIDTH)
 	{
 
 		// calculate ray position and direction
-		double camera_x = 2 * screen_iterator / (double)WIDTH - 1; //x-coordinate in camera space
-		double ray_dir_x = data->dirX + data->planeX * camera_x;
-		double ray_dir_y = data->dirY + data->planeY * camera_x;
+		//x-coordinate in camera space
+		ray->camera_x = 2 * x / (double)WIDTH - 1;
+		ray->ray_dir_x = ray->dir_x + ray->plane_x * ray->camera_x;
+		ray->ray_dir_y = ray->dir_y + ray->plane_y * ray->camera_x;
 
+		// essas variaveis abaixo sao relevantes para o DDA
 		// which box of the map we're in
-		int	map_x = (int)data->posX;
-		int map_y = (int)data->posY;
+		ray->map_x = (int)ray->pos_x;
+		ray->map_y = (int)ray->pos_y;
 
 		// length of ray from current position to next x or y-side
-		double side_dist_x;
-		double side_dist_y;
+		// double side_dist_x;
+		// double side_dist_y;
 
 		// lenght of ray from one x or y-side to next x or y-side
 		// fabs function takes the double argument and returns the absolute value and this is good to capture the distance between ray_dir_x to 0;
-		double delta_dist_x = fabs(1 / ray_dir_x);
-		double delta_dist_y = fabs(1 / ray_dir_y);
-		double perp_wall_dist;
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+
+		// calculate the lenght of the ray
+		// double perp_wall_dist;
 
 		// what direction to step in x or y (+1 or -1)
-		int	step_x;
-		int	step_y;
+		// int	step_x;
+		// int	step_y;
 
 		// was there a wall hit?
-		int	hit = 0;
 		// was a NS or a EW wall hit?
-		int	side;
+		// int	side;
 
 		// calculate step and initial side_dist
-		if (ray_dir_x < 0)
+		if (ray->ray_dir_x < 0)
 		{
-			step_x = -1;
-			side_dist_x = (data->posX - map_x) * delta_dist_x;
+			ray->step_x = -1;
+			ray->side_dist_x = (ray->pos_x - ray->map_x) * ray->delta_dist_x;
+			// then multiply by delta_dist to get the actual euclidean distance
 		}
 		else
 		{
-			step_x = 1;
-			side_dist_x = (map_x + 1.0 - data->posX) * delta_dist_x;
+			ray->step_x = 1;
+			ray->side_dist_x = (ray->map_x + 1.0 - ray->pos_x) * ray->delta_dist_x;
 		}
-		if (ray_dir_y < 0)
+		if (ray->ray_dir_y < 0)
 		{
-			step_y = -1;
-			side_dist_y = (data->posY - map_y) * delta_dist_y;
+			ray->step_y = -1;
+			ray->side_dist_y = (ray->pos_y - ray->map_y) * ray->delta_dist_y;
 		}
 		else
 		{
-			step_y = 1;
-			side_dist_y = (map_y + 1.0 - data->posY) * delta_dist_y;
+			ray->step_y = 1;
+			ray->side_dist_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_dist_y;
 		}
 
-		while (hit == 0)
+		// dda algorithm ()
+		ray->hit = 0;
+		while (ray->hit == 0)
 		{
 			// jump to next map square, OR in x-direction, OR in y-direction
-			if (side_dist_x < side_dist_y)
+			if (ray->side_dist_x < ray->side_dist_y)
 			{
-				side_dist_x += delta_dist_x;
-				map_x += step_x;
-				side = 0;
+				ray->side_dist_x += ray->delta_dist_x;
+				ray->map_x += ray->step_x;
+				ray->side = 0;
 			}
 			else
 			{
-				side_dist_y += delta_dist_y;
-				map_y += step_y;
-				side = 1;
+				ray->side_dist_y += ray->delta_dist_y;
+				ray->map_y += ray->step_y;
+				ray->side = 1;
 			}
 			//check if ray has hit a wall
-			if (world_map[map_x][map_y] > 0)
-				hit = 1;
+			if (world_map[ray->map_x][ray->map_y] > 0)
+				ray->hit = 1;
 		}
 
-		if (side == 0)
-			perp_wall_dist = (map_x - data->posX + (1 - step_x) / 2) / ray_dir_x;
+		// this step above is for calculate the size of wall and if you need change the whay of see the game, change here (fish eye)
+		if (ray->side == 0)
+			ray->perp_wall_dist = (ray->map_x - ray->pos_x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
 		else
-			perp_wall_dist = (map_y - data->posY + (1 - step_y) / 2) / ray_dir_y;
+			ray->perp_wall_dist = (ray->map_y - ray->pos_y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
 
 		// calculate height of line to draw on screen
-		int	line_height = (int)(HEIGHT / perp_wall_dist);
+		int	line_height = (int)(HEIGHT / ray->perp_wall_dist);
 
 		// calculate lowest and highest pixel to fill in current stripe
 		int	draw_start = -line_height / 2 + HEIGHT / 2;
@@ -120,22 +128,22 @@ void	calc_rayCasting(t_data *data)
 			draw_end = HEIGHT - 1;
 
 		int	color;
-		if (world_map[map_y][map_x] == 1)
+		if (world_map[ray->map_y][ray->map_x] == 1)
 			color =  0xFF0000;
-		else if (world_map[map_y][map_x] == 2)
+		else if (world_map[ray->map_y][ray->map_x] == 2)
 			color = 0x00FF00;
-		else if (world_map[map_y][map_x] == 3)
+		else if (world_map[ray->map_y][ray->map_x] == 3)
 			color = 0x0000FF;
-		else if (world_map[map_y][map_x] == 4)
+		else if (world_map[ray->map_y][ray->map_x] == 4)
 			color = 0xFFFFFF;
 		else
 			color = 0xFFFF00;
 
-		if (side == 1)
+		if (ray->side == 1)
 			color = color / 2;
 
-		ver_line(data, screen_iterator, draw_start, draw_end, color);
+		ver_line(ray, x, draw_start, draw_end, color);
 
-		screen_iterator++;
+		x++;
 	}
 }
