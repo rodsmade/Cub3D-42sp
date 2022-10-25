@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/24 23:58:58 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:45:08 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	print_err_exit(int errcode, t_map_parameters *map_params);
 
 // init_data.c
 void	init_map_parameters(t_map_parameters *map_parameters);
+void	init_ray_parameters(t_ray *ray, t_mlx_struct *mlx);
 
 // input_validation_utils.c
 char	*get_next_line_trimmed(int input_fd);
@@ -155,7 +156,7 @@ bool	is_valid_parameter_char(char c);
 bool	has_valid_param_identifier(char *str);
 
 // raycasting.c
-int	raycasting(t_ray *ray);
-void	calc_rayCasting(t_ray *ray);
+int		raycasting(t_ray *ray);
+void	calc_rayCasting(t_ray *ray, int x);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/24 23:53:19 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/25 00:48:15 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,7 @@ int	main(int argc, char **argv)
 	validate_input_file(input_fd, &map_params);
 	mlx.pointer = mlx_init();
 	window(&mlx);
-
-	for(int i = 0; i < 1; i++) {
-		dprintf(2, "%s\n", map_params.line);
-		dprintf(2, "oieee\n");
-	}
-
-	// start ray content
-	ray.pos_x = 12; 		// start position
-	ray.pos_y = 5;			// start position
-	ray.dir_x = -1;			// initial direction vector
-	ray.dir_y = 0;			// initial direction vector
-	ray.plane_x = 0;		// camera plane
-	ray.plane_y = 0.66;		// camera plane iss 66º
-	ray.move_speed = 0.05;
-	ray.rot_speed = 0.05;
-	ray.hit = 0;
-	ray.mlx->pointer = mlx.pointer;
-	ray.mlx->window = mlx.window;
-
+	init_ray_parameters(&ray, &mlx);
 	mlx_loop_hook(mlx.pointer, &raycasting, &ray);
 	mlx_loop(mlx.pointer);
 	return (0);

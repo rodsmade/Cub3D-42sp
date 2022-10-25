@@ -6,15 +6,16 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:13:53 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/18 23:47:41 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:44:11 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "cub3D.h"
 
-int	raycasting(t_data *data)
+
+int	raycasting(t_ray *ray)
 {
-	calc_rayCasting(data);
+	calc_rayCasting(ray, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/25 00:06:35 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:45:50 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,46 +24,24 @@ static void	ver_line(t_ray *ray, int x, int y1, int y2, int color)
 	}
 }
 
-void	calc_rayCasting(t_ray *ray)
+static void	init_ray(t_ray *ray, int x)
 {
-	int	x;
+	ray->camera_x = 2 * x / (double)WIDTH - 1;
+	ray->ray_dir_x = ray->dir_x + ray->plane_x * ray->camera_x;
+	ray->ray_dir_y = ray->dir_y + ray->plane_y * ray->camera_x;
+	ray->map_x = (int)ray->pos_x;
+	ray->map_y = (int)ray->pos_y;
+	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	ray->hit = 0;
+}
 
-	x = 0;
+void	calc_rayCasting(t_ray *ray, int x)
+{
 	// that loop draw a whole frame and read the input every time
 	while (x < WIDTH)
 	{
-
-		// calculate ray position and direction
-		//x-coordinate in camera space
-		ray->camera_x = 2 * x / (double)WIDTH - 1;
-		ray->ray_dir_x = ray->dir_x + ray->plane_x * ray->camera_x;
-		ray->ray_dir_y = ray->dir_y + ray->plane_y * ray->camera_x;
-
-		// essas variaveis abaixo sao relevantes para o DDA
-		// which box of the map we're in
-		ray->map_x = (int)ray->pos_x;
-		ray->map_y = (int)ray->pos_y;
-
-		// length of ray from current position to next x or y-side
-		// double side_dist_x;
-		// double side_dist_y;
-
-		// lenght of ray from one x or y-side to next x or y-side
-		// fabs function takes the double argument and returns the absolute value and this is good to capture the distance between ray_dir_x to 0;
-		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
-		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
-
-		// calculate the lenght of the ray
-		// double perp_wall_dist;
-
-		// what direction to step in x or y (+1 or -1)
-		// int	step_x;
-		// int	step_y;
-
-		// was there a wall hit?
-		// was a NS or a EW wall hit?
-		// int	side;
-
+		init_ray(ray, x);
 		// calculate step and initial side_dist
 		if (ray->ray_dir_x < 0)
 		{
