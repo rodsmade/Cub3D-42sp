@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/25 17:32:34 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:35:18 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@
 # define IMG_TEST			"./img/blueMacaw.xpm"
 # define WIDTH	1024
 # define HEIGHT 720
-# define PI 3.142857
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 // ------------------------------------------------		STRUCTS		-----------
 
@@ -92,6 +93,9 @@ typedef struct s_ray
 	int				color;
 	int				draw_start;
 	int				draw_end;
+	int				**buf;
+	int				texture[8][TEX_HEIGHT * TEX_WIDTH];
+	int				re_buf;
 	t_mlx_struct	*mlx;
 	t_map_parameters *map;
 }				t_ray;

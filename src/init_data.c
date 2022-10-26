@@ -6,26 +6,48 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/25 00:47:42 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:45:50 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+static void	init_tex_parameters(t_ray *ray)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	ray->buf = (int **)malloc(sizeof(int *) * HEIGHT);
+	while (++i < HEIGHT)
+		ray->buf[i] = (int *)malloc(sizeof(int) * WIDTH);
+	i = 0;
+	while (i < 8)
+	{
+		j = 0;
+		while (j < TEX_HEIGHT * TEX_WIDTH )
+		{
+			ray->buf[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
+
 void	init_ray_parameters(t_ray *ray, t_mlx_struct *mlx)
 {
-	// start ray content
-	ray->pos_x = 12; 		// start position
-	ray->pos_y = 5;			// start position
-	ray->dir_x = -1;			// initial direction vector
-	ray->dir_y = 0;			// initial direction vector
-	ray->plane_x = 0;		// camera plane
-	ray->plane_y = 0.66;		// camera plane iss 66º
+	ray->pos_x = 22;
+	ray->pos_y = 11.5;
+	ray->dir_x = -1;
+	ray->dir_y = 0;
+	ray->plane_x = 0;
+	ray->plane_y = 0.66;
 	ray->move_speed = 0.05;
 	ray->rot_speed = 0.05;
 	ray->hit = 0;
 	ray->mlx->pointer = mlx->pointer;
 	ray->mlx->window = mlx->window;
+	init_tex_parameters(ray);
 }
 
 void	init_map_parameters(t_map_parameters *map_parameters)
