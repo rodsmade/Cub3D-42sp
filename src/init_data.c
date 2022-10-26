@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/26 16:27:49 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:37:22 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ void	init_ray_parameters(t_ray *ray, t_mlx_struct *mlx)
 	ray->move_speed = 0.05;
 	ray->rot_speed = 0.05;
 	ray->hit = 0;
-	ray->mlx->pointer = mlx->pointer;
-	ray->mlx->window = mlx->window;
+	ray->mlx = mlx;
 	init_tex_parameters(ray, 0, 0);
 	put_tex_in_matrix(ray, 0, 0);
 }

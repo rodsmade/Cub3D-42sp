@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/26 15:35:18 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:35:30 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ extern int	world_map[24][24];
 
 typedef struct s_mlx_img
 {
+	int		*data;
 	void	*pointer;
-	char	*addr;
 	int		bits_per_pixel;
 	int		line_lenght;
 	int		endian;
