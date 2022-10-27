@@ -6,14 +6,16 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/26 15:50:10 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:32:24 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	draw(t_ray *ray, int x)
+static void	display_and_text_calcs(t_ray *ray, int x)
 {
+	int	y;
+
 	ray->line_height = (int)(HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
 	if (ray->draw_start < 0)
@@ -21,22 +23,22 @@ static void	draw(t_ray *ray, int x)
 	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
 	if (ray->draw_end >= HEIGHT)
 		ray->draw_end = HEIGHT - 1;
-	if (world_map[ray->map_y][ray->map_x] == 1)
-		ray->color = 0xFF0000;
-	else if (world_map[ray->map_y][ray->map_x] == 2)
-		ray->color = 0x00FF00;
-	else if (world_map[ray->map_y][ray->map_x] == 3)
-		ray->color = 0x0000FF;
-	else if (world_map[ray->map_y][ray->map_x] == 4)
-		ray->color = 0xFFFFFF;
-	else
-		ray->color = 0xFFFF00;
-	if (ray->side == 1)
-		ray->color = ray->color / 2;
-	while (ray->draw_start <= ray->draw_end)
+	ray->tex_num = world_map[ray->map_x][ray->map_y];
+	ray->wall_x = wall_x_calc(ray);
+	ray->tex_x = take_x_coord_on_texture(ray);
+	ray->step = pixel_perscreen(ray);
+	ray->tex_pos = tex_coordinate(ray);
+	y = ray->draw_start;
+	while (y < ray->draw_end)
 	{
-		mlx_pixel_put(ray->mlx->pointer, ray->mlx->window, x, ray->draw_start, ray->color);
-		ray->draw_start++;
+		ray->tex_y = conv_text_coord_to_int(ray);
+		ray->tex_pos += ray->step;
+		ray->color = ray->texture[ray->tex_num][TEX_HEIGHT
+			* ray->tex_y + ray->tex_x];
+		color_more_dark_to_y_sides(ray);
+		ray->buf[y][x] = ray->color;
+		ray->re_buf = 1;
+		y++;
 	}
 }
 
@@ -107,6 +109,25 @@ static void	ray_size(t_ray *ray)
 			(1 - ray->step_y) / 2) / ray->ray_dir_y;
 }
 
+void	draw(t_ray *ray)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < HEIGHT)
+	{
+		j = 0;
+		while (j < WIDTH)
+		{
+			ray->mlx->img->data[i * WIDTH + j] = ray->buf[i][j];
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(ray->mlx->pointer, ray->mlx->window, ray->mlx->img->pointer, 0, 0);
+}
+
 void	calc_rayCasting(t_ray *ray, int x)
 {
 	while (x < WIDTH)
@@ -115,7 +136,8 @@ void	calc_rayCasting(t_ray *ray, int x)
 		ray_direction(ray);
 		ray_hit(ray);
 		ray_size(ray);
-		draw(ray, x);
+		display_and_text_calcs(ray, x);
+		draw(ray);
 		x++;
 	}
 }

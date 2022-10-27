@@ -35,8 +35,7 @@ SRCS			=	cub3D.c							\
 					$(KEYSTROKES_PATH)keystrokes.c	\
 					$(RAYCASTING_PATH)rayCasting.c	\
 					$(RAYCASTING_PATH)calc_rayCasting.c	\
-
-
+					$(RAYCASTING_PATH)texture_rayCasting.c	\
 
 OBJS			:=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
@@ -44,7 +43,7 @@ SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
 all:	$(NAME)
 
 $(NAME): $(LIBFT) $(MLIBX) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBFT_FLAGS) $(MLX_FLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBFT_FLAGS) $(MLX_FLAGS) -lm
 
 $(MLIBX):
 	make -C $(MLIBX_PATH)

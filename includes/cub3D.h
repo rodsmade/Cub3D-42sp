@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/26 16:35:30 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:08:39 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,12 @@ typedef struct s_ray
 	int				draw_start;
 	int				draw_end;
 	int				**buf;
+	int				tex_num;
+	double			wall_x;
+	int				tex_x;
+	int				tex_y;
+	double			step;
+	double			tex_pos;
 	int				texture[8][TEX_HEIGHT * TEX_WIDTH];
 	int				re_buf;
 	t_mlx_struct	*mlx;
@@ -165,5 +171,14 @@ bool	has_valid_param_identifier(char *str);
 // raycasting.c
 int		raycasting(t_ray *ray);
 void	calc_rayCasting(t_ray *ray, int x);
+
+// texture_rayCasting.c
+double	wall_x_calc(t_ray *ray);
+int	take_x_coord_on_texture(t_ray *ray);
+double	pixel_perscreen(t_ray *ray);
+double	tex_coordinate(t_ray *ray);
+int	conv_text_coord_to_int(t_ray *ray);
+void	color_more_dark_to_y_sides(t_ray *ray);
+
 
 #endif
