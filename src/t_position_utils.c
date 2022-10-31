@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 10:24:22 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/04 10:25:17 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/31 06:41:16 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	t_position_copy(t_position *destination, const t_position source)
 {
 	destination->line = source.line;
 	destination->column = source.column;
+	return ;
 }
 
 bool	t_position_compare_ptr(t_position *a, t_position *b)

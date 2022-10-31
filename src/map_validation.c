@@ -6,13 +6,14 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/11 21:11:01 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/31 06:42:39 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	decide_where_to_go_next(t_data *data, t_position *prev_pos, t_position curr_pos, t_position *next_pos)
+void	decide_where_to_go_next(t_data *data, t_position *prev_pos,
+			t_position curr_pos, t_position *next_pos)
 /* pra debugar colocar a seguinte linha antes de retornar: 
 	data->map_copy_for_debug[curr_pos.line][curr_pos.column] = '-';
 */
@@ -46,7 +47,7 @@ void	decide_where_to_go_next(t_data *data, t_position *prev_pos, t_position curr
 	print_err_exit(INVALID_MAP, data);
 }
 
-void	find_starting_point(t_position *pivot, t_data *data)
+void	find_starting_point(t_position *starting_point, t_data *data)
 {
 	int	i;
 	int	j;
@@ -65,8 +66,8 @@ void	find_starting_point(t_position *pivot, t_data *data)
 	}
 	if (!(data->map)[i][j])
 		print_err_exit(INVALID_MAP, data);
-	pivot->line = i;
-	pivot->column = j;
+	starting_point->line = i;
+	starting_point->column = j;
 	return ;
 }
 
@@ -93,121 +94,9 @@ void	trace_outer_walls(t_data *data)
 	}
 	if (t_position_compare_ptr(goes_to, &starting_point) == false)
 		print_err_exit(INVALID_MAP, data);
-}
-
-int	find_longest_line_length(char **map)
-{
-	int	max_length;
-	int	line_length;
-	int	i;
-
-	max_length = 0;
-	i = -1;
-	while (map[++i])
-	{
-		line_length = (int) ft_strlen(map[i]);
-		if (line_length > max_length)
-			max_length = line_length;
-	}
-	return (max_length);
-}
-
-char	*ft_alloc_string(int str_size, int init_value)
-/**
- * @brief allocates `str_size` bytes for a string, appends a terminating '\0',
- * and initialises every byte in the string to `init_value`.
- */
-{
-	char	*str;
-	int		i;
-
-	str = malloc((str_size + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	i = -1;
-	while (++i < str_size)
-		str[i] = init_value;
-	str[i] = '\0';
-	return (str);
-}
-
-void	pad_lines_on_top_and_bottom(int map_length, t_data *data)
-{
-	char	**temp_map;
-	int		map_size;
-	int		i;
-
-	temp_map = data->map;
-	map_size = ft_matrixlen(temp_map);
-	data->map = malloc((map_size + 2 + 1) * sizeof(char *));
-	if (!data->map)
-		print_err_exit(MEMORY_ALLOCATION, data);
-	data->map[0] = ft_alloc_string(map_length, ' ');
-	i = -1;
-	while (temp_map[++i])
-		data->map[i + 1] = ft_strdup(temp_map[i]);
-	data->map[map_size + 2 - 1] = ft_alloc_string(map_length, ' ');
-	data->map[map_size + 2] = NULL;
-	ft_free_arr((void *)&temp_map);
-}
-
-void	pad_line_with_spaces(char **curr_line, int map_length, t_data *data)
-{
-	int		old_line_len;
-	char	*padded_line;
-	char	*temp;
-
-	temp = *curr_line;
-	old_line_len = ft_strlen(*curr_line);
-	padded_line = ft_alloc_string(map_length, ' ');
-	if (!padded_line)
-		print_err_exit(MEMORY_ALLOCATION, data);
-	ft_memcpy(padded_line, *curr_line, old_line_len);
-	*curr_line = padded_line;
-	ft_free_ptr((void *)&temp);
-	return ;
-}
-
-void	add_leading_and_trailing_spaces(char **line, int map_length, t_data *data)
-{
-	char	*temp;
-
-	temp = *line;
-	*line = malloc((map_length + 2 + 1) * sizeof(char));
-	if (!*line)
-		print_err_exit(MEMORY_ALLOCATION, data);
-	(*line)[0] = ' ';
-	ft_memcpy(*line + 1, temp, map_length);
-	(*line)[map_length + 1] = ' ';
-	(*line)[map_length + 2] = '\0';
-	ft_free_ptr((void *)&temp);
-	return ;
-}
-
-void	pad_columns(int map_length, t_data *data)
-{
-	int		i;
-
-	i = -1;
-	while (data->map[++i])
-	{
-		if ((int) ft_strlen(data->map[i]) < map_length)
-			pad_line_with_spaces(&(data->map[i]), map_length, data);
-		add_leading_and_trailing_spaces(&(data->map[i]), map_length, data);
-	}
-		
-	return ;
-}
-
-void	pad_map(t_data *data)
-{
-	int		map_length;
-
-	map_length = find_longest_line_length(data->map);
-	pad_lines_on_top_and_bottom(map_length, data);
-	pad_columns(map_length, data);
-	debug_print_map_read(data->map);
-	print_err_exit(MEMORY_ALLOCATION, data);
+	ft_free_ptr((void *)&came_from);
+	ft_free_ptr((void *)&goes_to);
+	ft_free_ptr((void *)&pivot);
 }
 
 void	save_map(t_data *data)
@@ -232,6 +121,22 @@ void	save_map(t_data *data)
 	pad_map(data);
 }
 
+void	validate_characters(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (data->map[++i])
+	{
+		j = -1;
+		while (data->map[i][++j])
+			if (!ft_strchr(VALID_CHARS, data->map[i][j]))
+				return print_err_exit(INVALID_CHAR_FOUND, data);
+	}
+	return ;
+}
+
 void	validate_map(t_data *data)
 /*
 	funções de debug q puxei pra cá pra ñ deletar e perder a ref:
@@ -243,6 +148,7 @@ void	validate_map(t_data *data)
 */
 {
 	save_map(data);
+	validate_characters(data);
 	trace_outer_walls(data);
 	return ;
 }

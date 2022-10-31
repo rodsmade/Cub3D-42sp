@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/11 20:39:43 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/31 06:58:33 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static char	*get_error_message(int errcode)
 		"Invalid colour format. Use: " UPURPLE "R, G, B" RESET \
 			", each value ranging from 0 to 255.", \
 		"Invalid map.", \
-		"Error allocating memory. Ran out of RAM?"
+		"Error allocating memory. Ran out of RAM?", \
+		"Map has invalid char. Valid chars are: " UPURPLE VALID_CHARS RESET
 	};
 
 	return (error_messages[errcode]);

@@ -89,6 +89,7 @@ printf "\n${BHWHT}Making logs directory...\n"
 echo "$ mkdir -p logs" && mkdir -p logs
 
 # RUN TESTS
+## test_case 'test_description' 'input_path' expected_return_code 'log_path'
 test_case '00_test_texture_params_format_ID_space_VALID_PATH_must_return_exit_code_0' './maps/valid/00_valid_texture_parameters.cub' 0 'test_00_err'
 test_case '01_test_texture_params_format_ID_many_spaces_VALID_PATH_must_return_exit_code_0' './maps/valid/01_texture_ids_separated_by_many_spaces.cub' 0 'test_01_err'
 test_case '02_test_NO_texture_param_format_ID_space_INVALID_PATH_must_return_exit_code_1' './maps/invalid/02_valid_NO_texture_parameter.cub' 1 'test_02_err'
@@ -137,6 +138,7 @@ test_case '44_test_valid_square_map_surrounded_by_ones_must_return_exit_code_0' 
 test_case '45_test_invalid_square_map_not_surrounded_by_ones_must_return_exit_code_1' './maps/invalid/45_invalid_square_map.cub' 1 'test_45_err'
 test_case '46_test_if_line_starts_with_spaces_must_return_exit_code_0' './maps/valid/46_valid_T_map.cub' 0 'test_46_err'
 test_case '47_test_valid_irregular_map_surrounded_by_ones_at_right_angles_must_return_exit_code_0' './maps/valid/47_valid_irregular_map_surrounded_by_ones.cub' 0 'test_47_err'
+test_case '48_test_invalid_map_with_invalid_character_must_return_exit_code_1' './maps/invalid/48_invalid_map_with_invalid_character.cub' 1 'test_48_err'
 
 # ESQUECI DE ESCREVER TESTE DE FORMATO ERRADO D: .cub
 
