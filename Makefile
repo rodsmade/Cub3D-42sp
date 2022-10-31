@@ -3,8 +3,7 @@ NAME	= cub3D
 CC				=	gcc
 CFLAGS			=	-g -Wall -Werror -Wextra
 RM				=	rm -f
-VALGRIND		=	valgrind --leak-check=full --show-leak-kinds=all \
-						--track-origins=yes -q --tool=memcheck
+VALGRIND		=	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck
 INCLUDES_DIR	=	./includes ./libs/libft ./libs/minilibx-linux
 SRC_DIR			=	./src
 OBJ_DIR			=	./obj
@@ -27,7 +26,9 @@ SRCS			=	cub3D.c							\
 					init_data.c						\
 					input_validation_utils.c		\
 					input_validation.c				\
+					map_padding.c					\
 					map_params_checks.c				\
+					map_utils.c						\
 					map_validation.c				\
 					params_utils.c					\
 					t_position_utils.c				\
