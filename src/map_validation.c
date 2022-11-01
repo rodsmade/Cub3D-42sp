@@ -6,70 +6,11 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/31 06:42:39 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:48:45 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	decide_where_to_go_next(t_data *data, t_position *prev_pos,
-			t_position curr_pos, t_position *next_pos)
-/* pra debugar colocar a seguinte linha antes de retornar: 
-	data->map_copy_for_debug[curr_pos.line][curr_pos.column] = '-';
-*/
-{
-	t_position	next_move;
-
-	if ((data->map)[curr_pos.line - 1][curr_pos.column] == '1')
-	{
-		next_move = t_position_create_tuple(curr_pos.line - 1, curr_pos.column);
-		if (t_position_compare_ptr(&next_move, prev_pos) == false)
-			return (t_position_copy(next_pos, next_move));
-	}
-	if ((data->map)[curr_pos.line][curr_pos.column + 1] == '1')
-	{
-		next_move = t_position_create_tuple(curr_pos.line, curr_pos.column + 1);
-		if (t_position_compare_ptr(&next_move, prev_pos) == false)
-			return (t_position_copy(next_pos, next_move));
-	}
-	if ((data->map)[curr_pos.line + 1][curr_pos.column] == '1')
-	{
-		next_move = t_position_create_tuple(curr_pos.line + 1, curr_pos.column);
-		if (t_position_compare_ptr(&next_move, prev_pos) == false)
-			return (t_position_copy(next_pos, next_move));
-	}
-	if ((data->map)[curr_pos.line][curr_pos.column - 1] == '1')
-	{
-		next_move = t_position_create_tuple(curr_pos.line, curr_pos.column - 1);
-		if (t_position_compare_ptr(&next_move, prev_pos) == false)
-			return (t_position_copy(next_pos, next_move));
-	}
-	print_err_exit(INVALID_MAP, data);
-}
-
-void	find_starting_point(t_position *starting_point, t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while ((data->map)[++(i)])
-	{
-		j = -1;
-		while ((data->map)[i][++j])
-		{
-			if ((data->map)[i][j] == '1')
-				break ;
-		}
-		if ((data->map)[i][j] && (data->map)[i][j] == '1')
-			break ;
-	}
-	if (!(data->map)[i][j])
-		print_err_exit(INVALID_MAP, data);
-	starting_point->line = i;
-	starting_point->column = j;
-	return ;
-}
 
 void	trace_outer_walls(t_data *data)
 {
@@ -132,7 +73,7 @@ void	validate_characters(t_data *data)
 		j = -1;
 		while (data->map[i][++j])
 			if (!ft_strchr(VALID_CHARS, data->map[i][j]))
-				return print_err_exit(INVALID_CHAR_FOUND, data);
+				return (print_err_exit(INVALID_CHAR_FOUND, data));
 	}
 	return ;
 }

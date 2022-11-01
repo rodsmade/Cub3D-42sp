@@ -30,6 +30,7 @@ SRCS			=	cub3D.c							\
 					map_params_checks.c				\
 					map_utils.c						\
 					map_validation.c				\
+					map_validation_utils.c			\
 					params_utils.c					\
 					t_position_utils.c				\
 					tests_debug.c					\

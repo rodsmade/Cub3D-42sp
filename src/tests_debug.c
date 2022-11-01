@@ -6,13 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:38:20 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/11 20:38:25 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:54:16 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	debug_print_map_read(char **map)
+/*void	debug_print_map_read(char **map)
 {
 	int	i;
 
@@ -92,3 +92,4 @@ void	debug_print_locale(char **map, int line, int column)
 		printf("x");
 	printf("]\n");
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/31 06:33:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:52:05 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,13 @@ int			find_longest_line_length(char **map);
 
 // map_validation.c
 void		validate_map(t_data *data);
+
+// map_validation_utils.c
+bool		try_to_move_in_direction(t_position next_move, t_position *prev_pos,
+				t_position *next_pos, t_data *data);
+void		decide_where_to_go_next(t_data *data, t_position *prev_pos,
+				t_position curr_pos, t_position *next_pos);
+void		find_starting_point(t_position *starting_point, t_data *data);
 
 // params_utils.c
 bool		is_direction_identifier(char identifier[2]);
