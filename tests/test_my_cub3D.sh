@@ -139,6 +139,8 @@ test_case '45_test_invalid_square_map_not_surrounded_by_ones_must_return_exit_co
 test_case '46_test_if_line_starts_with_spaces_must_return_exit_code_0' './maps/valid/46_valid_T_map.cub' 0 'test_46_err'
 test_case '47_test_valid_irregular_map_surrounded_by_ones_at_right_angles_must_return_exit_code_0' './maps/valid/47_valid_irregular_map_surrounded_by_ones.cub' 0 'test_47_err'
 test_case '48_test_invalid_map_with_invalid_character_must_return_exit_code_1' './maps/invalid/48_invalid_map_with_invalid_character.cub' 1 'test_48_err'
+test_case '49_test_map_with_no_starting_position_character_must_return_exit_code_1' './maps/invalid/49_invalid_map_with_no_starting_position_character.cub' 1 'test_49_err'
+test_case '50_test_map_with_two_starting_position_characters_must_return_exit_code_1' './maps/invalid/50_invalid_map_with_two_starting_position_characters.cub' 1 'test_49_err'
 
 # ESQUECI DE ESCREVER TESTE DE FORMATO ERRADO D: .cub
 
