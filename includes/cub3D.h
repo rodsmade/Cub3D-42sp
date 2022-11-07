@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 17:04:58 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:49:49 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,19 @@ enum e_colours {
 	CEILING,
 	FLOOR
 };
+
 enum e_directions {
 	NO,
 	SO,
 	EA,
 	WE
 };
+
+enum e_ups_and_downs {
+	UP,
+	DOWN
+};
+
 enum e_err_codes {
 	SYSCALL_ERROR,
 	WRONG_ARGS_NO,
