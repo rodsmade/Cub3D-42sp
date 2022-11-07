@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 17:49:49 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 18:32:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ enum e_err_codes {
 	INVALID_CHAR_FOUND,
 	INVALID_MAP_SIZE,
 	STARTING_POS_ERROR,
-	MULTIPLE_POSITION_CHARS_FOUND,
+	MULTIPLE_POS_CHARS_FOUND,
 	PLAYER_OFF_MAP
 };
 

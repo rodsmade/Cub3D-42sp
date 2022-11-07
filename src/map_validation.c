@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/07 16:17:52 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 18:32:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	validate_characters(t_data *data)
 				if (!starting_char)
 					starting_char = true;
 				else
-					return(print_err_exit(MULTIPLE_POSITION_CHARS_FOUND, data));
+					return (print_err_exit(MULTIPLE_POS_CHARS_FOUND, data));
 			}
 		}
 	}
