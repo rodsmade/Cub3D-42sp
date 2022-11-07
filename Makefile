@@ -20,23 +20,24 @@ WINDOW_PATH		= window/
 DESTROY_PATH	= destroy/
 KEYSTROKES_PATH = keystrokes/
 
-SRCS			=	cub3D.c							\
-					error_handling.c				\
-					free_memory.c					\
-					init_data.c						\
-					input_validation_utils.c		\
-					input_validation.c				\
-					map_padding.c					\
-					map_params_checks.c				\
-					map_utils.c						\
-					map_validation.c				\
-					map_validation_utils.c			\
-					params_utils.c					\
-					t_position_utils.c				\
-					tests_debug.c					\
-					$(WINDOW_PATH)window.c			\
-					$(DESTROY_PATH)destroy.c		\
-					$(KEYSTROKES_PATH)keystrokes.c	\
+SRCS			=	cub3D.c								\
+					error_handling.c					\
+					free_memory.c						\
+					init_data.c							\
+					input_validation_utils.c			\
+					input_validation.c					\
+					map_padding.c						\
+					map_params_checks.c					\
+					map_utils.c							\
+					map_validation.c					\
+					map_validation_player_position.c	\
+					map_validation_utils.c				\
+					params_utils.c						\
+					t_position_utils.c					\
+					tests_debug.c						\
+					$(WINDOW_PATH)window.c				\
+					$(DESTROY_PATH)destroy.c			\
+					$(KEYSTROKES_PATH)keystrokes.c		\
 
 OBJS			:=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 16:00:01 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:04:58 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@
 
 // ------------------------------------------------		STRUCTS		-----------
 
+typedef struct s_position
+{
+	int		line;
+	int		column;
+}		t_position;
+
 typedef struct s_mlx_struct
 {
 	void	*pointer;
@@ -42,20 +48,15 @@ typedef struct s_mlx_struct
 
 typedef struct s_data
 {
-	int		input_fd;
-	int		texture_fds[4];
-	int		colours[2][3];
-	int		params_count;
-	char	*line;
-	char	**map;
-	char	**map_copy_for_debug;
+	int			input_fd;
+	int			texture_fds[4];
+	int			colours[2][3];
+	int			params_count;
+	char		*line;
+	char		**map;
+	char		**map_copy_for_debug;
+	t_position	starting_position;
 }		t_data;
-
-typedef struct s_position
-{
-	int		line;
-	int		column;
-}		t_position;
 
 // ------------------------------------------------		ENUMS		-----------
 
@@ -82,7 +83,8 @@ enum e_err_codes {
 	INVALID_CHAR_FOUND,
 	INVALID_MAP_SIZE,
 	STARTING_POS_ERROR,
-	MULTIPLE_POSITION_CHARS_FOUND
+	MULTIPLE_POSITION_CHARS_FOUND,
+	PLAYER_OFF_MAP
 };
 
 // ------------------------------------------------		PROTOTYPES	-----------
@@ -138,6 +140,9 @@ bool		try_to_move_in_direction(t_position next_move, t_position *prev_pos,
 void		decide_where_to_go_next(t_data *data, t_position *prev_pos,
 				t_position curr_pos, t_position *next_pos);
 void		find_starting_point(t_position *starting_point, t_data *data);
+
+// map_validation_player_position.c
+void		check_player_position(t_data *data);
 
 // params_utils.c
 bool		is_direction_identifier(char identifier[2]);

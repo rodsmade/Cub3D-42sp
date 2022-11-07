@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/07 12:40:26 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:16:07 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ static char	*get_error_message(int errcode)
 		"Invalid map size.", \
 		"No starting position character found. Valid chars are: " \
 			UPURPLE "N" RESET ", " UPURPLE "S" RESET ", " UPURPLE "E" RESET \
-			UPURPLE "W" RESET ".", \
-		"Multiple starting position characters found. Only one allowed."
+			", " UPURPLE "W" RESET ".", \
+		"Multiple starting position characters found. Only one allowed.", \
+		"Player starting position is outside the map."
 	};
 
 	return (error_messages[errcode]);

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/07 12:41:05 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:17:52 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ void	validate_map(t_data *data)
 	validate_map_size(data);
 	validate_characters(data);
 	trace_outer_walls(data);
-	
+	check_player_position(data);
 	return ;
 }
