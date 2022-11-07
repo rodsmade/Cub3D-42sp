@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/01 11:48:45 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:41:05 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,37 @@ void	save_map(t_data *data)
 
 void	validate_characters(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	bool	starting_char;
 
+	starting_char = false;
 	i = -1;
 	while (data->map[++i])
 	{
 		j = -1;
 		while (data->map[i][++j])
+		{
 			if (!ft_strchr(VALID_CHARS, data->map[i][j]))
 				return (print_err_exit(INVALID_CHAR_FOUND, data));
+			if (ft_strchr(STARTING_CHARS, data->map[i][j]))
+			{
+				if (!starting_char)
+					starting_char = true;
+				else
+					return(print_err_exit(MULTIPLE_POSITION_CHARS_FOUND, data));
+			}
+		}
 	}
+	if (!starting_char)
+		return (print_err_exit(STARTING_POS_ERROR, data));
+	return ;
+}
+
+void	validate_map_size(t_data *data)
+{
+	if (ft_matrixlen(data->map) < 3 || ft_strlen(data->map[0]) < 5)
+		print_err_exit(INVALID_MAP_SIZE, data);
 	return ;
 }
 
@@ -83,13 +103,12 @@ void	validate_map(t_data *data)
 	funções de debug q puxei pra cá pra ñ deletar e perder a ref:
 		debug_print_map_read(data);
 		debug_copy_map(data);
-	TODO:
-		validate_map_size(map);
-		validate_chars(map);
 */
 {
 	save_map(data);
+	validate_map_size(data);
 	validate_characters(data);
 	trace_outer_walls(data);
+	
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 05:57:00 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/31 05:57:23 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:32:46 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,13 @@ void	pad_columns(int map_length, t_data *data)
 }
 
 void	pad_map(t_data *data)
+/*
+	debug_print_map_read(data->map);
+*/
 {
 	int		map_length;
 
 	map_length = find_longest_line_length(data->map);
 	pad_lines_on_top_and_bottom(map_length, data);
 	pad_columns(map_length, data);
-	debug_print_map_read(data->map);
 }

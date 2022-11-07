@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/10/31 06:58:33 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:40:26 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ static char	*get_error_message(int errcode)
 			", each value ranging from 0 to 255.", \
 		"Invalid map.", \
 		"Error allocating memory. Ran out of RAM?", \
-		"Map has invalid char. Valid chars are: " UPURPLE VALID_CHARS RESET
+		"Map has invalid char. Valid chars are: " UPURPLE VALID_CHARS RESET, \
+		"Invalid map size.", \
+		"No starting position character found. Valid chars are: " \
+			UPURPLE "N" RESET ", " UPURPLE "S" RESET ", " UPURPLE "E" RESET \
+			UPURPLE "W" RESET ".", \
+		"Multiple starting position characters found. Only one allowed."
 	};
 
 	return (error_messages[errcode]);

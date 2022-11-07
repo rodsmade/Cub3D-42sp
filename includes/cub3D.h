@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/01 11:52:05 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:00:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 
 // ------------------------------------------------		MACROS		-----------
 # define KEY_ESC		65307		// ESC keycode
-# define VALID_CHARS	"10 NSEW"	// ESC keycode
+# define VALID_CHARS	"10 NSEW"	// valid map chars
+# define STARTING_CHARS	"NSEW"		// valid starting position chars
 
 // ------------------------------------------------		STRUCTS		-----------
 
@@ -78,7 +79,10 @@ enum e_err_codes {
 	INVALID_COLOUR_PARAM,
 	INVALID_MAP,
 	MEMORY_ALLOCATION,
-	INVALID_CHAR_FOUND
+	INVALID_CHAR_FOUND,
+	INVALID_MAP_SIZE,
+	STARTING_POS_ERROR,
+	MULTIPLE_POSITION_CHARS_FOUND
 };
 
 // ------------------------------------------------		PROTOTYPES	-----------
