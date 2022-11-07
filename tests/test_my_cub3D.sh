@@ -140,7 +140,11 @@ test_case '46_test_if_line_starts_with_spaces_must_return_exit_code_0' './maps/v
 test_case '47_test_valid_irregular_map_surrounded_by_ones_at_right_angles_must_return_exit_code_0' './maps/valid/47_valid_irregular_map_surrounded_by_ones.cub' 0 'test_47_err'
 test_case '48_test_invalid_map_with_invalid_character_must_return_exit_code_1' './maps/invalid/48_invalid_map_with_invalid_character.cub' 1 'test_48_err'
 test_case '49_test_map_with_no_starting_position_character_must_return_exit_code_1' './maps/invalid/49_invalid_map_with_no_starting_position_character.cub' 1 'test_49_err'
-test_case '50_test_map_with_two_starting_position_characters_must_return_exit_code_1' './maps/invalid/50_invalid_map_with_two_starting_position_characters.cub' 1 'test_49_err'
+test_case '50_test_map_with_two_starting_position_characters_must_return_exit_code_1' './maps/invalid/50_invalid_map_with_two_starting_position_characters.cub' 1 'test_50_err'
+test_case '51_test_bumpy_map_with_starting_position_within_must_return_exit_code_0' './maps/valid/51_starting_position_within_bumpy_map.cub' 0 'test_51_err'
+test_case '52_test_circle_map_with_hole_and_starting_position_within_must_return_exit_code_0' './maps/valid/52_starting_position_within_map_with_hole.cub' 0 'test_52_err'
+test_case '53_test_circle_map_with_hole_and_starting_position_outside_must_return_exit_code_1' './maps/invalid/53_starting_position_outside_bumpy_map.cub' 1 'test_53_err'
+test_case '54_test_circle_map_with_hole_and_starting_position_outside_must_return_exit_code_1' './maps/valid/54_starting_position_outside_map_with_hole.cub' 1 'test_54_err'
 
 # ESQUECI DE ESCREVER TESTE DE FORMATO ERRADO D: .cub
 
