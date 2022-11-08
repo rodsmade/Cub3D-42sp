@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:52:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/27 11:59:12 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/11 20:37:42 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	jump_spaces(const char *str)
 	return (i);
 }
 
-void	check_conversion_chars(char *str, t_map_parameters *map_params)
+void	check_conversion_chars(char *str, t_data *data)
 {
 	int	i;
 
@@ -35,22 +35,22 @@ void	check_conversion_chars(char *str, t_map_parameters *map_params)
 	while (str[++i])
 	{
 		if (str[i] != '+' && str[i] != '-' && !ft_isdigit(str[i]))
-			print_err_exit(INVALID_COLOUR_PARAM, map_params);
+			print_err_exit(INVALID_COLOUR_PARAM, data);
 	}
 	return ;
 }
 
-int	convert_colour_to_int(char *colour, t_map_parameters *map_params)
+int	convert_colour_to_int(char *colour, t_data *data)
 {
 	int		colour_code;
 	char	*trimmed;
 
 	trimmed = ft_strtrim(colour, " \t\v\r");
 	ft_free_ptr((void *)&colour);
-	check_conversion_chars(trimmed, map_params);
+	check_conversion_chars(trimmed, data);
 	colour_code = ft_atoi(trimmed);
 	if (colour_code < 0 || colour_code > 255)
-		print_err_exit(INVALID_COLOUR_PARAM, map_params);
+		print_err_exit(INVALID_COLOUR_PARAM, data);
 	ft_free_ptr((void *)&trimmed);
 	return (colour_code);
 }

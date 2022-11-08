@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   ft_matrixlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 18:32:30 by roaraujo         ###   ########.fr       */
+/*   Created: 2022/10/10 12:42:03 by roaraujo          #+#    #+#             */
+/*   Updated: 2022/10/10 12:42:28 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_matrixlen(char **matrix)
 {
-	t_mlx_struct		mlx;
-	t_data				data;
+	int	i;
 
-	init_data(&data);
-	validate_args(argc, argv, &data);
-	validate_input_file(&data);
-	mlx.pointer = mlx_init();
-	window(&mlx);
-	mlx_loop(mlx.pointer);
-	free_data(&data);
-	return (0);
+	i = 0;
+	while (matrix[i])
+		i++;
+	return (i);
 }

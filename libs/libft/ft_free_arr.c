@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   ft_free_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 18:32:30 by roaraujo         ###   ########.fr       */
+/*   Created: 2022/09/29 21:45:12 by roaraujo          #+#    #+#             */
+/*   Updated: 2022/09/29 21:45:14 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_free_arr(void ***arr)
 {
-	t_mlx_struct		mlx;
-	t_data				data;
+	int	i;
 
-	init_data(&data);
-	validate_args(argc, argv, &data);
-	validate_input_file(&data);
-	mlx.pointer = mlx_init();
-	window(&mlx);
-	mlx_loop(mlx.pointer);
-	free_data(&data);
-	return (0);
+	i = -1;
+	if (*arr != NULL)
+	{
+		while ((*arr)[++i])
+		{
+			ft_free_ptr((void *)&(*arr)[i]);
+			(*arr)[i] = NULL;
+		}
+		free(*arr);
+	}
 }

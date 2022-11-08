@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 18:32:30 by roaraujo         ###   ########.fr       */
+/*   Created: 2022/10/31 06:31:48 by roaraujo          #+#    #+#             */
+/*   Updated: 2022/10/31 06:32:30 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	main(int argc, char **argv)
+int	find_longest_line_length(char **map)
 {
-	t_mlx_struct		mlx;
-	t_data				data;
+	int	max_length;
+	int	line_length;
+	int	i;
 
-	init_data(&data);
-	validate_args(argc, argv, &data);
-	validate_input_file(&data);
-	mlx.pointer = mlx_init();
-	window(&mlx);
-	mlx_loop(mlx.pointer);
-	free_data(&data);
-	return (0);
+	max_length = 0;
+	i = -1;
+	while (map[++i])
+	{
+		line_length = (int) ft_strlen(map[i]);
+		if (line_length > max_length)
+			max_length = line_length;
+	}
+	return (max_length);
 }

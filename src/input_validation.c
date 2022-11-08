@@ -6,65 +6,58 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/27 12:00:15 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/10/11 20:40:49 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	validate_args(int argc, char *argv[], int *input_fd,
-	t_map_parameters *map_params)
+void	validate_args(int argc, char *argv[], t_data *data)
 {
 	if (argc != 2)
-		print_err_exit(WRONG_ARGS_NO, map_params);
+		print_err_exit(WRONG_ARGS_NO, data);
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
-		print_err_exit(FILE_EXTENSION_ERROR, map_params);
-	*input_fd = open(argv[1], O_RDONLY);
-	if (*input_fd == -1)
-		print_err_exit(SYSCALL_ERROR, map_params);
+		print_err_exit(FILE_EXTENSION_ERROR, data);
+	data->input_fd = open(argv[1], O_RDONLY);
+	if (data->input_fd == -1)
+		print_err_exit(SYSCALL_ERROR, data);
 	return ;
 }
 
-void	retrieve_parameter(t_map_parameters *map_params)
+void	retrieve_parameter(t_data *data)
 {
 	char	identifier[2];
 
-	if (!has_valid_param_identifier(map_params->line))
-		print_err_exit(INVALID_TEXTURE_PARAMS, map_params);
-	ft_strlcpy(identifier, map_params->line, 3);
+	if (!has_valid_param_identifier(data->line))
+		print_err_exit(INVALID_TEXTURE_PARAMS, data);
+	ft_strlcpy(identifier, data->line, 3);
 	if (is_direction_identifier(identifier))
-		check_for_valid_path(map_params);
+		check_for_valid_path(data);
 	else
-		check_for_valid_colour(map_params);
+		check_for_valid_colour(data);
 }
 
-void	validate_map_parameters(int input_fd, t_map_parameters *map_params)
+void	validate_map_parameters(t_data *data)
 {
-	init_map_parameters(map_params);
-	(map_params->line) = get_next_line_trimmed(input_fd);
-	while ((map_params->line))
+	(data->line) = get_next_line_trimmed(data->input_fd);
+	while ((data->line))
 	{
-		if ((map_params->line)[0])
+		if ((data->line)[0])
 		{
-			if (is_valid_parameter_char((map_params->line)[0]))
-				retrieve_parameter(map_params);
+			if (is_valid_parameter_char((data->line)[0]))
+				retrieve_parameter(data);
 			else
 				break ;
 		}
-		ft_free_ptr((void *)&(map_params->line));
-		(map_params->line) = get_next_line_trimmed(input_fd);
+		ft_free_ptr((void *)&(data->line));
+		(data->line) = get_next_line_trimmed(data->input_fd);
 	}
-	ft_free_ptr((void *)&(map_params->line));
-	if (map_params->params_count != 6)
-		print_err_exit(MISSING_PARAMETER, map_params);
+	if (data->params_count != 6)
+		print_err_exit(MISSING_PARAMETER, data);
 }
 
-void	validate_input_file(int input_fd, t_map_parameters *map_params)
-/*
-	idealmente vai ter tb as funçoes:
-		open_texture_files()
-		validate_map()
-*/
+void	validate_input_file(t_data *data)
 {
-	validate_map_parameters(input_fd, map_params);
+	validate_map_parameters(data);
+	validate_map(data);
 }

@@ -20,6 +20,7 @@ SOURCES			+=	ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c
 SOURCES			+=	ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c
 SOURCES			+=	ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c
 SOURCES			+=	ft_tolower.c ft_toupper.c get_next_line.c ft_free_ptr.c
+SOURCES			+=	ft_free_arr.c ft_charjoin.c ft_matrixlen.c ft_alloc_string.c
 
 SOURCES_BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c
 SOURCES_BONUS	+=	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c

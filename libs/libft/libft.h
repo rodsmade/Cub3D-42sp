@@ -522,5 +522,9 @@ char			*get_next_line(int fd);
 
 // extra
 void			ft_free_ptr(void **ptr);
+void			ft_free_arr(void ***arr);
+char			*ft_charjoin(const char* str, const char c);
+int				ft_matrixlen(char **matrix);
+char			*ft_alloc_string(int str_size, int init_value);
 
 #endif

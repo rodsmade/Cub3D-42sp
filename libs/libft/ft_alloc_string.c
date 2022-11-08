@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   ft_alloc_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 18:32:30 by roaraujo         ###   ########.fr       */
+/*   Created: 2022/10/31 06:00:39 by roaraujo          #+#    #+#             */
+/*   Updated: 2022/10/31 06:00:46 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_alloc_string(int str_size, int init_value)
+/**
+ * @brief allocates `str_size` bytes for a string, appends a terminating '\0',
+ * and initialises every byte in the string to `init_value`.
+ */
 {
-	t_mlx_struct		mlx;
-	t_data				data;
+	char	*str;
+	int		i;
 
-	init_data(&data);
-	validate_args(argc, argv, &data);
-	validate_input_file(&data);
-	mlx.pointer = mlx_init();
-	window(&mlx);
-	mlx_loop(mlx.pointer);
-	free_data(&data);
-	return (0);
+	str = malloc((str_size + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (++i < str_size)
+		str[i] = init_value;
+	str[i] = '\0';
+	return (str);
 }
