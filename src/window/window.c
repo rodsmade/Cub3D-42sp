@@ -12,9 +12,10 @@
 
 #include "cub3D.h"
 
-void	window(t_mlx_struct *mlx)
+void	open_window(t_data *data)
 {
-	mlx->window = mlx_new_window(mlx->pointer, 300, 300, "cub3D");
-	mlx_hook(mlx->window, 17, 0L, destroy, mlx);
-	mlx_hook(mlx->window, 3, 1L << 1, keystrokes_management, mlx);
+	data->mlx_struct.window = mlx_new_window(data->mlx_struct.pointer, 300, 300, "cub3D");
+	if (data->mlx_struct.window == NULL)
+		print_err_exit(MLX_ERROR, data);
+	return ;
 }

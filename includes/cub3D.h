@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/08 18:58:22 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:37:26 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,12 @@ enum e_colours {
 	FLOOR
 };
 
+enum e_rgb_values {
+	R_VALUE,
+	G_VALUE,
+	B_VALUE
+};
+
 enum e_directions {
 	NO,
 	SO,
@@ -173,13 +179,16 @@ void		validate_args(int argc, char *argv[], t_data *data);
 void		validate_input_file(t_data *data);
 
 // window.c
-void		window(t_mlx_struct *mlx);
+void		open_window(t_data *data);
 
 // destroy.c
 int			destroy(t_mlx_struct *mlx);
 
 // free_memory.c
 void		free_data(t_data *data);
+
+// hooks.c
+void		set_hooks(t_data *data);
 
 // key_press.c
 int			keystrokes_management(int keycode, t_mlx_struct *mlx);

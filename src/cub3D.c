@@ -6,11 +6,49 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/08 18:56:12 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:37:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	encode_rgb(u_int8_t red, u_int8_t green, u_int8_t blue)
+{
+	return (red << 16 | green << 8 | blue);
+}
+
+void	paint_floor_and_ceiling(t_data *data)
+{
+	int	i;
+	int	j;
+
+	if (!data->mlx_struct.window)
+		return ;
+	i = -1;
+	while (++i < WIDTH)
+	{
+		j = -1;
+		while (++j < HEIGHT)
+		{
+			if (j < HEIGHT / 2)
+				mlx_pixel_put(data->mlx_struct.pointer,
+								data->mlx_struct.window,
+								i,
+								j,
+								encode_rgb(data->colours[CEILING][R_VALUE],
+									data->colours[CEILING][G_VALUE],
+									data->colours[CEILING][B_VALUE]));
+			else
+				mlx_pixel_put(data->mlx_struct.pointer,
+								data->mlx_struct.window,
+								i,
+								j,
+								encode_rgb(data->colours[FLOOR][R_VALUE],
+									data->colours[FLOOR][G_VALUE],
+									data->colours[FLOOR][B_VALUE]));
+		}
+	}
+}
 
 void	initialise_minilibx(t_data *data)
 {
@@ -36,7 +74,10 @@ int	main(int argc, char **argv)
 	validate_args(argc, argv, &data);
 	validate_input_file(&data);
 	initialise_minilibx(&data);
-	window(&data.mlx_struct);
+	// create image of floor, create image of ceiling
+	open_window(&data);
+	paint_floor_and_ceiling(&data);
+	set_hooks(&data);
 	// init_raycasting_parameters(&data);
 	// raycasting(&ray);
 	mlx_loop(data.mlx_struct.pointer);

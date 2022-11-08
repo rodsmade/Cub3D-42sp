@@ -39,6 +39,7 @@ LIBMATH_FLAGS	=	-lm
 SRCS			=	cub3D.c														\
 					error_handling.c											\
 					free_memory.c												\
+					hooks.c														\
 					init_data.c													\
 					$(DESTROY_PATH)destroy.c									\
 					$(INPUT_VALIDATION_PATH)input_validation_utils.c			\

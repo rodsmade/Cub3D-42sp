@@ -134,10 +134,8 @@ void	calc_ray_casting(t_raycasting *ray, int x, t_data *data)
 	{
 		init_raycasting(ray, x);
 		ray_direction(ray);
-		// passar data aqui:
 		ray_hit(ray, data);
 		ray_size(ray);
-		// passar data aqui:
 		display_and_text_calcs(ray, x, data);
 		draw(data);
 		x++;
