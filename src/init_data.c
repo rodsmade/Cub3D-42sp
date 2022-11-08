@@ -6,13 +6,13 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/08 16:19:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:57:50 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	put_tex_in_matrix(t_ray *ray, int x, int y)
+static void	put_tex_in_matrix(t_raycasting *ray, int x, int y)
 {
 	int	xor_color;
 	int	y_color;
@@ -46,7 +46,7 @@ static void	put_tex_in_matrix(t_ray *ray, int x, int y)
 	}
 }
 
-static void	init_tex_parameters(t_ray *ray, int i, int j)
+static void	init_tex_parameters(t_raycasting *ray, int i, int j)
 {
 	i = -1;
 	ray->buf = (int **)malloc(sizeof(int *) * HEIGHT);
@@ -75,20 +75,19 @@ static void	init_tex_parameters(t_ray *ray, int i, int j)
 	}
 }
 
-void	init_ray_parameters(t_ray *ray, t_mlx_struct *mlx)
+void	init_raycasting_parameters(t_data *data)
 {
-	ray->pos_x = 22;
-	ray->pos_y = 11.5;
-	ray->dir_x = -1;
-	ray->dir_y = 0;
-	ray->plane_x = 0;
-	ray->plane_y = 0.66;
-	ray->move_speed = 0.05;
-	ray->rot_speed = 0.05;
-	ray->hit = 0;
-	ray->mlx = mlx;
-	init_tex_parameters(ray, 0, 0);
-	put_tex_in_matrix(ray, 0, 0);
+	data->raycasting.pos_x = 22;
+	data->raycasting.pos_y = 11.5;
+	data->raycasting.dir_x = -1;
+	data->raycasting.dir_y = 0;
+	data->raycasting.plane_x = 0;
+	data->raycasting.plane_y = 0.66;
+	data->raycasting.move_speed = 0.05;
+	data->raycasting.rot_speed = 0.05;
+	data->raycasting.hit = 0;
+	init_tex_parameters(&data->raycasting, 0, 0);
+	put_tex_in_matrix(&data->raycasting, 0, 0);
 }
 
 void	init_data(t_data *data)

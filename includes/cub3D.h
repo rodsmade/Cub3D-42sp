@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/08 16:49:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:58:22 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,7 @@ typedef struct s_mlx_struct
 	t_mlx_img	*img;
 }				t_mlx_struct;
 
-typedef struct s_data
-{
-	int				input_fd;
-	int				colours[2][3];
-	int				texture_fds[4];
-	int				params_count;
-	char			*line;
-	char			**map;
-	char			**map_copy_for_debug;
-	t_position		starting_position;
-	t_mlx_struct	mlx_struct;
-}		t_data;
-
-typedef struct s_ray
+typedef struct s_raycasting
 {
 	double			pos_x;
 	double			pos_y;
@@ -111,9 +98,21 @@ typedef struct s_ray
 	double			tex_pos;
 	int				texture[8][TEX_HEIGHT * TEX_WIDTH];
 	int				re_buf;
-	t_mlx_struct	*mlx;
-	t_data			*data;
-}				t_ray;
+}				t_raycasting;
+
+typedef struct s_data
+{
+	int				input_fd;
+	int				colours[2][3];
+	int				texture_fds[4];
+	int				params_count;
+	char			*line;
+	char			**map;
+	char			**map_copy_for_debug;
+	t_position		starting_position;
+	t_mlx_struct	mlx_struct;
+	t_raycasting	raycasting;
+}		t_data;
 
 // ------------------------------------------------		ENUMS		-----------
 
@@ -162,7 +161,7 @@ void		print_err_exit(int errcode, t_data *data);
 
 // init_data.c
 void		init_data(t_data *data);
-void		init_ray_parameters(t_ray *ray, t_mlx_struct *mlx);
+void		init_raycasting_parameters(t_data *data);
 
 // input_validation_utils.c
 char		*get_next_line_trimmed(int input_fd);
@@ -218,16 +217,16 @@ bool		is_valid_parameter_char(char c);
 bool		has_valid_param_identifier(char *str);
 
 // raycasting.c
-int			raycasting(t_ray *ray, t_data *data);
-void		calc_ray_casting(t_ray *ray, int x, t_data *data);
+int			raycasting(t_raycasting *ray, t_data *data);
+void		calc_ray_casting(t_raycasting *ray, int x, t_data *data);
 
 // texture_ray_casting.c
-double		wall_x_calc(t_ray *ray);
-int			take_x_coord_on_texture(t_ray *ray);
-double		pixel_perscreen(t_ray *ray);
-double		tex_coordinate(t_ray *ray);
-int			conv_text_coord_to_int(t_ray *ray);
-void		color_more_dark_to_y_sides(t_ray *ray);
+double		wall_x_calc(t_raycasting *ray);
+int			take_x_coord_on_texture(t_raycasting *ray);
+double		pixel_perscreen(t_raycasting *ray);
+double		tex_coordinate(t_raycasting *ray);
+int			conv_text_coord_to_int(t_raycasting *ray);
+void		color_more_dark_to_y_sides(t_raycasting *ray);
 
 // t_position_utils.c
 t_position	t_position_create_tuple(int line, int column);

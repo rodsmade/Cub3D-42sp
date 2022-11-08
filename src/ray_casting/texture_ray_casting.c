@@ -15,7 +15,7 @@
 /*
 	- calculate value of wallX
 */
-double	wall_x_calc(t_ray *ray)
+double	wall_x_calc(t_raycasting *ray)
 {
 	double	wall_x;
 
@@ -30,7 +30,7 @@ double	wall_x_calc(t_ray *ray)
 /*
 	- x coordinate on the texture
 */
-int	take_x_coord_on_texture(t_ray *ray)
+int	take_x_coord_on_texture(t_raycasting *ray)
 {
 	int	tex_x;
 
@@ -45,7 +45,7 @@ int	take_x_coord_on_texture(t_ray *ray)
 /*
 	- How much to increase the texture coordinate perscreen pixel
 */
-double	pixel_perscreen(t_ray *ray)
+double	pixel_perscreen(t_raycasting *ray)
 {
 	double	step;
 
@@ -56,7 +56,7 @@ double	pixel_perscreen(t_ray *ray)
 /*
 	- Starting texture coordinate
 */
-double	tex_coordinate(t_ray *ray)
+double	tex_coordinate(t_raycasting *ray)
 {
 	double tex_pos;
 
@@ -67,7 +67,7 @@ double	tex_coordinate(t_ray *ray)
 /*
 	- Cast the texture coordinate y to integer, and mask with (texHeight - 1) in case of overflow
 */
-int	conv_text_coord_to_int(t_ray *ray)
+int	conv_text_coord_to_int(t_raycasting *ray)
 {
 	int	tex_y;
 
@@ -78,7 +78,7 @@ int	conv_text_coord_to_int(t_ray *ray)
 /*
 	- make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 */
-void	color_more_dark_to_y_sides(t_ray *ray)
+void	color_more_dark_to_y_sides(t_raycasting *ray)
 {
 	if (ray->side == 1)
 		ray->color = (ray->color >> 1) & 8355711;

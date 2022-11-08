@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-static void	display_and_text_calcs(t_ray *ray, int x, t_data *data)
+static void	display_and_text_calcs(t_raycasting *ray, int x, t_data *data)
 {
 	int	y;
 
@@ -42,7 +42,7 @@ static void	display_and_text_calcs(t_ray *ray, int x, t_data *data)
 	}
 }
 
-static void	init_ray(t_ray *ray, int x)
+static void	init_raycasting(t_raycasting *ray, int x)
 {
 	ray->camera_x = 2 * x / (double)WIDTH - 1;
 	ray->ray_dir_x = ray->dir_x + ray->plane_x * ray->camera_x;
@@ -54,7 +54,7 @@ static void	init_ray(t_ray *ray, int x)
 	ray->hit = 0;
 }
 
-static void	ray_direction(t_ray *ray)
+static void	ray_direction(t_raycasting *ray)
 {
 	if (ray->ray_dir_x < 0)
 		{
@@ -78,7 +78,7 @@ static void	ray_direction(t_ray *ray)
 		}
 }
 
-static void	ray_hit(t_ray *ray, t_data *data)
+static void	ray_hit(t_raycasting *ray, t_data *data)
 {
 	while (ray->hit == 0)
 	{
@@ -99,7 +99,7 @@ static void	ray_hit(t_ray *ray, t_data *data)
 	}
 }
 
-static void	ray_size(t_ray *ray)
+static void	ray_size(t_raycasting *ray)
 {
 	if (ray->side == 0)
 		ray->perp_wall_dist = (ray->map_x - ray->pos_x +
@@ -109,7 +109,7 @@ static void	ray_size(t_ray *ray)
 			(1 - ray->step_y) / 2) / ray->ray_dir_y;
 }
 
-void	draw(t_ray *ray)
+void	draw(t_data *data)
 {
 	int	i;
 	int	j;
@@ -120,26 +120,26 @@ void	draw(t_ray *ray)
 		j = 0;
 		while (j < WIDTH)
 		{
-			ray->mlx->img->data[i * WIDTH + j] = ray->buf[i][j];
+			data->mlx_struct.img->data[i * WIDTH + j] = data->raycasting.buf[i][j];
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(ray->mlx->pointer, ray->mlx->window, ray->mlx->img->pointer, 0, 0);
+	mlx_put_image_to_window(data->mlx_struct.pointer, data->mlx_struct.window, data->mlx_struct.img->pointer, 0, 0);
 }
 
-void	calc_ray_casting(t_ray *ray, int x, t_data *data)
+void	calc_ray_casting(t_raycasting *ray, int x, t_data *data)
 {
 	while (x < WIDTH)
 	{
-		init_ray(ray, x);
+		init_raycasting(ray, x);
 		ray_direction(ray);
 		// passar data aqui:
 		ray_hit(ray, data);
 		ray_size(ray);
 		// passar data aqui:
 		display_and_text_calcs(ray, x, data);
-		draw(ray);
+		draw(data);
 		x++;
 	}
 }

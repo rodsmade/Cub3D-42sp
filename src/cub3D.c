@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/08 16:47:09 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:56:12 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ void	initialise_minilibx(t_data *data)
 int	main(int argc, char **argv)
 /*
 	- [] integrar whichever data structure dele com minha
+	- [x] trazer código do raycasting praqui
 	- [] integrar código do raycasting aqui
 	- [] copiar estrutura da main do so long pra cá
 	- [] alterar a cor do céu e do chão
 */
 {
-	// t_ray				ray;
+	// t_raycasting				ray;
 	t_data				data;
 
 	init_data(&data);
@@ -36,7 +37,7 @@ int	main(int argc, char **argv)
 	validate_input_file(&data);
 	initialise_minilibx(&data);
 	window(&data.mlx_struct);
-	// init_ray_parameters(&ray, &(data.mlx_struct), &data);
+	// init_raycasting_parameters(&data);
 	// raycasting(&ray);
 	mlx_loop(data.mlx_struct.pointer);
 	free_data(&data);

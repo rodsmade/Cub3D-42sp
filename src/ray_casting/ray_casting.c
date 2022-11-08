@@ -14,7 +14,7 @@
 #include "cub3D.h"
 
 
-int	raycasting(t_ray *ray, t_data *data)
+int	raycasting(t_raycasting *ray, t_data *data)
 {
 	calc_ray_casting(ray, 0, data);
 	return (0);
