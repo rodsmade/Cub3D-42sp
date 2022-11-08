@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/07 17:16:07 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:42:48 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static char	*get_error_message(int errcode)
 			UPURPLE "N" RESET ", " UPURPLE "S" RESET ", " UPURPLE "E" RESET \
 			", " UPURPLE "W" RESET ".", \
 		"Multiple starting position characters found. Only one allowed.", \
-		"Player starting position is outside the map."
+		"Player starting position is outside the map.", \
+		"MLX error"
 	};
 
 	return (error_messages[errcode]);

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 18:32:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:49:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@
 # include <stdlib.h> 			// exit()
 # include "ansi_color_codes.h"	// colours 🌈
 # include <stdbool.h>			// bool type
+# include <math.h>				// math functions
 
 // ------------------------------------------------		MACROS		-----------
 # define KEY_ESC		65307		// ESC keycode
 # define VALID_CHARS	"10 NSEW"	// valid map chars
 # define STARTING_CHARS	"NSEW"		// valid starting position chars
+# define WIDTH	1024
+# define HEIGHT 720
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 // ------------------------------------------------		STRUCTS		-----------
 
@@ -40,23 +45,75 @@ typedef struct s_position
 	int		column;
 }		t_position;
 
+typedef struct s_mlx_img
+{
+	int		*data;
+	void	*pointer;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+}				t_mlx_img;
+
 typedef struct s_mlx_struct
 {
 	void	*pointer;
 	void	*window;
+	t_mlx_img	*img;
 }				t_mlx_struct;
 
 typedef struct s_data
 {
-	int			input_fd;
-	int			texture_fds[4];
-	int			colours[2][3];
-	int			params_count;
-	char		*line;
-	char		**map;
-	char		**map_copy_for_debug;
-	t_position	starting_position;
+	int				input_fd;
+	int				colours[2][3];
+	int				texture_fds[4];
+	int				params_count;
+	char			*line;
+	char			**map;
+	char			**map_copy_for_debug;
+	t_position		starting_position;
+	t_mlx_struct	mlx_struct;
 }		t_data;
+
+typedef struct s_ray
+{
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			move_speed;
+	double			rot_speed;
+	double			camera_x;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	int				map_x;
+	int				map_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	double			perp_wall_dist;
+	int				line_height;
+	int				color;
+	int				draw_start;
+	int				draw_end;
+	int				**buf;
+	int				tex_num;
+	double			wall_x;
+	int				tex_x;
+	int				tex_y;
+	double			step;
+	double			tex_pos;
+	int				texture[8][TEX_HEIGHT * TEX_WIDTH];
+	int				re_buf;
+	t_mlx_struct	*mlx;
+	t_data			*data;
+}				t_ray;
 
 // ------------------------------------------------		ENUMS		-----------
 
@@ -91,19 +148,21 @@ enum e_err_codes {
 	INVALID_MAP_SIZE,
 	STARTING_POS_ERROR,
 	MULTIPLE_POS_CHARS_FOUND,
-	PLAYER_OFF_MAP
+	PLAYER_OFF_MAP,
+	MLX_ERROR
 };
 
 // ------------------------------------------------		PROTOTYPES	-----------
 // tests_debug ********** APAGAR DPS ***************
-void		debug_print_map_read(char **map);
-void		debug_copy_map(t_data *data);
+// void		debug_print_map_read(char **map);
+// void		debug_copy_map(t_data *data);
 
 // error_handling.c
 void		print_err_exit(int errcode, t_data *data);
 
 // init_data.c
 void		init_data(t_data *data);
+void		init_ray_parameters(t_ray *ray, t_mlx_struct *mlx);
 
 // input_validation_utils.c
 char		*get_next_line_trimmed(int input_fd);
@@ -157,6 +216,18 @@ int			get_direction_index(char d);
 int			get_colour_index(char c);
 bool		is_valid_parameter_char(char c);
 bool		has_valid_param_identifier(char *str);
+
+// raycasting.c
+int			raycasting(t_ray *ray, t_data *data);
+void		calc_ray_casting(t_ray *ray, int x, t_data *data);
+
+// texture_ray_casting.c
+double		wall_x_calc(t_ray *ray);
+int			take_x_coord_on_texture(t_ray *ray);
+double		pixel_perscreen(t_ray *ray);
+double		tex_coordinate(t_ray *ray);
+int			conv_text_coord_to_int(t_ray *ray);
+void		color_more_dark_to_y_sides(t_ray *ray);
 
 // t_position_utils.c
 t_position	t_position_create_tuple(int line, int column);

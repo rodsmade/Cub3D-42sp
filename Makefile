@@ -22,6 +22,7 @@ KEYSTROKES_PATH			=	keystrokes/
 INPUT_VALIDATION_PATH	=	input_validation/
 UTILS_PATH				=	utils/
 WINDOW_PATH				=	window/
+RAYCASTING_PATH			=	ray_casting/
 
 ## libs
 MLIBX_PATH		=	./libs/minilibx-linux
@@ -30,7 +31,9 @@ MLX_FLAGS		=	-L$(MLIBX_PATH) -lmlx -lXext -lX11
 
 LIBFT_PATH		=	./libs/libft
 LIBFT			=	$(LIBFT_PATH)/libft.a
-LIBFT_FLAGS 	=	-L$(LIBFT_PATH) -lft
+LIBFT_FLAGS		=	-L$(LIBFT_PATH) -lft
+
+LIBMATH_FLAGS	=	-lm
 
 ## source files
 SRCS			=	cub3D.c														\
@@ -50,6 +53,9 @@ SRCS			=	cub3D.c														\
 					$(UTILS_PATH)params_utils.c									\
 					$(UTILS_PATH)t_position_utils.c								\
 					$(WINDOW_PATH)window.c										\
+					$(RAYCASTING_PATH)ray_casting.c	\
+					$(RAYCASTING_PATH)calc_ray_casting.c	\
+					$(RAYCASTING_PATH)texture_ray_casting.c	\
 
 OBJS			:=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
@@ -58,7 +64,7 @@ SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
 all:	$(NAME)
 
 $(NAME): $(LIBFT) $(MLIBX) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBFT_FLAGS) $(MLX_FLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBFT_FLAGS) $(MLX_FLAGS) $(LIBMATH_FLAGS)
 
 $(MLIBX):
 	make -C $(MLIBX_PATH)
@@ -71,6 +77,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(DESTROY_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(INPUT_VALIDATION_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(KEYSTROKES_PATH))
+	@mkdir -p $(addprefix $(OBJ_DIR)/,$(RAYCASTING_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(UTILS_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(WINDOW_PATH))
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS)
