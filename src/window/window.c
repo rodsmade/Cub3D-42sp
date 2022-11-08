@@ -14,7 +14,10 @@
 
 void	open_window(t_data *data)
 {
-	data->mlx_struct.window = mlx_new_window(data->mlx_struct.pointer, 300, 300, "cub3D");
+	data->mlx_struct.window = mlx_new_window(data->mlx_struct.pointer,
+											WIDTH,
+											HEIGHT,
+											"cub3D");
 	if (data->mlx_struct.window == NULL)
 		print_err_exit(MLX_ERROR, data);
 	return ;
