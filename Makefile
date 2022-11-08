@@ -1,47 +1,60 @@
+# VARIABLES
+## binary
 NAME	= cub3D
 
+## compilation
 CC				=	gcc
 CFLAGS			=	-g -Wall -Werror -Wextra
-RM				=	rm -f
-VALGRIND		=	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck
-INCLUDES_DIR	=	./includes ./libs/libft ./libs/minilibx-linux
-SRC_DIR			=	./src
-OBJ_DIR			=	./obj
+INCLUDES		=	$(addprefix -I,$(INCLUDES_DIR))
 
+## bash commands
+RM				=	rm -f
+
+## valgrind
+VALGRIND		=	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck
+
+## directories
+INCLUDES_DIR			=	./includes ./libs/libft ./libs/minilibx-linux
+SRC_DIR					=	./src
+OBJ_DIR					=	./obj
+DESTROY_PATH			=	destroy/
+KEYSTROKES_PATH			=	keystrokes/
+INPUT_VALIDATION_PATH	=	input_validation/
+UTILS_PATH				=	utils/
+WINDOW_PATH				=	window/
+
+## libs
 MLIBX_PATH		=	./libs/minilibx-linux
 MLIBX			=	$(MLIBX_PATH)/libmlx.a
 MLX_FLAGS		=	-L$(MLIBX_PATH) -lmlx -lXext -lX11
+
 LIBFT_PATH		=	./libs/libft
 LIBFT			=	$(LIBFT_PATH)/libft.a
 LIBFT_FLAGS 	=	-L$(LIBFT_PATH) -lft
-INCLUDES		=	$(addprefix -I,$(INCLUDES_DIR))
 
-WINDOW_PATH		= window/
-DESTROY_PATH	= destroy/
-KEYSTROKES_PATH = keystrokes/
-
-SRCS			=	cub3D.c								\
-					error_handling.c					\
-					free_memory.c						\
-					init_data.c							\
-					input_validation_utils.c			\
-					input_validation.c					\
-					map_padding.c						\
-					map_params_checks.c					\
-					map_utils.c							\
-					map_validation.c					\
-					map_validation_player_position.c	\
-					map_validation_utils.c				\
-					params_utils.c						\
-					t_position_utils.c					\
-					tests_debug.c						\
-					$(WINDOW_PATH)window.c				\
-					$(DESTROY_PATH)destroy.c			\
-					$(KEYSTROKES_PATH)keystrokes.c		\
+## source files
+SRCS			=	cub3D.c														\
+					error_handling.c											\
+					free_memory.c												\
+					init_data.c													\
+					$(DESTROY_PATH)destroy.c									\
+					$(INPUT_VALIDATION_PATH)input_validation_utils.c			\
+					$(INPUT_VALIDATION_PATH)input_validation.c					\
+					$(INPUT_VALIDATION_PATH)map_padding.c						\
+					$(INPUT_VALIDATION_PATH)map_params_checks.c					\
+					$(INPUT_VALIDATION_PATH)map_utils.c							\
+					$(INPUT_VALIDATION_PATH)map_validation.c					\
+					$(INPUT_VALIDATION_PATH)map_validation_player_position.c	\
+					$(INPUT_VALIDATION_PATH)map_validation_utils.c				\
+					$(KEYSTROKES_PATH)keystrokes.c								\
+					$(UTILS_PATH)params_utils.c									\
+					$(UTILS_PATH)t_position_utils.c								\
+					$(WINDOW_PATH)window.c										\
 
 OBJS			:=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
 
+# TARGETS
 all:	$(NAME)
 
 $(NAME): $(LIBFT) $(MLIBX) $(OBJS)
@@ -55,9 +68,11 @@ $(LIBFT):
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(addprefix $(OBJ_DIR)/,$(WINDOW_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(DESTROY_PATH))
+	@mkdir -p $(addprefix $(OBJ_DIR)/,$(INPUT_VALIDATION_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(KEYSTROKES_PATH))
+	@mkdir -p $(addprefix $(OBJ_DIR)/,$(UTILS_PATH))
+	@mkdir -p $(addprefix $(OBJ_DIR)/,$(WINDOW_PATH))
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS)
 
 clean:
@@ -66,8 +81,8 @@ clean:
 	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
-	make fclean -C $(LIBFT_PATH)
 	# make clean $(MLIBX_PATH)
+	make fclean -C $(LIBFT_PATH)
 	$(RM) $(NAME)
 
 re:	fclean all
