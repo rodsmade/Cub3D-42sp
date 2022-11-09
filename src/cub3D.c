@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/08 19:37:01 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:45:13 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,14 @@ void	paint_floor_and_ceiling(t_data *data)
 		while (++j < HEIGHT)
 		{
 			if (j < HEIGHT / 2)
-				mlx_pixel_put(data->mlx_struct.pointer,
-								data->mlx_struct.window,
-								i,
-								j,
+				mlx_pixel_put(data->mlx_struct.pointer, data->mlx_struct.window,
+								i, j,
 								encode_rgb(data->colours[CEILING][R_VALUE],
 									data->colours[CEILING][G_VALUE],
 									data->colours[CEILING][B_VALUE]));
 			else
-				mlx_pixel_put(data->mlx_struct.pointer,
-								data->mlx_struct.window,
-								i,
-								j,
+				mlx_pixel_put(data->mlx_struct.pointer, data->mlx_struct.window,
+								i, j,
 								encode_rgb(data->colours[FLOOR][R_VALUE],
 									data->colours[FLOOR][G_VALUE],
 									data->colours[FLOOR][B_VALUE]));
@@ -60,21 +56,25 @@ void	initialise_minilibx(t_data *data)
 
 int	main(int argc, char **argv)
 /*
-	- [] integrar whichever data structure dele com minha
+	- [x] integrar whichever data structure dele com minha
 	- [x] trazer código do raycasting praqui
-	- [] integrar código do raycasting aqui
-	- [] copiar estrutura da main do so long pra cá
-	- [] alterar a cor do céu e do chão
+	- [x] integrar código do raycasting aqui - ok, mas ñ tô usando ainda.
+	- [x] copiar estrutura da main do so long pra cá
+	- [x] alterar a cor do céu e do chão
+	------------------------
+	- [ ] entender +- o raycasting codado
+	- [ ] como parametrizar pra entrar numa posição específica?
+	- [ ] como parametrizar pra olhar pra uma direção específica?
+	- [ ] como mexer a câmera?
+	- [ ] como andar?
 */
 {
-	// t_raycasting				ray;
 	t_data				data;
 
 	init_data(&data);
 	validate_args(argc, argv, &data);
 	validate_input_file(&data);
 	initialise_minilibx(&data);
-	// create image of floor, create image of ceiling
 	open_window(&data);
 	paint_floor_and_ceiling(&data);
 	set_hooks(&data);
