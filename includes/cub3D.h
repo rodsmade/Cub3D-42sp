@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/08 19:37:26 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:16:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct s_mlx_img
 
 typedef struct s_mlx_struct
 {
-	void	*pointer;
-	void	*window;
+	void		*pointer;
+	void		*window;
 	t_mlx_img	*img;
 }				t_mlx_struct;
 
@@ -182,7 +182,7 @@ void		validate_input_file(t_data *data);
 void		open_window(t_data *data);
 
 // destroy.c
-int			destroy(t_mlx_struct *mlx);
+int			destroy(t_data *data);
 
 // free_memory.c
 void		free_data(t_data *data);
@@ -191,7 +191,7 @@ void		free_data(t_data *data);
 void		set_hooks(t_data *data);
 
 // key_press.c
-int			keystrokes_management(int keycode, t_mlx_struct *mlx);
+int			keystrokes_management(int keycode, t_data *data);
 
 // map_padding.c
 void		pad_map(t_data *data);

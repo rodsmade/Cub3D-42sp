@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/08 18:57:50 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:17:10 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,6 @@ void	init_data(t_data *data)
 	data->params_count = 0;
 	data->line = NULL;
 	data->map = NULL;
+	data->mlx_struct.pointer = NULL;
+	data->mlx_struct.img = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/08 19:45:13 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:04:30 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv)
 	validate_input_file(&data);
 	initialise_minilibx(&data);
 	open_window(&data);
-	paint_floor_and_ceiling(&data);
+	paint_floor_and_ceiling(&data); // FULL OK! DEUS NO COMANDO
 	set_hooks(&data);
 	// init_raycasting_parameters(&data);
 	// raycasting(&ray);

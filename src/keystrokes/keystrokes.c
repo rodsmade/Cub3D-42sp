@@ -12,9 +12,9 @@
 
 #include "cub3D.h"
 
-int	keystrokes_management(int keycode, t_mlx_struct *mlx)
+int	keystrokes_management(int keycode, t_data *data)
 {
 	if (keycode == KEY_ESC)
-		destroy(mlx);
+		destroy(data);
 	return (0);
 }
