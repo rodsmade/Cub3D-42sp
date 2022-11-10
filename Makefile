@@ -23,20 +23,23 @@ KEYSTROKES_PATH = keystrokes/
 RAYCASTING_PATH = rayCasting/
 
 
-SRCS			=	cub3D.c							\
-					error_handling.c				\
-					init_data.c						\
-					input_validation_utils.c		\
-					input_validation.c				\
-					map_params_checks.c				\
-					params_utils.c					\
-					texture_load.c					\
-					$(WINDOW_PATH)window.c			\
-					$(DESTROY_PATH)destroy.c		\
-					$(KEYSTROKES_PATH)keystrokes.c	\
-					$(RAYCASTING_PATH)rayCasting.c	\
-					$(RAYCASTING_PATH)calc_rayCasting.c	\
-					$(RAYCASTING_PATH)texture_rayCasting.c	\
+SRCS			=	cub3D.c									\
+					error_handling.c						\
+					init_data.c								\
+					input_validation_utils.c				\
+					input_validation.c						\
+					map_params_checks.c						\
+					params_utils.c							\
+					texture_load.c							\
+					$(WINDOW_PATH)window.c					\
+					$(DESTROY_PATH)destroy.c				\
+					$(KEYSTROKES_PATH)keystrokes.c			\
+					$(RAYCASTING_PATH)dda.c					\
+					$(RAYCASTING_PATH)rayCasting.c			\
+					$(RAYCASTING_PATH)rayCasting_utils.c	\
+					$(RAYCASTING_PATH)calc_rayCasting.c		\
+					$(RAYCASTING_PATH)texture_calcs_0.c		\
+					$(RAYCASTING_PATH)texture_calcs_1.c		\
 
 OBJS			:=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))

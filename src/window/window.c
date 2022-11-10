@@ -16,15 +16,14 @@ static	void	init_img(t_mlx_struct *mlx)
 {
 	mlx->img->pointer = mlx_new_image(mlx->pointer, WIDTH, HEIGHT);
 	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->pointer,
-		&mlx->img->bits_per_pixel, &mlx->img->line_lenght,
-		&mlx->img->endian);
+			&mlx->img->bits_per_pixel, &mlx->img->line_lenght,
+			&mlx->img->endian);
 }
 
 void	window(t_mlx_struct *mlx)
 {
-	if (!(mlx->window = mlx_new_window(mlx->pointer, WIDTH,
-			HEIGHT, "cub3D")))
-			exit(555);
+	mlx->window = mlx_new_window(mlx->pointer, WIDTH,
+			HEIGHT, "cub3D");
 	init_img(mlx);
 	mlx_hook(mlx->window, 17, 0L, destroy, mlx);
 	mlx_hook(mlx->window, 3, 1L << 1, keystrokes_management, mlx);

@@ -6,29 +6,14 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 17:59:27 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:44:49 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	display_and_text_calcs(t_mlx_struct *mlx, int x)
+static void	display_draw(t_mlx_struct *mlx, int x, int y)
 {
-	int	y;
-
-	mlx->ray->line_height = (int)(HEIGHT / mlx->ray->perp_wall_dist);
-	mlx->ray->draw_start = -mlx->ray->line_height / 2 + HEIGHT / 2;
-	if (mlx->ray->draw_start < 0)
-		mlx->ray->draw_start = 0;
-	mlx->ray->draw_end = mlx->ray->line_height / 2 + HEIGHT / 2;
-	if (mlx->ray->draw_end >= HEIGHT)
-		mlx->ray->draw_end = HEIGHT - 1;
-	mlx->ray->tex_num = world_map[mlx->ray->map_x][mlx->ray->map_y];
-	mlx->ray->wall_x = wall_x_calc(mlx);
-	mlx->ray->tex_x = take_x_coord_on_texture(mlx);
-	mlx->ray->step = pixel_perscreen(mlx);
-	mlx->ray->tex_pos = tex_coordinate(mlx);
-	y = mlx->ray->draw_start;
 	while (y < mlx->ray->draw_end)
 	{
 		mlx->ray->tex_y = conv_text_coord_to_int(mlx);
@@ -42,11 +27,30 @@ static void	display_and_text_calcs(t_mlx_struct *mlx, int x)
 	}
 }
 
-static void	init_ray(t_mlx_struct *mlx, int x)
+static void	display_and_text_calcs(t_mlx_struct *mlx, int x)
+{
+	mlx->ray->line_height = (int)(HEIGHT / mlx->ray->perp_wall_dist);
+	mlx->ray->draw_start = -mlx->ray->line_height / 2 + HEIGHT / 2;
+	if (mlx->ray->draw_start < 0)
+		mlx->ray->draw_start = 0;
+	mlx->ray->draw_end = mlx->ray->line_height / 2 + HEIGHT / 2;
+	if (mlx->ray->draw_end >= HEIGHT)
+		mlx->ray->draw_end = HEIGHT - 1;
+	mlx->ray->tex_num = world_map[mlx->ray->map_x][mlx->ray->map_y];
+	mlx->ray->wall_x = wall_x_calc(mlx);
+	mlx->ray->tex_x = take_x_coord_on_texture(mlx);
+	mlx->ray->step = pixel_perscreen(mlx);
+	mlx->ray->tex_pos = tex_coordinate(mlx);
+	display_draw(mlx, x, mlx->ray->draw_start);
+}
+
+static void	handle_initial_data(t_mlx_struct *mlx, int x)
 {
 	mlx->ray->camera_x = 2 * x / (double)WIDTH - 1;
-	mlx->ray->ray_dir_x = mlx->ray->dir_x + mlx->ray->plane_x * mlx->ray->camera_x;
-	mlx->ray->ray_dir_y = mlx->ray->dir_y + mlx->ray->plane_y * mlx->ray->camera_x;
+	mlx->ray->ray_dir_x = mlx->ray->dir_x
+		+ mlx->ray->plane_x * mlx->ray->camera_x;
+	mlx->ray->ray_dir_y = mlx->ray->dir_y
+		+ mlx->ray->plane_y * mlx->ray->camera_x;
 	mlx->ray->map_x = (int)mlx->ray->pos_x;
 	mlx->ray->map_y = (int)mlx->ray->pos_y;
 	mlx->ray->delta_dist_x = fabs(1 / mlx->ray->ray_dir_x);
@@ -54,85 +58,16 @@ static void	init_ray(t_mlx_struct *mlx, int x)
 	mlx->ray->hit = 0;
 }
 
-static void	ray_direction(t_mlx_struct *mlx)
+void	calc_raycasting(t_mlx_struct *mlx, int x)
 {
-	if (mlx->ray->ray_dir_x < 0)
-		{
-			mlx->ray->step_x = -1;
-			mlx->ray->side_dist_x = (mlx->ray->pos_x - mlx->ray->map_x) * mlx->ray->delta_dist_x;
-		}
-		else
-		{
-			mlx->ray->step_x = 1;
-			mlx->ray->side_dist_x = (mlx->ray->map_x + 1.0 - mlx->ray->pos_x) * mlx->ray->delta_dist_x;
-		}
-		if (mlx->ray->ray_dir_y < 0)
-		{
-			mlx->ray->step_y = -1;
-			mlx->ray->side_dist_y = (mlx->ray->pos_y - mlx->ray->map_y) * mlx->ray->delta_dist_y;
-		}
-		else
-		{
-			mlx->ray->step_y = 1;
-			mlx->ray->side_dist_y = (mlx->ray->map_y + 1.0 - mlx->ray->pos_y) * mlx->ray->delta_dist_y;
-		}
-}
-
-static void	ray_hit(t_mlx_struct *mlx)
-{
-	while (mlx->ray->hit == 0)
-	{
-		if (mlx->ray->side_dist_x < mlx->ray->side_dist_y)
-		{
-			mlx->ray->side_dist_x += mlx->ray->delta_dist_x;
-			mlx->ray->map_x += mlx->ray->step_x;
-			mlx->ray->side = 0;
-		}
-		else
-		{
-			mlx->ray->side_dist_y += mlx->ray->delta_dist_y;
-			mlx->ray->map_y += mlx->ray->step_y;
-			mlx->ray->side = 1;
-		}
-		if (world_map[mlx->ray->map_x][mlx->ray->map_y] > 0)
-			mlx->ray->hit = 1;
-	}
-}
-
-static void	ray_size(t_mlx_struct *mlx)
-{
-	if (mlx->ray->side == 0)
-		mlx->ray->perp_wall_dist = (mlx->ray->map_x - mlx->ray->pos_x +
-			(1 - mlx->ray->step_x) / 2) / mlx->ray->ray_dir_x;
-	else
-		mlx->ray->perp_wall_dist = (mlx->ray->map_y - mlx->ray->pos_y +
-			(1 - mlx->ray->step_y) / 2) / mlx->ray->ray_dir_y;
-}
-
-void	calc_rayCasting(t_mlx_struct *mlx, int x)
-{
-	int	y;
-
 	if (mlx->ray->re_buf == 1)
-	{
-		while (x < HEIGHT)
-		{
-			y = 0;
-			while (y < WIDTH)
-			{
-				mlx->ray->buf[x][y] = 0;
-				y++;
-			}
-			x++;
-		}
-	}
-	x = 0;
+		clean_buf_with_zero(mlx, 0);
 	while (x < WIDTH)
 	{
-		init_ray(mlx, x);
-		ray_direction(mlx);
-		ray_hit(mlx);
-		ray_size(mlx);
+		handle_initial_data(mlx, x);
+		calc_ray_side_distance_and_next_block_step(mlx);
+		dda_loop_with_check_hit(mlx);
+		calc_perp_wall_dist_from_camera_plane(mlx);
 		display_and_text_calcs(mlx, x);
 		x++;
 	}

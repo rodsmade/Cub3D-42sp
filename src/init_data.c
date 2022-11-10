@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/07 16:50:35 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:31:06 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,14 @@
 
 static void	init_tex_parameters(t_mlx_struct *mlx, int i, int j)
 {
-	while (i < HEIGHT)
-	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			mlx->ray->buf[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-	if (!(mlx->ray->texture = (int **)malloc(sizeof(int *) * 8)))
-		exit (444);
+	clean_buf_with_zero(mlx, 0);
+	mlx->ray->texture = (int **)malloc(sizeof(int *) * 8);
 	i = 0;
 	while (i < 8)
 	{
 		j = 0;
-		if (!(mlx->ray->texture[i] = (int *)malloc(sizeof(int) *
-		(TEX_HEIGHT * TEX_WIDTH))))
-			exit (111);
+		mlx->ray->texture[i] = (int *)malloc(sizeof(int)
+				* (TEX_HEIGHT * TEX_WIDTH));
 		while (j < TEX_HEIGHT * TEX_WIDTH)
 		{
 			mlx->ray->texture[i][j] = 0;

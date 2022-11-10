@@ -6,13 +6,14 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:42:40 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 16:27:12 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:51:04 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	load_image(t_mlx_struct *mlx, int *texture, char *path, t_mlx_img *img)
+static void	load_image(t_mlx_struct *mlx, int *texture,
+	char *path, t_mlx_img *img)
 {
 	int	i;
 	int	j;

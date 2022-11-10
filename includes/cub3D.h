@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 15:36:22 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:54:49 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 // ------------------------------------------------		STRUCTS		-----------
 
-extern int	world_map[24][24];
+// extern int	world_map[24][24];
 
 typedef struct s_mlx_img
 {
@@ -107,11 +107,12 @@ typedef struct s_mlx_struct
 	t_mlx_img	*img;
 }				t_mlx_struct;
 
-
-
 // ------------------------------------------------		ENUMS		-----------
 
-enum e_colours {CEILING, FLOOR};
+enum e_colours {
+	CEILING,
+	FLOOR
+};
 enum e_directions {
 	NO,
 	SO,
@@ -170,19 +171,28 @@ bool	is_valid_parameter_char(char c);
 bool	has_valid_param_identifier(char *str);
 
 // raycasting.c
-int	raycasting(t_mlx_struct *mlx);
-void	calc_rayCasting(t_mlx_struct *mlx, int x);
+int		raycasting(t_mlx_struct *mlx);
+void	calc_raycasting(t_mlx_struct *mlx, int x);
 
-// texture_rayCasting.c
-double	wall_x_calc(t_mlx_struct *mlx);
-int	take_x_coord_on_texture(t_mlx_struct *mlx);
-double	pixel_perscreen(t_mlx_struct *mlx);
+//rayCasting_utils.c
+void	clean_buf_with_zero(t_mlx_struct *mlx, int x);
+
+//dda.c
+void	dda_loop_with_check_hit(t_mlx_struct *mlx);
+void	calc_perp_wall_dist_from_camera_plane(t_mlx_struct *mlx);
+void	calc_ray_side_distance_and_next_block_step(t_mlx_struct *mlx);
+
+// texture_calcs_0.c
 double	tex_coordinate(t_mlx_struct *mlx);
-int	conv_text_coord_to_int(t_mlx_struct *mlx);
+int		conv_text_coord_to_int(t_mlx_struct *mlx);
 void	color_more_dark_to_y_sides(t_mlx_struct *mlx);
+
+// texture_calcs_1.c
+double	wall_x_calc(t_mlx_struct *mlx);
+int		take_x_coord_on_texture(t_mlx_struct *mlx);
+double	pixel_perscreen(t_mlx_struct *mlx);
 
 //texture_load.c
 void	load_texture(t_mlx_struct *mlx);
-
 
 #endif

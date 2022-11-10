@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_rayCasting.c                               :+:      :+:    :+:   */
+/*   texture_calcs_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:42:40 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/07 15:35:18 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:40:59 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/*
-	- calculate value of wallX
-*/
 double	wall_x_calc(t_mlx_struct *mlx)
 {
 	double	wall_x;
 
 	if (mlx->ray->side == 0)
-		wall_x = mlx->ray->pos_y + mlx->ray->perp_wall_dist * mlx->ray->ray_dir_y;
+		wall_x = mlx->ray->pos_y + mlx->ray->perp_wall_dist
+			* mlx->ray->ray_dir_y;
 	else
-		wall_x = mlx->ray->pos_x + mlx->ray->perp_wall_dist * mlx->ray->ray_dir_x;
+		wall_x = mlx->ray->pos_x + mlx->ray->perp_wall_dist
+			* mlx->ray->ray_dir_x;
 	wall_x -= floor(wall_x);
 	return (wall_x);
 }
 
-/*
-	- x coordinate on the texture
-*/
 int	take_x_coord_on_texture(t_mlx_struct *mlx)
 {
 	int	tex_x;
@@ -42,44 +38,10 @@ int	take_x_coord_on_texture(t_mlx_struct *mlx)
 	return (tex_x);
 }
 
-/*
-	- How much to increase the texture coordinate perscreen pixel
-*/
 double	pixel_perscreen(t_mlx_struct *mlx)
 {
 	double	step;
 
 	step = 1.0 * TEX_HEIGHT / mlx->ray->line_height;
 	return (step);
-}
-
-/*
-	- Starting texture coordinate
-*/
-double	tex_coordinate(t_mlx_struct *mlx)
-{
-	double tex_pos;
-
-	tex_pos = (mlx->ray->draw_start - HEIGHT / 2 + mlx->ray->line_height / 2) * mlx->ray->step;
-	return (tex_pos);
-}
-
-/*
-	- Cast the texture coordinate y to integer, and mask with (texHeight - 1) in case of overflow
-*/
-int	conv_text_coord_to_int(t_mlx_struct *mlx)
-{
-	int	tex_y;
-
-	tex_y = (int)mlx->ray->tex_pos & (TEX_HEIGHT - 1);
-	return (tex_y);
-}
-
-/*
-	- make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-*/
-void	color_more_dark_to_y_sides(t_mlx_struct *mlx)
-{
-	if (mlx->ray->side == 1)
-		mlx->ray->color = (mlx->ray->color >> 1) & 8355711;
 }
