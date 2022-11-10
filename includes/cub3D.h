@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/26 21:08:39 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:36:22 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,14 @@ extern int	world_map[24][24];
 
 typedef struct s_mlx_img
 {
-	int		*data;
 	void	*pointer;
+	int		*data;
 	int		bits_per_pixel;
 	int		line_lenght;
 	int		endian;
+	int		img_width;
+	int		img_height;
 }				t_mlx_img;
-
-typedef struct s_mlx_struct
-{
-	void		*pointer;
-	void		*window;
-	t_mlx_img	*img;
-}				t_mlx_struct;
 
 typedef struct s_map_parameters
 {
@@ -93,18 +88,24 @@ typedef struct s_ray
 	int				color;
 	int				draw_start;
 	int				draw_end;
-	int				**buf;
+	int				buf[HEIGHT][WIDTH];
 	int				tex_num;
 	double			wall_x;
 	int				tex_x;
 	int				tex_y;
 	double			step;
 	double			tex_pos;
-	int				texture[8][TEX_HEIGHT * TEX_WIDTH];
+	int				**texture;
 	int				re_buf;
-	t_mlx_struct	*mlx;
-	t_map_parameters *map;
 }				t_ray;
+
+typedef struct s_mlx_struct
+{
+	void		*pointer;
+	void		*window;
+	t_ray		*ray;
+	t_mlx_img	*img;
+}				t_mlx_struct;
 
 
 
@@ -133,7 +134,7 @@ void	print_err_exit(int errcode, t_map_parameters *map_params);
 
 // init_data.c
 void	init_map_parameters(t_map_parameters *map_parameters);
-void	init_ray_parameters(t_ray *ray, t_mlx_struct *mlx);
+void	init_ray_parameters(t_mlx_struct *mlx);
 
 // input_validation_utils.c
 char	*get_next_line_trimmed(int input_fd);
@@ -169,16 +170,19 @@ bool	is_valid_parameter_char(char c);
 bool	has_valid_param_identifier(char *str);
 
 // raycasting.c
-int		raycasting(t_ray *ray);
-void	calc_rayCasting(t_ray *ray, int x);
+int	raycasting(t_mlx_struct *mlx);
+void	calc_rayCasting(t_mlx_struct *mlx, int x);
 
 // texture_rayCasting.c
-double	wall_x_calc(t_ray *ray);
-int	take_x_coord_on_texture(t_ray *ray);
-double	pixel_perscreen(t_ray *ray);
-double	tex_coordinate(t_ray *ray);
-int	conv_text_coord_to_int(t_ray *ray);
-void	color_more_dark_to_y_sides(t_ray *ray);
+double	wall_x_calc(t_mlx_struct *mlx);
+int	take_x_coord_on_texture(t_mlx_struct *mlx);
+double	pixel_perscreen(t_mlx_struct *mlx);
+double	tex_coordinate(t_mlx_struct *mlx);
+int	conv_text_coord_to_int(t_mlx_struct *mlx);
+void	color_more_dark_to_y_sides(t_mlx_struct *mlx);
+
+//texture_load.c
+void	load_texture(t_mlx_struct *mlx);
 
 
 #endif

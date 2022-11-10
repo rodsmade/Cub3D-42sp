@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/26 17:01:15 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:28:03 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,18 @@ int	world_map[24][24] =	{
 int	main(int argc, char **argv)
 {
 	t_mlx_struct			mlx;
-	t_ray					ray;
 	static t_map_parameters	map_params;
 	int						input_fd;
 
+
+	mlx.pointer = mlx_init();
 	validate_args(argc, argv, &input_fd, &map_params);
 	validate_input_file(input_fd, &map_params);
-	mlx.pointer = mlx_init();
+	init_ray_parameters(&mlx);
+  load_texture(&mlx);
 	window(&mlx);
-	init_ray_parameters(&ray, &mlx);
-	raycasting(&ray);
+
+  mlx_loop_hook(mlx.pointer, &raycasting, &mlx);
 	mlx_loop(mlx.pointer);
 	return (0);
 }

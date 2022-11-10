@@ -6,138 +6,134 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/10/26 21:32:24 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:59:27 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	display_and_text_calcs(t_ray *ray, int x)
+static void	display_and_text_calcs(t_mlx_struct *mlx, int x)
 {
 	int	y;
 
-	ray->line_height = (int)(HEIGHT / ray->perp_wall_dist);
-	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
-	if (ray->draw_end >= HEIGHT)
-		ray->draw_end = HEIGHT - 1;
-	ray->tex_num = world_map[ray->map_x][ray->map_y];
-	ray->wall_x = wall_x_calc(ray);
-	ray->tex_x = take_x_coord_on_texture(ray);
-	ray->step = pixel_perscreen(ray);
-	ray->tex_pos = tex_coordinate(ray);
-	y = ray->draw_start;
-	while (y < ray->draw_end)
+	mlx->ray->line_height = (int)(HEIGHT / mlx->ray->perp_wall_dist);
+	mlx->ray->draw_start = -mlx->ray->line_height / 2 + HEIGHT / 2;
+	if (mlx->ray->draw_start < 0)
+		mlx->ray->draw_start = 0;
+	mlx->ray->draw_end = mlx->ray->line_height / 2 + HEIGHT / 2;
+	if (mlx->ray->draw_end >= HEIGHT)
+		mlx->ray->draw_end = HEIGHT - 1;
+	mlx->ray->tex_num = world_map[mlx->ray->map_x][mlx->ray->map_y];
+	mlx->ray->wall_x = wall_x_calc(mlx);
+	mlx->ray->tex_x = take_x_coord_on_texture(mlx);
+	mlx->ray->step = pixel_perscreen(mlx);
+	mlx->ray->tex_pos = tex_coordinate(mlx);
+	y = mlx->ray->draw_start;
+	while (y < mlx->ray->draw_end)
 	{
-		ray->tex_y = conv_text_coord_to_int(ray);
-		ray->tex_pos += ray->step;
-		ray->color = ray->texture[ray->tex_num][TEX_HEIGHT
-			* ray->tex_y + ray->tex_x];
-		color_more_dark_to_y_sides(ray);
-		ray->buf[y][x] = ray->color;
-		ray->re_buf = 1;
+		mlx->ray->tex_y = conv_text_coord_to_int(mlx);
+		mlx->ray->tex_pos += mlx->ray->step;
+		mlx->ray->color = mlx->ray->texture[mlx->ray->tex_num][TEX_HEIGHT
+			* mlx->ray->tex_y + mlx->ray->tex_x];
+		color_more_dark_to_y_sides(mlx);
+		mlx->ray->buf[y][x] = mlx->ray->color;
+		mlx->ray->re_buf = 1;
 		y++;
 	}
 }
 
-static void	init_ray(t_ray *ray, int x)
+static void	init_ray(t_mlx_struct *mlx, int x)
 {
-	ray->camera_x = 2 * x / (double)WIDTH - 1;
-	ray->ray_dir_x = ray->dir_x + ray->plane_x * ray->camera_x;
-	ray->ray_dir_y = ray->dir_y + ray->plane_y * ray->camera_x;
-	ray->map_x = (int)ray->pos_x;
-	ray->map_y = (int)ray->pos_y;
-	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
-	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
-	ray->hit = 0;
+	mlx->ray->camera_x = 2 * x / (double)WIDTH - 1;
+	mlx->ray->ray_dir_x = mlx->ray->dir_x + mlx->ray->plane_x * mlx->ray->camera_x;
+	mlx->ray->ray_dir_y = mlx->ray->dir_y + mlx->ray->plane_y * mlx->ray->camera_x;
+	mlx->ray->map_x = (int)mlx->ray->pos_x;
+	mlx->ray->map_y = (int)mlx->ray->pos_y;
+	mlx->ray->delta_dist_x = fabs(1 / mlx->ray->ray_dir_x);
+	mlx->ray->delta_dist_y = fabs(1 / mlx->ray->ray_dir_y);
+	mlx->ray->hit = 0;
 }
 
-static void	ray_direction(t_ray *ray)
+static void	ray_direction(t_mlx_struct *mlx)
 {
-	if (ray->ray_dir_x < 0)
+	if (mlx->ray->ray_dir_x < 0)
 		{
-			ray->step_x = -1;
-			ray->side_dist_x = (ray->pos_x - ray->map_x) * ray->delta_dist_x;
+			mlx->ray->step_x = -1;
+			mlx->ray->side_dist_x = (mlx->ray->pos_x - mlx->ray->map_x) * mlx->ray->delta_dist_x;
 		}
 		else
 		{
-			ray->step_x = 1;
-			ray->side_dist_x = (ray->map_x + 1.0 - ray->pos_x) * ray->delta_dist_x;
+			mlx->ray->step_x = 1;
+			mlx->ray->side_dist_x = (mlx->ray->map_x + 1.0 - mlx->ray->pos_x) * mlx->ray->delta_dist_x;
 		}
-		if (ray->ray_dir_y < 0)
+		if (mlx->ray->ray_dir_y < 0)
 		{
-			ray->step_y = -1;
-			ray->side_dist_y = (ray->pos_y - ray->map_y) * ray->delta_dist_y;
+			mlx->ray->step_y = -1;
+			mlx->ray->side_dist_y = (mlx->ray->pos_y - mlx->ray->map_y) * mlx->ray->delta_dist_y;
 		}
 		else
 		{
-			ray->step_y = 1;
-			ray->side_dist_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_dist_y;
+			mlx->ray->step_y = 1;
+			mlx->ray->side_dist_y = (mlx->ray->map_y + 1.0 - mlx->ray->pos_y) * mlx->ray->delta_dist_y;
 		}
 }
 
-static void	ray_hit(t_ray *ray)
+static void	ray_hit(t_mlx_struct *mlx)
 {
-	while (ray->hit == 0)
+	while (mlx->ray->hit == 0)
 	{
-		if (ray->side_dist_x < ray->side_dist_y)
+		if (mlx->ray->side_dist_x < mlx->ray->side_dist_y)
 		{
-			ray->side_dist_x += ray->delta_dist_x;
-			ray->map_x += ray->step_x;
-			ray->side = 0;
+			mlx->ray->side_dist_x += mlx->ray->delta_dist_x;
+			mlx->ray->map_x += mlx->ray->step_x;
+			mlx->ray->side = 0;
 		}
 		else
 		{
-			ray->side_dist_y += ray->delta_dist_y;
-			ray->map_y += ray->step_y;
-			ray->side = 1;
+			mlx->ray->side_dist_y += mlx->ray->delta_dist_y;
+			mlx->ray->map_y += mlx->ray->step_y;
+			mlx->ray->side = 1;
 		}
-		if (world_map[ray->map_x][ray->map_y] > 0)
-			ray->hit = 1;
+		if (world_map[mlx->ray->map_x][mlx->ray->map_y] > 0)
+			mlx->ray->hit = 1;
 	}
 }
 
-static void	ray_size(t_ray *ray)
+static void	ray_size(t_mlx_struct *mlx)
 {
-	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->map_x - ray->pos_x +
-			(1 - ray->step_x) / 2) / ray->ray_dir_x;
+	if (mlx->ray->side == 0)
+		mlx->ray->perp_wall_dist = (mlx->ray->map_x - mlx->ray->pos_x +
+			(1 - mlx->ray->step_x) / 2) / mlx->ray->ray_dir_x;
 	else
-		ray->perp_wall_dist = (ray->map_y - ray->pos_y +
-			(1 - ray->step_y) / 2) / ray->ray_dir_y;
+		mlx->ray->perp_wall_dist = (mlx->ray->map_y - mlx->ray->pos_y +
+			(1 - mlx->ray->step_y) / 2) / mlx->ray->ray_dir_y;
 }
 
-void	draw(t_ray *ray)
+void	calc_rayCasting(t_mlx_struct *mlx, int x)
 {
-	int	i;
-	int	j;
+	int	y;
 
-	i = 0;
-	while (i < HEIGHT)
+	if (mlx->ray->re_buf == 1)
 	{
-		j = 0;
-		while (j < WIDTH)
+		while (x < HEIGHT)
 		{
-			ray->mlx->img->data[i * WIDTH + j] = ray->buf[i][j];
-			j++;
+			y = 0;
+			while (y < WIDTH)
+			{
+				mlx->ray->buf[x][y] = 0;
+				y++;
+			}
+			x++;
 		}
-		i++;
 	}
-	mlx_put_image_to_window(ray->mlx->pointer, ray->mlx->window, ray->mlx->img->pointer, 0, 0);
-}
-
-void	calc_rayCasting(t_ray *ray, int x)
-{
+	x = 0;
 	while (x < WIDTH)
 	{
-		init_ray(ray, x);
-		ray_direction(ray);
-		ray_hit(ray);
-		ray_size(ray);
-		display_and_text_calcs(ray, x);
-		draw(ray);
+		init_ray(mlx, x);
+		ray_direction(mlx);
+		ray_hit(mlx);
+		ray_size(mlx);
+		display_and_text_calcs(mlx, x);
 		x++;
 	}
 }

@@ -22,8 +22,9 @@ static	void	init_img(t_mlx_struct *mlx)
 
 void	window(t_mlx_struct *mlx)
 {
-	mlx->window = mlx_new_window(mlx->pointer, WIDTH, HEIGHT, "cub3D");
-	mlx->img = malloc(sizeof(t_mlx_struct));
+	if (!(mlx->window = mlx_new_window(mlx->pointer, WIDTH,
+			HEIGHT, "cub3D")))
+			exit(555);
 	init_img(mlx);
 	mlx_hook(mlx->window, 17, 0L, destroy, mlx);
 	mlx_hook(mlx->window, 3, 1L << 1, keystrokes_management, mlx);

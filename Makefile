@@ -30,6 +30,7 @@ SRCS			=	cub3D.c							\
 					input_validation.c				\
 					map_params_checks.c				\
 					params_utils.c					\
+					texture_load.c					\
 					$(WINDOW_PATH)window.c			\
 					$(DESTROY_PATH)destroy.c		\
 					$(KEYSTROKES_PATH)keystrokes.c	\
