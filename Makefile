@@ -20,17 +20,26 @@ INCLUDES		=	$(addprefix -I,$(INCLUDES_DIR))
 WINDOW_PATH		= window/
 DESTROY_PATH	= destroy/
 KEYSTROKES_PATH = keystrokes/
+RAYCASTING_PATH = rayCasting/
 
-SRCS			=	cub3D.c							\
-					error_handling.c				\
-					init_data.c						\
-					input_validation_utils.c		\
-					input_validation.c				\
-					map_params_checks.c				\
-					params_utils.c					\
-					$(WINDOW_PATH)window.c			\
-					$(DESTROY_PATH)destroy.c		\
-					$(KEYSTROKES_PATH)keystrokes.c	\
+
+SRCS			=	cub3D.c									\
+					error_handling.c						\
+					init_data.c								\
+					input_validation_utils.c				\
+					input_validation.c						\
+					map_params_checks.c						\
+					params_utils.c							\
+					texture_load.c							\
+					$(WINDOW_PATH)window.c					\
+					$(DESTROY_PATH)destroy.c				\
+					$(KEYSTROKES_PATH)keystrokes.c			\
+					$(RAYCASTING_PATH)dda.c					\
+					$(RAYCASTING_PATH)rayCasting.c			\
+					$(RAYCASTING_PATH)rayCasting_utils.c	\
+					$(RAYCASTING_PATH)calc_rayCasting.c		\
+					$(RAYCASTING_PATH)texture_calcs_0.c		\
+					$(RAYCASTING_PATH)texture_calcs_1.c		\
 
 OBJS			:=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
@@ -38,7 +47,7 @@ SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
 all:	$(NAME)
 
 $(NAME): $(LIBFT) $(MLIBX) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBFT_FLAGS) $(MLX_FLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBFT_FLAGS) $(MLX_FLAGS) -lm
 
 $(MLIBX):
 	make -C $(MLIBX_PATH)
@@ -51,6 +60,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(WINDOW_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(DESTROY_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(KEYSTROKES_PATH))
+	@mkdir -p $(addprefix $(OBJ_DIR)/,$(RAYCASTING_PATH))
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS)
 
 clean:
