@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/10 17:54:49 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:36:30 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@
 
 // ------------------------------------------------		STRUCTS		-----------
 
-// extern int	world_map[24][24];
+extern int	world_map[24][24];
+extern char	world_map_char[24][24];
 
 typedef struct s_mlx_img
 {

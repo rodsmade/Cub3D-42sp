@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:15:26 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/10 17:53:04 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:32:09 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	dda_loop_with_check_hit(t_mlx_struct *mlx)
 			mlx->ray->map_y += mlx->ray->step_y;
 			mlx->ray->side = 1;
 		}
-		if (world_map[mlx->ray->map_x][mlx->ray->map_y] > 0)
+		if (world_map_char[mlx->ray->map_x][mlx->ray->map_y] > '0')
 			mlx->ray->hit = 1;
 	}
 }

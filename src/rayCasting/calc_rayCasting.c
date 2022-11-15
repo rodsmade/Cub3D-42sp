@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_rayCasting.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/10 17:44:49 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:32:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	display_and_text_calcs(t_mlx_struct *mlx, int x)
 	mlx->ray->draw_end = mlx->ray->line_height / 2 + HEIGHT / 2;
 	if (mlx->ray->draw_end >= HEIGHT)
 		mlx->ray->draw_end = HEIGHT - 1;
-	mlx->ray->tex_num = world_map[mlx->ray->map_x][mlx->ray->map_y];
+	mlx->ray->tex_num = world_map_char[mlx->ray->map_x][mlx->ray->map_y] - 48;
 	mlx->ray->wall_x = wall_x_calc(mlx);
 	mlx->ray->tex_x = take_x_coord_on_texture(mlx);
 	mlx->ray->step = pixel_perscreen(mlx);
