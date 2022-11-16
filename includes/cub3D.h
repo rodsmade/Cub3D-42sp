@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/16 15:07:15 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:14:23 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 
 // ------------------------------------------------		STRUCTS		-----------
 
-extern int	world_map[24][24];
 extern char	world_map_char[24][24];
 
 typedef struct s_mlx_img

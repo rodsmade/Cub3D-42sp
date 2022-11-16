@@ -46,33 +46,33 @@ void	move_player(int keycode, t_mlx_struct *mlx)
 	//move forward if no wall in front of you
 	if (keycode == XK_w)
 	{
-		if(world_map[(int)(mlx->ray->pos_x + mlx->ray->dir_x * mlx->ray->move_speed)][(int)mlx->ray->pos_y] == false)
+		if(world_map_char[(int)(mlx->ray->pos_x + mlx->ray->dir_x * mlx->ray->move_speed)][(int)mlx->ray->pos_y] == '0')
 			mlx->ray->pos_x += mlx->ray->dir_x * mlx->ray->move_speed;
-		if(world_map[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y + mlx->ray->dir_y * mlx->ray->move_speed)] == false)
+		if(world_map_char[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y + mlx->ray->dir_y * mlx->ray->move_speed)] == '0')
 			mlx->ray->pos_y += mlx->ray->dir_y * mlx->ray->move_speed;
 	}
 	//move backwards if no wall behind you
 	if (keycode == XK_s)
 	{
-		if(world_map[(int)(mlx->ray->pos_x - mlx->ray->dir_x * mlx->ray->move_speed)][(int)mlx->ray->pos_y] == false)
+		if(world_map_char[(int)(mlx->ray->pos_x - mlx->ray->dir_x * mlx->ray->move_speed)][(int)mlx->ray->pos_y] == '0')
 			mlx->ray->pos_x -= mlx->ray->dir_x * mlx->ray->move_speed;
-		if(world_map[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y - mlx->ray->dir_y * mlx->ray->move_speed)] == false)
+		if(world_map_char[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y - mlx->ray->dir_y * mlx->ray->move_speed)] == '0')
 			mlx->ray->pos_y -= mlx->ray->dir_y * mlx->ray->move_speed;
 	}
 	// //move left if no wall in front of you
 	// if (keycode == XK_a)
 	// {
-	// 	if(world_map[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y + mlx->ray->dir_y * mlx->ray->move_speed)] == false)
+	// 	if(world_map_char[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y + mlx->ray->dir_y * mlx->ray->move_speed)] == '0')
 	// 		mlx->ray->pos_x += mlx->ray->dir_x * mlx->ray->move_speed;
-	// 	if(world_map[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y + mlx->ray->dir_y * mlx->ray->move_speed)] == false)
+	// 	if(world_map_char[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y + mlx->ray->dir_y * mlx->ray->move_speed)] == '0')
 	// 		mlx->ray->pos_y += mlx->ray->dir_y * mlx->ray->move_speed;
 	// }
 	// //move right if no wall behind you
 	// if (keycode == XK_d)
 	// {
-	// 	if(world_map[(int)(mlx->ray->pos_x - mlx->ray->dir_x * mlx->ray->move_speed)][(int)mlx->ray->pos_y] == false)
+	// 	if(world_map_char[(int)(mlx->ray->pos_x - mlx->ray->dir_x * mlx->ray->move_speed)][(int)mlx->ray->pos_y] == '0')
 	// 		mlx->ray->pos_x -= mlx->ray->dir_x * mlx->ray->move_speed;
-	// 	if(world_map[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y - mlx->ray->dir_y * mlx->ray->move_speed)] == false)
+	// 	if(world_map_char[(int)mlx->ray->pos_x][(int)(mlx->ray->pos_y - mlx->ray->dir_y * mlx->ray->move_speed)] == '0')
 	// 		mlx->ray->pos_y -= mlx->ray->dir_y * mlx->ray->move_speed;
 	// }
 }
