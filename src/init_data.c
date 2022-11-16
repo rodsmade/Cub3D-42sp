@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/16 13:03:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:08:42 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	init_ray_parameters(t_mlx_struct *mlx)
 	set_camera_plane_vector(mlx);
 	mlx->ray->re_buf = 0;
 	mlx->ray->hit = 0;
-	mlx->ray->move_speed = 0.05;
+	mlx->ray->move_speed = 0.1;
 	mlx->ray->rot_speed = 0.05;
 	init_tex_parameters(mlx, 0, 0);
 }

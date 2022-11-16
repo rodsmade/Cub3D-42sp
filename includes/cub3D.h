@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/16 12:52:19 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:07:15 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include "ansi_color_codes.h"	// colours 🌈
 # include <stdbool.h>			// bool type
 # include <math.h>				// math functions
+# include <X11/keysym.h>		// X11 header - keyboard key codes
+# include <X11/X.h>				// X11 headers
 
 // ------------------------------------------------		MACROS		-----------
 
