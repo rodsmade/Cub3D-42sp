@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/10 17:31:06 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:03:18 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,71 @@ static void	init_tex_parameters(t_mlx_struct *mlx, int i, int j)
 	}
 }
 
+void	set_facing_direction_vector(t_mlx_struct *mlx)
+{
+	if (mlx->map_data.starting_pos_char == 'N')
+	{
+		mlx->ray->dir_x = -1;
+		mlx->ray->dir_y = 0;
+	}
+	if (mlx->map_data.starting_pos_char == 'S')
+	{
+		mlx->ray->dir_x = 1;
+		mlx->ray->dir_y = 0;
+	}
+	if (mlx->map_data.starting_pos_char == 'E')
+	{
+		mlx->ray->dir_x = 0;
+		mlx->ray->dir_y = 1;
+	}
+	if (mlx->map_data.starting_pos_char == 'W')
+	{
+		mlx->ray->dir_x = 0;
+		mlx->ray->dir_y = -1;
+	}
+}
+
+void	set_camera_plane_vector(t_mlx_struct *mlx)
+{
+	if (mlx->map_data.starting_pos_char == 'N')
+	{
+		mlx->ray->plane_x = 0;
+		mlx->ray->plane_y = 0.66;
+	}
+	if (mlx->map_data.starting_pos_char == 'S')
+	{
+		mlx->ray->plane_x = 0;
+		mlx->ray->plane_y = -0.33;
+	}
+	if (mlx->map_data.starting_pos_char == 'E')
+	{
+		mlx->ray->plane_x = 0.33;
+		mlx->ray->plane_y = 0;
+	}
+	if (mlx->map_data.starting_pos_char == 'W')
+	{
+		mlx->ray->plane_x = -0.66;
+		mlx->ray->plane_y = 0;
+	}
+}
+
 void	init_ray_parameters(t_mlx_struct *mlx)
 {
 	mlx->img = malloc(sizeof(t_mlx_img));
 	mlx->ray = malloc(sizeof(t_ray));
-	mlx->ray->pos_x = 22;
-	mlx->ray->pos_y = 11.5;
-	mlx->ray->dir_x = -1;
-	mlx->ray->dir_y = 0;
-	mlx->ray->plane_x = 0;
-	mlx->ray->plane_y = 0.66;
+	mlx->ray->pos_x = 5;
+	mlx->ray->pos_y = 10.5;
+	// mlx->ray->dir_x = -1;
+	// mlx->ray->dir_y = 0;
+	// mlx->ray->plane_x = 0;
+	// mlx->ray->plane_y = 0.66;
+	mlx->map_data.starting_pos_char = 'W'; // linkar com validacao do mapa dps
+	mlx->map_data.floor_colour_hex = 0xFF4F79; // linkar com validacao do mapa dps
+	mlx->map_data.ceiling_colour_hex = 0xA11692; // linkar com validacao do mapa dps
+	// mlx->map_data.floor_colour_hex = 16732025; // linkar com validacao do mapa dps
+	// mlx->map_data.ceiling_colour_hex = 10557074; // linkar com validacao do mapa dps
+	set_facing_direction_vector(mlx);
+	set_camera_plane_vector(mlx);
 	mlx->ray->re_buf = 0;
 	mlx->ray->hit = 0;
 	mlx->ray->move_speed = 0.05;

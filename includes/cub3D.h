@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/15 11:36:30 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/16 12:52:19 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,20 @@ typedef struct s_ray
 	int				re_buf;
 }				t_ray;
 
+typedef struct s_map_data
+{
+	char	starting_pos_char;
+	int		floor_colour_hex;
+	int		ceiling_colour_hex;
+}			t_map_data;
+
 typedef struct s_mlx_struct
 {
 	void		*pointer;
 	void		*window;
 	t_ray		*ray;
 	t_mlx_img	*img;
+	t_map_data	map_data;
 }				t_mlx_struct;
 
 // ------------------------------------------------		ENUMS		-----------
@@ -131,6 +139,9 @@ enum e_err_codes {
 };
 
 // ------------------------------------------------		PROTOTYPES	-----------
+// colour_encode_util.c
+int		encode_rgb(u_int8_t red, u_int8_t green, u_int8_t blue);
+
 // error_handling.c
 void	print_err_exit(int errcode, t_map_parameters *map_params);
 

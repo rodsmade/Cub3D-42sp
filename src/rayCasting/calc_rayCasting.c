@@ -6,14 +6,20 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/15 11:32:21 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:03:03 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 static void	display_draw(t_mlx_struct *mlx, int x, int y)
+// x = coordenada x da linha vertical sendo desenhada; y = draw_start.
 {
+	int	i;
+
+	i = -1;
+	while (++i < y)
+		mlx->ray->buf[i][x] = mlx->map_data.ceiling_colour_hex;
 	while (y < mlx->ray->draw_end)
 	{
 		mlx->ray->tex_y = conv_text_coord_to_int(mlx);
@@ -25,6 +31,9 @@ static void	display_draw(t_mlx_struct *mlx, int x, int y)
 		mlx->ray->re_buf = 1;
 		y++;
 	}
+	i = y;
+	while (++i < HEIGHT)
+		mlx->ray->buf[i][x] = mlx->map_data.floor_colour_hex;
 }
 
 static void	display_and_text_calcs(t_mlx_struct *mlx, int x)
