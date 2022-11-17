@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_load.c                                     :+:      :+:    :+:   */
+/*   texture_loading.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:42:40 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/10 17:51:04 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/17 11:47:19 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,8 @@ void	load_texture(t_mlx_struct *mlx)
 {
 	t_mlx_img	img;
 
-	load_image(mlx, mlx->ray->texture[0], "./textures/eagle.xpm", &img);
-	load_image(mlx, mlx->ray->texture[1], "./textures/redbrick.xpm", &img);
-	load_image(mlx, mlx->ray->texture[2], "./textures/purplestone.xpm", &img);
-	load_image(mlx, mlx->ray->texture[3], "./textures/greystone.xpm", &img);
-	load_image(mlx, mlx->ray->texture[4], "./textures/bluestone.xpm", &img);
-	load_image(mlx, mlx->ray->texture[5], "./textures/mossy.xpm", &img);
-	load_image(mlx, mlx->ray->texture[6], "./textures/wood.xpm", &img);
-	load_image(mlx, mlx->ray->texture[7], "./textures/colorstone.xpm", &img);
+	load_image(mlx, mlx->ray->texture[0], "./assets/textures/eagle.xpm", &img);
+	load_image(mlx, mlx->ray->texture[1], "./assets/textures/redbrick.xpm", &img);
+	load_image(mlx, mlx->ray->texture[2], "./assets/textures/purplestone.xpm", &img);
+	load_image(mlx, mlx->ray->texture[3], "./assets/textures/greystone.xpm", &img);
 }
