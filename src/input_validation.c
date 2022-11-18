@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 11:20:39 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:08:14 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	validate_map_parameters(t_data *data)
 		ft_free_ptr((void *)&(data->map_data.line));
 		(data->map_data.line) = get_next_line_trimmed(data->map_data.input_fd);
 	}
-	ft_free_ptr((void *)&(data->map_data.line));
 	if (data->map_data.params_count != 6)
 		print_err_exit(MISSING_PARAMETER, data);
 }

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 11:55:56 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:13:14 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 // ------------------------------------------------		MACROS		-----------
 
 # define KEY_ESC	65307		// ESC keycode
-# define IMG_TEST			"./img/blueMacaw.xpm"
 # define WIDTH	1024
 # define HEIGHT 720
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+# define NB_OF_TEXTURES 4
 
 // ------------------------------------------------		STRUCTS		-----------
 

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 11:30:56 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:13:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ void	init_tex_parameters(t_data *data)
 {
 	int	i;
 	int	j;
-	int	nb_of_textures;
 
-	nb_of_textures = 4;
 	clean_buf_with_zero(&data->ray);
-	data->ray.texture = (int **)malloc(sizeof(int *) * nb_of_textures);
+	data->ray.texture = (int **)malloc(sizeof(int *) * NB_OF_TEXTURES);
 	i = -1;
-	while (++i < nb_of_textures)
+	while (++i < NB_OF_TEXTURES)
 	{
 		data->ray.texture[i] = (int *)malloc(sizeof(int)
 				* (TEX_HEIGHT * TEX_WIDTH));
