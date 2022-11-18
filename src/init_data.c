@@ -6,107 +6,96 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/17 11:44:40 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:30:56 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	init_tex_parameters(t_mlx_struct *mlx, int i, int j)
+void	init_tex_parameters(t_data *data)
 {
+	int	i;
+	int	j;
 	int	nb_of_textures;
 
 	nb_of_textures = 4;
-	clean_buf_with_zero(mlx, 0);
-	mlx->ray->texture = (int **)malloc(sizeof(int *) * nb_of_textures);
-	i = 0;
-	while (i < nb_of_textures)
+	clean_buf_with_zero(&data->ray);
+	data->ray.texture = (int **)malloc(sizeof(int *) * nb_of_textures);
+	i = -1;
+	while (++i < nb_of_textures)
 	{
-		j = 0;
-		mlx->ray->texture[i] = (int *)malloc(sizeof(int)
+		data->ray.texture[i] = (int *)malloc(sizeof(int)
 				* (TEX_HEIGHT * TEX_WIDTH));
-		while (j < TEX_HEIGHT * TEX_WIDTH)
-		{
-			mlx->ray->texture[i][j] = 0;
-			j++;
-		}
-		i++;
+		j = -1;
+		while (++j < TEX_HEIGHT * TEX_WIDTH)
+			data->ray.texture[i][j] = 0;
 	}
 }
 
-void	set_facing_direction_vector(t_mlx_struct *mlx)
+void	set_facing_direction_vector(t_data *data)
 {
-	if (mlx->map_data.starting_pos_char == 'N')
+	if (data->map_data.starting_pos_char == 'N')
 	{
-		mlx->ray->dir_x = -1;
-		mlx->ray->dir_y = 0;
+		data->ray.dir_x = -1;
+		data->ray.dir_y = 0;
 	}
-	if (mlx->map_data.starting_pos_char == 'S')
+	if (data->map_data.starting_pos_char == 'S')
 	{
-		mlx->ray->dir_x = 1;
-		mlx->ray->dir_y = 0;
+		data->ray.dir_x = 1;
+		data->ray.dir_y = 0;
 	}
-	if (mlx->map_data.starting_pos_char == 'E')
+	if (data->map_data.starting_pos_char == 'E')
 	{
-		mlx->ray->dir_x = 0;
-		mlx->ray->dir_y = 1;
+		data->ray.dir_x = 0;
+		data->ray.dir_y = 1;
 	}
-	if (mlx->map_data.starting_pos_char == 'W')
+	if (data->map_data.starting_pos_char == 'W')
 	{
-		mlx->ray->dir_x = 0;
-		mlx->ray->dir_y = -1;
+		data->ray.dir_x = 0;
+		data->ray.dir_y = -1;
 	}
 }
 
-void	set_camera_plane_vector(t_mlx_struct *mlx)
+void	set_camera_plane_vector(t_data *data)
 {
-	if (mlx->map_data.starting_pos_char == 'N')
+	if (data->map_data.starting_pos_char == 'N')
 	{
-		mlx->ray->plane_x = 0;
-		mlx->ray->plane_y = 0.66;
+		data->ray.plane_x = 0;
+		data->ray.plane_y = 0.66;
 	}
-	if (mlx->map_data.starting_pos_char == 'S')
+	if (data->map_data.starting_pos_char == 'S')
 	{
-		mlx->ray->plane_x = 0;
-		mlx->ray->plane_y = -0.33;
+		data->ray.plane_x = 0;
+		data->ray.plane_y = -0.33;
 	}
-	if (mlx->map_data.starting_pos_char == 'E')
+	if (data->map_data.starting_pos_char == 'E')
 	{
-		mlx->ray->plane_x = 0.33;
-		mlx->ray->plane_y = 0;
+		data->ray.plane_x = 0.33;
+		data->ray.plane_y = 0;
 	}
-	if (mlx->map_data.starting_pos_char == 'W')
+	if (data->map_data.starting_pos_char == 'W')
 	{
-		mlx->ray->plane_x = -0.66;
-		mlx->ray->plane_y = 0;
+		data->ray.plane_x = -0.66;
+		data->ray.plane_y = 0;
 	}
 }
 
-void	init_ray_parameters(t_mlx_struct *mlx)
+void	init_ray_parameters(t_data *data)
 {
-	mlx->img = malloc(sizeof(t_mlx_img));
-	mlx->ray = malloc(sizeof(t_ray));
-	mlx->ray->pos_x = 5;
-	mlx->ray->pos_y = 10.5;
-	// mlx->ray->dir_x = -1;
-	// mlx->ray->dir_y = 0;
-	// mlx->ray->plane_x = 0;
-	// mlx->ray->plane_y = 0.66;
-	mlx->map_data.starting_pos_char = 'W'; // linkar com validacao do mapa dps
-	mlx->map_data.floor_colour_hex = 0xFF4F79; // linkar com validacao do mapa dps
-	mlx->map_data.ceiling_colour_hex = 0xA11692; // linkar com validacao do mapa dps
-	// mlx->map_data.floor_colour_hex = 16732025; // linkar com validacao do mapa dps
-	// mlx->map_data.ceiling_colour_hex = 10557074; // linkar com validacao do mapa dps
-	set_facing_direction_vector(mlx);
-	set_camera_plane_vector(mlx);
-	mlx->ray->re_buf = 0;
-	mlx->ray->hit = 0;
-	mlx->ray->move_speed = 0.1;
-	mlx->ray->rot_speed = 0.05;
-	init_tex_parameters(mlx, 0, 0);
+	data->ray.pos_x = 5; // linkar com validacao do mapa dps
+	data->ray.pos_y = 10.5; // linkar com validacao do mapa dps
+	data->map_data.starting_pos_char = 'W'; // linkar com validacao do mapa dps
+	data->map_data.floor_colour_hex = 0xFF4F79; // linkar com validacao do mapa dps
+	data->map_data.ceiling_colour_hex = 0xA11692; // linkar com validacao do mapa dps
+	set_facing_direction_vector(data);
+	set_camera_plane_vector(data);
+	data->ray.re_buf = 0;
+	data->ray.hit = 0;
+	data->ray.move_speed = 0.1;
+	data->ray.rot_speed = 0.05;
 }
 
-void	init_map_parameters(t_map_parameters *map_parameters)
+void	init_map_data(t_map_data *map_parameters)
 {
 	map_parameters->fds[NO] = -42;
 	map_parameters->fds[SO] = -42;

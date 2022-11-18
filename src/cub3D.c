@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/16 17:14:16 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:51:20 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,26 @@ char    world_map_char[24][24] =    {
   "111111111111111111111111"
 };
 
+void	init_mlx_struct(t_data *data)
+{
+	data->mlx.img = malloc(sizeof(t_mlx_img));
+	data->mlx.pointer = mlx_init();
+	data->mlx.window = NULL;
+	return ;
+}
+
 int	main(int argc, char **argv)
 {
-	int						input_fd;
-	t_mlx_struct			mlx;
-	static t_map_parameters	map_params;
+	t_data	data;
 
-	mlx.pointer = mlx_init();
-	validate_args(argc, argv, &input_fd, &map_params);
-	validate_input_file(input_fd, &map_params);
-	init_ray_parameters(&mlx);
-	load_texture(&mlx);
-	window(&mlx);
-	mlx_loop_hook(mlx.pointer, &raycasting, &mlx);
-	mlx_loop(mlx.pointer);
+	init_mlx_struct(&data);
+	validate_args(argc, argv, &data);
+	validate_input_file(&data);
+	init_ray_parameters(&data);
+	init_tex_parameters(&data);
+	load_textures(&data);
+	open_window(&data);
+	mlx_loop_hook(data.mlx.pointer, &raycasting, &data);
+	mlx_loop(data.mlx.pointer);
 	return (0);
 }

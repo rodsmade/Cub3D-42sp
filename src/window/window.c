@@ -12,19 +12,19 @@
 
 #include "cub3D.h"
 
-static	void	init_img(t_mlx_struct *mlx)
+static	void	init_img(t_data *data)
 {
-	mlx->img->pointer = mlx_new_image(mlx->pointer, WIDTH, HEIGHT);
-	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->pointer,
-			&mlx->img->bits_per_pixel, &mlx->img->line_lenght,
-			&mlx->img->endian);
+	data->mlx.img->pointer = mlx_new_image(data->mlx.pointer, WIDTH, HEIGHT);
+	data->mlx.img->data = (int *)mlx_get_data_addr(data->mlx.img->pointer,
+			&data->mlx.img->bits_per_pixel, &data->mlx.img->line_lenght,
+			&data->mlx.img->endian);
 }
 
-void	window(t_mlx_struct *mlx)
+void	open_window(t_data *data)
 {
-	mlx->window = mlx_new_window(mlx->pointer, WIDTH,
+	data->mlx.window = mlx_new_window(data->mlx.pointer, WIDTH,
 			HEIGHT, "cub3D");
-	init_img(mlx);
-	mlx_hook(mlx->window, 17, 0L, destroy, mlx);
-	mlx_hook(mlx->window, 3, 1L << 1, keystrokes_management, mlx);
+	init_img(data);
+	mlx_hook(data->mlx.window, 17, 0L, destroy, data);
+	mlx_hook(data->mlx.window, 3, 1L << 1, keystrokes_management, data);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_rayCasting.c                                  :+:      :+:    :+:   */
+/*   calc_ray_casting.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 11:46:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:45:27 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	display_draw(t_data *data, int x, int y)
 
 	i = -1;
 	while (++i < y)
-		data->ray.buf[i][x] = data->map_data.ceiling_colour_hex;
+		data->ray.buf[i][x] = data->map.colours_hex[CEILING];
 	while (y < data->ray.draw_end)
 	{
 		data->ray.tex_y = conv_text_coord_to_int(data);
@@ -33,7 +33,7 @@ static void	display_draw(t_data *data, int x, int y)
 	}
 	i = y;
 	while (++i < HEIGHT)
-		data->ray.buf[i][x] = data->map_data.floor_colour_hex;
+		data->ray.buf[i][x] = data->map.colours_hex[FLOOR];
 }
 
 static void	display_and_text_calcs(t_data *data, int x)
@@ -67,17 +67,19 @@ static void	handle_initial_data(t_data *data, int x)
 	data->ray.hit = 0;
 }
 
-void	calc_raycasting(t_data *data, int x)
+void	calc_raycasting(t_data *data)
 {
+	int	x;
+
 	if (data->ray.re_buf == 1)
-		clean_buf_with_zero(&data->ray);
-	while (x < WIDTH)
+		clean_buf_with_zero(data);
+	x = -1;
+	while (++x < WIDTH)
 	{
 		handle_initial_data(data, x);
 		calc_ray_side_distance_and_next_block_step(data);
 		dda_loop_with_check_hit(data);
 		calc_perp_wall_dist_from_camera_plane(data);
 		display_and_text_calcs(data, x);
-		x++;
 	}
 }

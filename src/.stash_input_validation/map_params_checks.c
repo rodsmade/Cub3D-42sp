@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_checks.c                                :+:      :+:    :+:   */
+/*   map_params_checks_new.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:36:31 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 11:40:42 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:27:51 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,24 @@ void	check_for_valid_path(t_data *data)
 	int	i;
 	int	fd;
 
-	if (data->map_data.fds[get_direction_index(data->map_data.line[0])] == -42)
-		(data->map_data.params_count)++;
+	if (data->map.texture_paths[get_direction_index(data->map.line[0])] == NULL)
+		(data->map.params_count)++;
 	else
 		print_err_exit(REDUNDANT_PARAMETER_FOUND, data);
-	i = 2 + jump_spaces(&(data->map_data.line[2]));
-	fd = open(&(data->map_data.line[i]), O_RDONLY);
+	i = 2 + jump_spaces(&(data->map.line[2]));
+	fd = open(&(data->map.line[i]), O_RDONLY);
 	if (fd == -1)
 		print_err_exit(SYSCALL_ERROR, data);
-	data->map_data.fds[get_direction_index(data->map_data.line[0])] = fd;
+	data->map.texture_paths[get_direction_index(data->map.line[0])] = \
+		ft_strdup(&(data->map.line[i]));
+	close(fd);
 	return ;
 }
 
 void	check_duplicate_parameter(t_data *data)
 {
-	if (data->map_data.colours[get_colour_index(data->map_data.line[0])][0] == -42)
-		(data->map_data.params_count)++;
+	if (data->map.colours_rgb[get_colour_index(data->map.line[0])][0] == -42)
+		(data->map.params_count)++;
 	else
 		print_err_exit(REDUNDANT_PARAMETER_FOUND, data);
 	return ;
@@ -47,8 +49,8 @@ void	check_colour_params_count(char **colours_array,
 
 	comma_count = 0;
 	i = -1;
-	while (data->map_data.line[++i])
-		if (data->map_data.line[i] == ',')
+	while (data->map.line[++i])
+		if (data->map.line[i] == ',')
 			comma_count++;
 	if (comma_count != 2)
 		print_err_exit(INVALID_COLOUR_PARAM, data);
@@ -67,11 +69,11 @@ void	check_for_valid_colour(t_data *data)
 	char	**colours_array;
 
 	check_duplicate_parameter(data);
-	colours_array = ft_split(&(data->map_data.line[1]), ',');
+	colours_array = ft_split(&(data->map.line[1]), ',');
 	check_colour_params_count(colours_array, data);
 	i = -1;
 	while (colours_array[++i])
-		data->map_data.colours[get_colour_index(data->map_data.line[0])][i] = \
+		data->map.colours_rgb[get_colour_index(data->map.line[0])][i] = \
 			convert_colour_to_int(colours_array[i], data);
 	ft_free_ptr((void *)&colours_array);
 	return ;

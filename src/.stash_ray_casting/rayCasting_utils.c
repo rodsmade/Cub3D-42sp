@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_calcs_0.c                                  :+:      :+:    :+:   */
+/*   ray_casting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 17:42:40 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 11:46:48 by roaraujo         ###   ########.fr       */
+/*   Created: 2022/11/10 16:56:14 by gusalves          #+#    #+#             */
+/*   Updated: 2022/11/17 15:35:15 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-double	tex_coordinate(t_data *data)
+void	clean_buf_with_zero(t_data *data)
 {
-	double	tex_pos;
+	int x;
+	int	y;
 
-	tex_pos = (data->ray.draw_start - HEIGHT / 2
-			+ data->ray.line_height / 2) * data->ray.step;
-	return (tex_pos);
-}
-
-int	conv_text_coord_to_int(t_data *data)
-{
-	int	tex_y;
-
-	tex_y = (int)data->ray.tex_pos & (TEX_HEIGHT - 1);
-	return (tex_y);
-}
-
-void	color_more_dark_to_y_sides(t_data *data)
-{
-	if (data->ray.side == 1)
-		data->ray.color = (data->ray.color >> 1) & 8355711;
+	x = -1;
+	while (++x < HEIGHT)
+	{
+		y = -1;
+		while (++y < WIDTH)
+			data->ray.buf[x][y] = 0;
+	}
 }

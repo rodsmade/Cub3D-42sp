@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/16 17:14:23 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:55:56 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,17 @@ typedef struct s_mlx_img
 	int		img_height;
 }				t_mlx_img;
 
-typedef struct s_map_parameters
+typedef struct s_map_data
 {
+	char	starting_pos_char;
+	int		floor_colour_hex;
+	int		ceiling_colour_hex;
+	int		input_fd;
 	int		fds[4];
 	int		colours[2][3];
 	int		params_count;
 	char	*line;
-}		t_map_parameters;
+}			t_map_data;
 
 typedef struct s_ray
 {
@@ -99,23 +103,22 @@ typedef struct s_ray
 	double			tex_pos;
 	int				**texture;
 	int				re_buf;
+	t_map_data		*map_data;
 }				t_ray;
-
-typedef struct s_map_data
-{
-	char	starting_pos_char;
-	int		floor_colour_hex;
-	int		ceiling_colour_hex;
-}			t_map_data;
 
 typedef struct s_mlx_struct
 {
 	void		*pointer;
 	void		*window;
-	t_ray		*ray;
 	t_mlx_img	*img;
-	t_map_data	map_data;
 }				t_mlx_struct;
+
+typedef struct s_data
+{
+	t_mlx_struct	mlx;
+	t_ray			ray;
+	t_map_data		map_data;
+}	t_data;
 
 // ------------------------------------------------		ENUMS		-----------
 
@@ -144,37 +147,40 @@ enum e_err_codes {
 int		encode_rgb(u_int8_t red, u_int8_t green, u_int8_t blue);
 
 // error_handling.c
-void	print_err_exit(int errcode, t_map_parameters *map_params);
+void	print_err_exit(int errcode, t_data *data);
 
 // init_data.c
-void	init_map_parameters(t_map_parameters *map_parameters);
-void	init_ray_parameters(t_mlx_struct *mlx);
+void	init_map_data(t_map_data *map_parameters);
+void	init_ray_parameters(t_data *data);
+void	init_tex_parameters(t_data *data);
 
 // input_validation_utils.c
 char	*get_next_line_trimmed(int input_fd);
 int		jump_spaces(const char *str);
-int		convert_colour_to_int(char *colour, t_map_parameters *map_params);
+int		convert_colour_to_int(char *colour, t_data *data);
 
 // input_validation.c
-void	validate_args(int argc, char *argv[], int *input_fd,
-			t_map_parameters *map_params);
-void	validate_input_file(int fd, t_map_parameters *map_params);
+void	validate_args(int argc, char *argv[], t_data *data);
+void	validate_input_file(t_data *data);
 
 // window.c
-void	window(t_mlx_struct *mlx);
+void	open_window(t_data *data);
 
 // destroy.c
-int		destroy(t_mlx_struct *mlx);
+int		destroy(t_data *data);
 
 // key_press.c
-int		keystrokes_management(int keycode, t_mlx_struct *mlx);
+int		keystrokes_management(int keycode, t_data *data);
 
 // map_params_checks.c
-void	check_for_valid_path(t_map_parameters *map_params);
-void	check_duplicate_parameter(t_map_parameters *map_params);
+void	check_for_valid_path(t_data *data);
+void	check_duplicate_parameter(t_data *data);
 void	check_colour_params_count(char **colours_array,
-			t_map_parameters *map_params);
-void	check_for_valid_colour(t_map_parameters *map_params);
+			t_data *data);
+void	check_for_valid_colour(t_data *data);
+
+// memory_release.c
+void	free_data(t_data *data);
 
 // params_utils.c
 bool	is_direction_identifier(char identifier[2]);
@@ -184,28 +190,28 @@ bool	is_valid_parameter_char(char c);
 bool	has_valid_param_identifier(char *str);
 
 // raycasting.c
-int		raycasting(t_mlx_struct *mlx);
-void	calc_raycasting(t_mlx_struct *mlx, int x);
+int		raycasting(t_data *data);
+void	calc_raycasting(t_data *data, int x);
 
 //rayCasting_utils.c
-void	clean_buf_with_zero(t_mlx_struct *mlx, int x);
+void	clean_buf_with_zero(t_ray *ray);
 
 //dda.c
-void	dda_loop_with_check_hit(t_mlx_struct *mlx);
-void	calc_perp_wall_dist_from_camera_plane(t_mlx_struct *mlx);
-void	calc_ray_side_distance_and_next_block_step(t_mlx_struct *mlx);
+void	dda_loop_with_check_hit(t_data *data);
+void	calc_perp_wall_dist_from_camera_plane(t_data *data);
+void	calc_ray_side_distance_and_next_block_step(t_data *data);
 
 // texture_calcs_0.c
-double	tex_coordinate(t_mlx_struct *mlx);
-int		conv_text_coord_to_int(t_mlx_struct *mlx);
-void	color_more_dark_to_y_sides(t_mlx_struct *mlx);
+double	tex_coordinate(t_data *data);
+int		conv_text_coord_to_int(t_data *data);
+void	color_more_dark_to_y_sides(t_data *data);
 
 // texture_calcs_1.c
-double	wall_x_calc(t_mlx_struct *mlx);
-int		take_x_coord_on_texture(t_mlx_struct *mlx);
-double	pixel_perscreen(t_mlx_struct *mlx);
+double	wall_x_calc(t_data *data);
+int		take_x_coord_on_texture(t_data *data);
+double	pixel_perscreen(t_data *data);
 
 //texture_load.c
-void	load_texture(t_mlx_struct *mlx);
+void	load_textures(t_data *data);
 
 #endif

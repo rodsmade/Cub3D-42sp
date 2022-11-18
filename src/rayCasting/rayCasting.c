@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rayCasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:13:53 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/10 17:53:28 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/11/18 11:45:29 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	render(t_mlx_struct *mlx)
+void	render(t_data *data)
 {
 	int	i;
 	int	j;
@@ -23,17 +23,17 @@ void	render(t_mlx_struct *mlx)
 		j = 0;
 		while (j < WIDTH)
 		{
-			mlx->img->data[i * WIDTH + j] = mlx->ray->buf[i][j];
+			data->mlx.img->data[i * WIDTH + j] = data->ray.buf[i][j];
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(mlx->pointer, mlx->window, mlx->img->pointer, 0, 0);
+	mlx_put_image_to_window(data->mlx.pointer, data->mlx.window, data->mlx.img->pointer, 0, 0);
 }
 
-int	raycasting(t_mlx_struct *mlx)
+int	raycasting(t_data *data)
 {
-	calc_raycasting(mlx, 0);
-	render(mlx);
+	calc_raycasting(data, 0);
+	render(data);
 	return (0);
 }

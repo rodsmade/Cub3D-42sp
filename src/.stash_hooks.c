@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rayCasting_utils.c                                 :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 16:56:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 11:28:57 by roaraujo         ###   ########.fr       */
+/*   Created: 2022/11/08 19:13:38 by roaraujo          #+#    #+#             */
+/*   Updated: 2022/11/17 17:03:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	clean_buf_with_zero(t_ray *ray)
+void	set_hooks(t_data *data)
 {
-	int	x;
-	int	y;
-
-	x = -1;
-	while (++x < HEIGHT)
-	{
-		y = -1;
-		while (++y < WIDTH)
-			ray->buf[x][y] = 0;
-	}
+	mlx_hook(data->mlx.window, 17, 0L, destroy, data);
+	mlx_hook(data->mlx.window, 3, 1L << 1, keystrokes_management, data);
+	mlx_loop_hook(data->mlx.ptr, &raycasting, data);
+	return ;
 }

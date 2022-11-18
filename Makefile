@@ -30,6 +30,7 @@ SRCS			=	cub3D.c									\
 					input_validation_utils.c				\
 					input_validation.c						\
 					map_params_checks.c						\
+					memory_release.c						\
 					params_utils.c							\
 					texture_loading.c						\
 					$(WINDOW_PATH)window.c					\
