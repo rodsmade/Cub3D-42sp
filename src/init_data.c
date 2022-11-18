@@ -6,11 +6,28 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 12:13:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:29:14 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	init_mlx_struct(t_data *data)
+{
+	data->mlx.pointer = mlx_init();
+	init_img(data);
+	data->mlx.window = NULL;
+	return ;
+}
+
+void	init_img(t_data *data)
+{
+	data->mlx.img = malloc(sizeof(t_mlx_img));
+	data->mlx.img->pointer = mlx_new_image(data->mlx.pointer, WIDTH, HEIGHT);
+	data->mlx.img->data = (int *)mlx_get_data_addr(data->mlx.img->pointer,
+			&data->mlx.img->bits_per_pixel, &data->mlx.img->line_lenght,
+			&data->mlx.img->endian);
+}
 
 void	init_tex_parameters(t_data *data)
 {

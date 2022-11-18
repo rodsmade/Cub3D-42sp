@@ -26,6 +26,7 @@ RAYCASTING_PATH = rayCasting/
 SRCS			=	cub3D.c									\
 					colour_encoding_util.c					\
 					error_handling.c						\
+					hooks.c								\
 					init_data.c								\
 					input_validation_utils.c				\
 					input_validation.c						\

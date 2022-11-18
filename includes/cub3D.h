@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 12:13:14 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:29:24 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define NB_OF_TEXTURES 4
+# define VALID_CHARS	"10 NSEW"	// valid map chars
+# define STARTING_CHARS	"NSEW"		// valid starting position chars
 
 // ------------------------------------------------		STRUCTS		-----------
 
@@ -132,6 +134,7 @@ enum e_directions {
 	EA,
 	WE
 };
+
 enum e_err_codes {
 	SYSCALL_ERROR,
 	WRONG_ARGS_NO,
@@ -139,8 +142,17 @@ enum e_err_codes {
 	INVALID_TEXTURE_PARAMS,
 	MISSING_PARAMETER,
 	REDUNDANT_PARAMETER_FOUND,
-	INVALID_COLOUR_PARAM
+	INVALID_COLOUR_PARAM,
+	INVALID_MAP,
+	MEMORY_ALLOCATION,
+	INVALID_CHAR_FOUND,
+	INVALID_MAP_SIZE,
+	MISSING_STARTING_POS_CHAR_ERROR,
+	MULTIPLE_POS_CHARS_FOUND,
+	PLAYER_OFF_MAP,
+	MLX_ERROR
 };
+
 
 // ------------------------------------------------		PROTOTYPES	-----------
 // colour_encode_util.c
@@ -149,10 +161,15 @@ int		encode_rgb(u_int8_t red, u_int8_t green, u_int8_t blue);
 // error_handling.c
 void	print_err_exit(int errcode, t_data *data);
 
+// hooks.c
+void	set_hooks(t_data *data);
+
 // init_data.c
 void	init_map_data(t_map_data *map_parameters);
 void	init_ray_parameters(t_data *data);
 void	init_tex_parameters(t_data *data);
+void	init_img(t_data *data);
+void	init_mlx_struct(t_data *data);
 
 // input_validation_utils.c
 char	*get_next_line_trimmed(int input_fd);

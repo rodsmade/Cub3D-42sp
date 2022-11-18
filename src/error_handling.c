@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 11:56:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:27:16 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,17 @@ static char	*get_error_message(int errcode)
 			" and " UPURPLE "2 colours." RESET, \
 		"Redundant parameter found. Parameter duplicates not allowed.", \
 		"Invalid colour format. Use: " UPURPLE "R, G, B" RESET \
-			", each value ranging from 0 to 255."
+			", each value ranging from 0 to 255.", \
+		"Invalid map.", \
+		"Error allocating memory. Ran out of RAM?", \
+		"Map has invalid char. Valid chars are: " UPURPLE VALID_CHARS RESET, \
+		"Invalid map size.", \
+		"No starting position character found. Valid chars are: " \
+			UPURPLE "N" RESET ", " UPURPLE "S" RESET ", " UPURPLE "E" RESET \
+			", " UPURPLE "W" RESET ".", \
+		"Multiple starting position characters found. Only one allowed.", \
+		"Player starting position is outside the map.", \
+		"MLX error"
 	};
 
 	return (error_messages[errcode]);
