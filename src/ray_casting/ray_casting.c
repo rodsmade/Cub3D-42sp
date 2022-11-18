@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rayCasting_utils.c                                 :+:      :+:    :+:   */
+/*   ray_casting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 16:56:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 11:28:57 by roaraujo         ###   ########.fr       */
+/*   Created: 2022/10/18 15:13:53 by gusalves          #+#    #+#             */
+/*   Updated: 2022/11/18 11:45:29 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	clean_buf_with_zero(t_ray *ray)
+void	render(t_data *data)
 {
-	int	x;
-	int	y;
+	int	i;
+	int	j;
 
-	x = -1;
-	while (++x < HEIGHT)
+	i = 0;
+	while (i < HEIGHT)
 	{
-		y = -1;
-		while (++y < WIDTH)
-			ray->buf[x][y] = 0;
+		j = 0;
+		while (j < WIDTH)
+		{
+			data->mlx.img->data[i * WIDTH + j] = data->ray.buf[i][j];
+			j++;
+		}
+		i++;
 	}
+	mlx_put_image_to_window(data->mlx.pointer, data->mlx.window, data->mlx.img->pointer, 0, 0);
+}
+
+int	raycasting(t_data *data)
+{
+	calc_raycasting(data, 0);
+	render(data);
+	return (0);
 }

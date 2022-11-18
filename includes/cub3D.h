@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 12:29:24 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:41:08 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@
 // ------------------------------------------------		STRUCTS		-----------
 
 extern char	world_map_char[24][24];
+
+typedef struct s_position
+{
+	int		line;
+	int		column;
+}		t_position;
 
 typedef struct s_mlx_img
 {
@@ -128,6 +134,7 @@ enum e_colours {
 	CEILING,
 	FLOOR
 };
+
 enum e_directions {
 	NO,
 	SO,
@@ -210,7 +217,7 @@ bool	has_valid_param_identifier(char *str);
 int		raycasting(t_data *data);
 void	calc_raycasting(t_data *data, int x);
 
-//rayCasting_utils.c
+//ray_casting_utils.c
 void	clean_buf_with_zero(t_ray *ray);
 
 //dda.c
