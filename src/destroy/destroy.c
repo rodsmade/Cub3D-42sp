@@ -18,7 +18,6 @@ int	destroy(t_data *data)
 	mlx_loop_end(data->mlx.pointer);
 	mlx_clear_window(data->mlx.pointer, data->mlx.window);
 	mlx_destroy_image(data->mlx.pointer, data->mlx.img.pointer);
-	ft_free_ptr((void *)&data->mlx.img);
 	mlx_destroy_window(data->mlx.pointer, data->mlx.window);
 	mlx_destroy_display(data->mlx.pointer);
 	free(data->mlx.pointer);
