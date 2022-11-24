@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 22:15:24 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 12:13:46 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:02:16 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ void	free_data(t_data *data)
 	int	i;
 
 	free_map_data(&data->map_data);
-	// free_mlx_struct();
 	i = -1;
-	while (++i < NB_OF_TEXTURES)
-		ft_free_ptr((void *)&data->ray.texture[i]);
-	ft_free_ptr((void *)&data->ray.texture);
+	if (data->ray.texture)
+	{
+		while (++i < NB_OF_TEXTURES)
+			ft_free_ptr((void *)&data->ray.texture[i]);
+		ft_free_ptr((void *)&data->ray.texture);
+	}
 	return ;
 }

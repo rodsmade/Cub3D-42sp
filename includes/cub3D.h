@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 12:41:08 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/24 19:57:34 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct s_mlx_struct
 {
 	void		*pointer;
 	void		*window;
-	t_mlx_img	*img;
+	t_mlx_img	img;
 }				t_mlx_struct;
 
 typedef struct s_data

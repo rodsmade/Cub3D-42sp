@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 12:29:06 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:00:25 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,25 @@ char    world_map_char[24][24] =    {
   "111111111111111111111111"
 };
 
+void	null_mallocable_pointers(t_data *data)
+{
+	data->map_data.line = NULL;
+	data->ray.texture = NULL;
+	data->mlx.pointer = NULL;
+	data->mlx.window = NULL;
+}
+
+void	init_data(t_data *data)
+{
+	null_mallocable_pointers(data);
+	init_mlx_struct(data);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	init_mlx_struct(&data);
+	init_data(&data);
 	validate_args(argc, argv, &data);
 	validate_input_file(&data);
 	init_ray_parameters(&data);

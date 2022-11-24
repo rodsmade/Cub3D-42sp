@@ -23,12 +23,12 @@ void	render(t_data *data)
 		j = 0;
 		while (j < WIDTH)
 		{
-			data->mlx.img->data[i * WIDTH + j] = data->ray.buf[i][j];
+			data->mlx.img.data[i * WIDTH + j] = data->ray.buf[i][j];
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(data->mlx.pointer, data->mlx.window, data->mlx.img->pointer, 0, 0);
+	mlx_put_image_to_window(data->mlx.pointer, data->mlx.window, data->mlx.img.pointer, 0, 0);
 }
 
 int	raycasting(t_data *data)
