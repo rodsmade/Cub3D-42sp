@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/01 10:58:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 11:34:29 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@
 # define STARTING_CHARS	"NSEW"		// valid starting position chars
 
 // ------------------------------------------------		STRUCTS		-----------
-
-extern char	world_map_char[24][24];
 
 typedef struct s_position
 {

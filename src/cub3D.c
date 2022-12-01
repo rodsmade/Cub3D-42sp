@@ -6,26 +6,16 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/01 10:46:49 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:45:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-char    world_map_char[24][24] =    {
-  "111111111111111111111111",
-  "100000000000000010000001",
-  "100000000010000010000001",
-  "100000000000000010000001",
-  "100000000000000000000001",
-  "100000000000000000000001",
-  "100000000000110000010001",
-  "111111111111111111111111"
-};
-
 void	null_mallocable_pointers(t_data *data)
 {
 	data->map_data.line = NULL;
+	data->map_data.map = NULL;
 	data->ray.texture = NULL;
 	data->mlx.pointer = NULL;
 	data->mlx.window = NULL;

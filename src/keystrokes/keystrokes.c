@@ -46,33 +46,33 @@ void	move_player(int keycode, t_data *data)
 	//move forward if no wall in front of you
 	if (keycode == XK_w)
 	{
-		if(world_map_char[(int)(data->ray.pos_x + data->ray.dir_x * data->ray.move_speed)][(int)data->ray.pos_y] == '0')
+		if(data->map_data.map[(int)(data->ray.pos_x + data->ray.dir_x * data->ray.move_speed)][(int)data->ray.pos_y] == '0')
 			data->ray.pos_x += data->ray.dir_x * data->ray.move_speed;
-		if(world_map_char[(int)data->ray.pos_x][(int)(data->ray.pos_y + data->ray.dir_y * data->ray.move_speed)] == '0')
+		if(data->map_data.map[(int)data->ray.pos_x][(int)(data->ray.pos_y + data->ray.dir_y * data->ray.move_speed)] == '0')
 			data->ray.pos_y += data->ray.dir_y * data->ray.move_speed;
 	}
 	//move backwards if no wall behind you
 	if (keycode == XK_s)
 	{
-		if(world_map_char[(int)(data->ray.pos_x - data->ray.dir_x * data->ray.move_speed)][(int)data->ray.pos_y] == '0')
+		if(data->map_data.map[(int)(data->ray.pos_x - data->ray.dir_x * data->ray.move_speed)][(int)data->ray.pos_y] == '0')
 			data->ray.pos_x -= data->ray.dir_x * data->ray.move_speed;
-		if(world_map_char[(int)data->ray.pos_x][(int)(data->ray.pos_y - data->ray.dir_y * data->ray.move_speed)] == '0')
+		if(data->map_data.map[(int)data->ray.pos_x][(int)(data->ray.pos_y - data->ray.dir_y * data->ray.move_speed)] == '0')
 			data->ray.pos_y -= data->ray.dir_y * data->ray.move_speed;
 	}
 	// //move left if no wall in front of you
 	// if (keycode == XK_a)
 	// {
-	// 	if(world_map_char[(int)data->ray.pos_x][(int)(data->ray.pos_y + data->ray.dir_y * data->ray.move_speed)] == '0')
+	// 	if(data->map_data.map[(int)data->ray.pos_x][(int)(data->ray.pos_y + data->ray.dir_y * data->ray.move_speed)] == '0')
 	// 		data->ray.pos_x += data->ray.dir_x * data->ray.move_speed;
-	// 	if(world_map_char[(int)data->ray.pos_x][(int)(data->ray.pos_y + data->ray.dir_y * data->ray.move_speed)] == '0')
+	// 	if(data->map_data.map[(int)data->ray.pos_x][(int)(data->ray.pos_y + data->ray.dir_y * data->ray.move_speed)] == '0')
 	// 		data->ray.pos_y += data->ray.dir_y * data->ray.move_speed;
 	// }
 	// //move right if no wall behind you
 	// if (keycode == XK_d)
 	// {
-	// 	if(world_map_char[(int)(data->ray.pos_x - data->ray.dir_x * data->ray.move_speed)][(int)data->ray.pos_y] == '0')
+	// 	if(data->map_data.map[(int)(data->ray.pos_x - data->ray.dir_x * data->ray.move_speed)][(int)data->ray.pos_y] == '0')
 	// 		data->ray.pos_x -= data->ray.dir_x * data->ray.move_speed;
-	// 	if(world_map_char[(int)data->ray.pos_x][(int)(data->ray.pos_y - data->ray.dir_y * data->ray.move_speed)] == '0')
+	// 	if(data->map_data.map[(int)data->ray.pos_x][(int)(data->ray.pos_y - data->ray.dir_y * data->ray.move_speed)] == '0')
 	// 		data->ray.pos_y -= data->ray.dir_y * data->ray.move_speed;
 	// }
 }
