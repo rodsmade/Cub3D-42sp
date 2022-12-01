@@ -67,14 +67,14 @@ void	move_player(int keycode, t_data *data)
 	// 	if(data->map_data.map[(int)data->ray.pos_x][(int)(data->ray.pos_y + data->ray.dir_y * data->ray.move_speed)] == '0')
 	// 		data->ray.pos_y += data->ray.dir_y * data->ray.move_speed;
 	// }
-	// //move right if no wall behind you
-	// if (keycode == XK_d)
-	// {
-	// 	if(data->map_data.map[(int)(data->ray.pos_x - data->ray.dir_x * data->ray.move_speed)][(int)data->ray.pos_y] == '0')
-	// 		data->ray.pos_x -= data->ray.dir_x * data->ray.move_speed;
-	// 	if(data->map_data.map[(int)data->ray.pos_x][(int)(data->ray.pos_y - data->ray.dir_y * data->ray.move_speed)] == '0')
-	// 		data->ray.pos_y -= data->ray.dir_y * data->ray.move_speed;
-	// }
+	//move right if no wall behind you
+	if (keycode == XK_d)
+	{
+		if(data->map_data.map[(int)(data->ray.pos_x + data->ray.dir_y * data->ray.move_speed)][(int)data->ray.pos_y] == '0')
+			data->ray.pos_x += data->ray.dir_y * data->ray.move_speed;
+		if(data->map_data.map[(int)data->ray.pos_x][(int)(data->ray.pos_y - data->ray.dir_x * data->ray.move_speed)] == '0')
+			data->ray.pos_y -= data->ray.dir_x * data->ray.move_speed;
+	}
 }
 
 int	keystrokes_management(int keycode, t_data *data)
