@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 12:27:16 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:38:27 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	print_err_exit(int errcode, t_data *data)
 {
 	free_data(data);
 	printf(PURPLEB " ❌ Error " RESET "\n");
-	if (!errno)
+	if (errno)
 		printf("%s\n", get_error_message(errcode));
 	else
 		perror(NULL);
