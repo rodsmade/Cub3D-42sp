@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:18:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/17 17:49:17 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:44:47 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ void	find_player_starting_position(t_data *data)
 	int	j;
 
 	i = -1;
-	while (data->map.map[++i])
+	while (data->map_data.map[++i])
 	{
 		j = -1;
-		while (data->map.map[i][++j])
-			if (ft_strchr(STARTING_CHARS, data->map.map[i][j]))
+		while (data->map_data.map[i][++j])
+			if (ft_strchr(STARTING_CHARS, data->map_data.map[i][j]))
 				break ;
-		if (data->map.map[i][j] && ft_strchr(STARTING_CHARS, data->map.map[i][j]))
+		if (data->map_data.map[i][j] && ft_strchr(STARTING_CHARS, data->map_data.map[i][j]))
 			break ;
 	}
-	data->map.starting_position.line = i;
-	data->map.starting_position.column = j;
-	data->map.starting_pos_char = data->map.map[i][j];
+	data->map_data.starting_position.line = i;
+	data->map_data.starting_position.column = j;
+	data->map_data.starting_pos_char = data->map_data.map[i][j];
 	return ;
 }
 
@@ -38,13 +38,13 @@ int	check_for_inflection_point(int i, int j, t_data *data)
 	int	in;
 	int	out;
 
-	if (data->map.map[i - 1][j] == '1')
+	if (data->map_data.map[i - 1][j] == '1')
 		in = UP;
 	else
 		in = DOWN;
-	while (data->map.map[i][++j] == '1')
+	while (data->map_data.map[i][++j] == '1')
 		continue ;
-	if (data->map.map[i - 1][j - 1] == '1')
+	if (data->map_data.map[i - 1][j - 1] == '1')
 		out = UP;
 	else
 		out = DOWN;
@@ -60,18 +60,18 @@ void	check_player_is_inside_map(t_data *data)
 	int	intersection_count;
 
 	intersection_count = 0;
-	i = data->map.starting_position.line;
-	j = data->map.starting_position.column;
-	while (data->map.map[i][++j])
+	i = data->map_data.starting_position.line;
+	j = data->map_data.starting_position.column;
+	while (data->map_data.map[i][++j])
 	{
-		if (data->map.map[i][j] != '1')
+		if (data->map_data.map[i][j] != '1')
 			continue ;
-		if (data->map.map[i][j] == '1' && data->map.map[i][j + 1] != '1')
+		if (data->map_data.map[i][j] == '1' && data->map_data.map[i][j + 1] != '1')
 			intersection_count++;
 		else
 		{
 			intersection_count += check_for_inflection_point(i, j, data);
-			while (data->map.map[i][++j] == '1')
+			while (data->map_data.map[i][++j] == '1')
 				continue ;
 		}
 	}

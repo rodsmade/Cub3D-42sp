@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:49:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/17 17:50:03 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:44:47 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	try_to_move_in_direction(t_position next_move, t_position *prev_pos,
 	t_position *next_pos, t_data *data)
 {
-	if ((data->map.map)[next_move.line][next_move.column] == '1')
+	if ((data->map_data.map)[next_move.line][next_move.column] == '1')
 	{
 		if (t_position_compare_ptr(&next_move, prev_pos) == false)
 		{
@@ -49,18 +49,18 @@ void	find_starting_point(t_position *starting_point, t_data *data)
 	int	j;
 
 	i = -1;
-	while ((data->map.map)[++(i)])
+	while ((data->map_data.map)[++(i)])
 	{
 		j = -1;
-		while ((data->map.map)[i][++j])
+		while ((data->map_data.map)[i][++j])
 		{
-			if ((data->map.map)[i][j] == '1')
+			if ((data->map_data.map)[i][j] == '1')
 				break ;
 		}
-		if ((data->map.map)[i][j] && (data->map.map)[i][j] == '1')
+		if ((data->map_data.map)[i][j] && (data->map_data.map)[i][j] == '1')
 			break ;
 	}
-	if (!(data->map.map)[i][j])
+	if (!(data->map_data.map)[i][j])
 		print_err_exit(INVALID_MAP, data);
 	starting_point->line = i;
 	starting_point->column = j;

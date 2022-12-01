@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/24 20:00:39 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 11:26:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,15 @@ void	init_ray_parameters(t_data *data)
 
 void	init_map_data(t_map_data *map_parameters)
 {
-	map_parameters->fds[NO] = -42;
-	map_parameters->fds[SO] = -42;
-	map_parameters->fds[EA] = -42;
-	map_parameters->fds[WE] = -42;
-	map_parameters->colours[FLOOR][0] = -42;
-	map_parameters->colours[FLOOR][1] = -42;
-	map_parameters->colours[FLOOR][2] = -42;
-	map_parameters->colours[CEILING][0] = -42;
-	map_parameters->colours[CEILING][1] = -42;
-	map_parameters->colours[CEILING][2] = -42;
+	map_parameters->texture_paths[NO] = NULL;
+	map_parameters->texture_paths[SO] = NULL;
+	map_parameters->texture_paths[EA] = NULL;
+	map_parameters->texture_paths[WE] = NULL;
+	map_parameters->colours_rgb[FLOOR][0] = -42;
+	map_parameters->colours_rgb[FLOOR][1] = -42;
+	map_parameters->colours_rgb[FLOOR][2] = -42;
+	map_parameters->colours_rgb[CEILING][0] = -42;
+	map_parameters->colours_rgb[CEILING][1] = -42;
+	map_parameters->colours_rgb[CEILING][2] = -42;
 	map_parameters->params_count = 0;
-	map_parameters->line = NULL;
 }

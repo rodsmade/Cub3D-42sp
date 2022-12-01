@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 05:57:00 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/17 17:42:08 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:44:47 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	pad_lines_on_top_and_bottom(int map_length, t_data *data)
 	int		map_size;
 	int		i;
 
-	temp_map = data->map.map;
+	temp_map = data->map_data.map;
 	map_size = ft_matrixlen(temp_map);
-	data->map.map = malloc((map_size + 2 + 1) * sizeof(char *));
-	if (!data->map.map)
+	data->map_data.map = malloc((map_size + 2 + 1) * sizeof(char *));
+	if (!data->map_data.map)
 		print_err_exit(MEMORY_ALLOCATION, data);
-	data->map.map[0] = ft_alloc_string(map_length, ' ');
+	data->map_data.map[0] = ft_alloc_string(map_length, ' ');
 	i = -1;
 	while (temp_map[++i])
-		data->map.map[i + 1] = ft_strdup(temp_map[i]);
-	data->map.map[map_size + 2 - 1] = ft_alloc_string(map_length, ' ');
-	data->map.map[map_size + 2] = NULL;
+		data->map_data.map[i + 1] = ft_strdup(temp_map[i]);
+	data->map_data.map[map_size + 2 - 1] = ft_alloc_string(map_length, ' ');
+	data->map_data.map[map_size + 2] = NULL;
 	ft_free_arr((void *)&temp_map);
 }
 
@@ -70,23 +70,23 @@ void	pad_columns(int map_length, t_data *data)
 	int		i;
 
 	i = -1;
-	while (data->map.map[++i])
+	while (data->map_data.map[++i])
 	{
-		if ((int) ft_strlen(data->map.map[i]) < map_length)
-			pad_line_with_spaces(&(data->map.map[i]), map_length, data);
-		add_leading_and_trailing_spaces(&(data->map.map[i]), map_length, data);
+		if ((int) ft_strlen(data->map_data.map[i]) < map_length)
+			pad_line_with_spaces(&(data->map_data.map[i]), map_length, data);
+		add_leading_and_trailing_spaces(&(data->map_data.map[i]), map_length, data);
 	}
 	return ;
 }
 
 void	pad_map(t_data *data)
 /*
-	debug_print_map_read(data->map.map);
+	debug_print_map_read(data->map_data.map);
 */
 {
 	int		map_length;
 
-	map_length = find_longest_line_length(data->map.map);
+	map_length = find_longest_line_length(data->map_data.map);
 	pad_lines_on_top_and_bottom(map_length, data);
 	pad_columns(map_length, data);
 }

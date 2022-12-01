@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 22:15:24 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/24 20:02:16 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 11:31:27 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,12 @@
 
 void	free_map_data(t_map_data *map)
 {
-	// int	i;
-
-	// depois que juntar com a validação inteira do mapa (ler o mapa até o final), double check se essa linha n tá vazando msm.
 	ft_free_ptr((void *)&map->line);
-	
-	// i = -1;
-	// while (++i < NB_OF_TEXTURES)
-	// {
-	// 	if (map->texture_paths[i] != NULL)
-	// 		ft_free_ptr((void *)&map->texture_paths[i]);
-	// }
+	ft_free_ptr((void *)&map->texture_paths[NO]);
+	ft_free_ptr((void *)&map->texture_paths[SO]);
+	ft_free_ptr((void *)&map->texture_paths[EA]);
+	ft_free_ptr((void *)&map->texture_paths[WE]);
+	ft_free_arr((void *)&map->map);
 	return ;
 }
 

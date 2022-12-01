@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/24 19:57:34 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 10:58:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,12 @@ typedef struct s_map_data
 	int		floor_colour_hex;
 	int		ceiling_colour_hex;
 	int		input_fd;
-	int		fds[4];
-	int		colours[2][3];
+	char	*texture_paths[4];
+	int		colours_rgb[2][3];
 	int		params_count;
 	char	*line;
+	char			**map;
+	t_position		starting_position;
 }			t_map_data;
 
 typedef struct s_ray
@@ -135,11 +137,22 @@ enum e_colours {
 	FLOOR
 };
 
+enum e_rgb_values {
+	R_VALUE,
+	G_VALUE,
+	B_VALUE
+};
+
 enum e_directions {
 	NO,
 	SO,
 	EA,
 	WE
+};
+
+enum e_ups_and_downs {
+	UP,
+	DOWN
 };
 
 enum e_err_codes {
@@ -196,12 +209,30 @@ int		destroy(t_data *data);
 // key_press.c
 int		keystrokes_management(int keycode, t_data *data);
 
+// map_padding.c
+void		pad_map(t_data *data);
+
 // map_params_checks.c
-void	check_for_valid_path(t_data *data);
-void	check_duplicate_parameter(t_data *data);
-void	check_colour_params_count(char **colours_array,
-			t_data *data);
-void	check_for_valid_colour(t_data *data);
+void		check_for_valid_path(t_data *data);
+void		check_duplicate_parameter(t_data *data);
+void		check_colour_params_count(char **colours_array, t_data *data);
+void		check_for_valid_colour(t_data *data);
+
+// map_utils.c
+int			find_longest_line_length(char **map);
+
+// map_validation.c
+void		validate_map(t_data *data);
+
+// map_validation_utils.c
+bool		try_to_move_in_direction(t_position next_move, t_position *prev_pos,
+				t_position *next_pos, t_data *data);
+void		decide_where_to_go_next(t_data *data, t_position *prev_pos,
+				t_position curr_pos, t_position *next_pos);
+void		find_starting_point(t_position *starting_point, t_data *data);
+
+// map_validation_player_position.c
+void		check_player_position(t_data *data);
 
 // memory_release.c
 void	free_data(t_data *data);
@@ -237,5 +268,11 @@ double	pixel_perscreen(t_data *data);
 
 //texture_load.c
 void	load_textures(t_data *data);
+
+// t_position_utils.c
+t_position	t_position_create_tuple(int line, int column);
+bool		t_position_compare(t_position a, t_position b);
+bool		t_position_compare_ptr(t_position *a, t_position *b);
+void		t_position_copy(t_position *destination, const t_position source);
 
 #endif

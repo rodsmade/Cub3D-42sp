@@ -40,12 +40,17 @@ SRCS			=	cub3D.c									\
 					error_handling.c						\
 					hooks.c								\
 					init_data.c								\
-					input_validation_utils.c				\
-					input_validation.c						\
-					map_params_checks.c						\
 					memory_release.c						\
 					texture_loading.c						\
 					$(DESTROY_PATH)destroy.c				\
+					$(INPUT_VALIDATION_PATH)input_validation_utils.c			\
+					$(INPUT_VALIDATION_PATH)input_validation.c					\
+					$(INPUT_VALIDATION_PATH)map_padding.c						\
+					$(INPUT_VALIDATION_PATH)map_params_checks.c					\
+					$(INPUT_VALIDATION_PATH)map_utils.c							\
+					$(INPUT_VALIDATION_PATH)map_validation.c					\
+					$(INPUT_VALIDATION_PATH)map_validation_player_position.c	\
+					$(INPUT_VALIDATION_PATH)map_validation_utils.c				\
 					$(KEYSTROKES_PATH)keystrokes.c			\
 					$(RAYCASTING_PATH)dda.c					\
 					$(RAYCASTING_PATH)ray_casting.c			\
@@ -75,6 +80,7 @@ $(LIBFT):
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(DESTROY_PATH))
+	@mkdir -p $(addprefix $(OBJ_DIR)/,$(INPUT_VALIDATION_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(KEYSTROKES_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(RAYCASTING_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(UTILS_PATH))
@@ -82,13 +88,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS)
 
 clean:
-	# make -C clean $(MLIBX_PATH)
+	make clean -C $(MLIBX_PATH)
 	make clean -C $(LIBFT_PATH)
 	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	make fclean -C $(LIBFT_PATH)
-	# make clean $(MLIBX_PATH)
 	$(RM) $(NAME)
 
 re:	fclean all

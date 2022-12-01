@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/17 17:47:51 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:44:47 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,20 @@ void	save_map(t_data *data)
 	char	*map_stringified;
 	char	*temp;
 
-	data->map.line = ft_charjoin(data->map.line, '\n');
+	data->map_data.line = ft_charjoin(data->map_data.line, '\n');
 	map_stringified = ft_strdup("");
-	while (data->map.line)
+	while (data->map_data.line)
 	{
 		temp = map_stringified;
-		map_stringified = ft_strjoin(map_stringified, data->map.line);
+		map_stringified = ft_strjoin(map_stringified, data->map_data.line);
 		ft_free_ptr((void *)&temp);
-		ft_free_ptr((void *)&data->map.line);
-		data->map.line = get_next_line(data->map.input_fd);
+		ft_free_ptr((void *)&data->map_data.line);
+		data->map_data.line = get_next_line(data->map_data.input_fd);
 	}
-	data->map.map = ft_split(map_stringified, '\n');
+	data->map_data.map = ft_split(map_stringified, '\n');
 	ft_free_ptr((void *)&map_stringified);
-	ft_free_ptr((void *)&data->map.line);
-	close(data->map.input_fd);
+	ft_free_ptr((void *)&data->map_data.line);
+	close(data->map_data.input_fd);
 	pad_map(data);
 }
 
@@ -70,14 +70,14 @@ void	validate_characters(t_data *data)
 
 	starting_char = false;
 	i = -1;
-	while (data->map.map[++i])
+	while (data->map_data.map[++i])
 	{
 		j = -1;
-		while (data->map.map[i][++j])
+		while (data->map_data.map[i][++j])
 		{
-			if (!ft_strchr(VALID_CHARS, data->map.map[i][j]))
+			if (!ft_strchr(VALID_CHARS, data->map_data.map[i][j]))
 				return (print_err_exit(INVALID_CHAR_FOUND, data));
-			if (ft_strchr(STARTING_CHARS, data->map.map[i][j]))
+			if (ft_strchr(STARTING_CHARS, data->map_data.map[i][j]))
 			{
 				if (!starting_char)
 					starting_char = true;
@@ -93,7 +93,7 @@ void	validate_characters(t_data *data)
 
 void	validate_map_size(t_data *data)
 {
-	if (ft_matrixlen(data->map.map) < 3 || ft_strlen(data->map.map[0]) < 5)
+	if (ft_matrixlen(data->map_data.map) < 3 || ft_strlen(data->map_data.map[0]) < 5)
 		print_err_exit(INVALID_MAP_SIZE, data);
 	return ;
 }

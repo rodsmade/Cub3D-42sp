@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/24 20:00:25 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 10:46:49 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_data(t_data *data)
 {
 	null_mallocable_pointers(data);
 	init_mlx_struct(data);
+	init_map_data(&data->map_data);
 }
 
 int	main(int argc, char **argv)

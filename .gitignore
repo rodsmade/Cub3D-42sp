@@ -1,5 +1,8 @@
 .ignore
 
+# mlx
+libs/minilibx-linux/test/mlx-test
+
 # debugger
 .vscode
 
