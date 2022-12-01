@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/16 17:14:23 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/11/28 22:17:26 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void	calc_raycasting(t_mlx_struct *mlx, int x);
 
 //rayCasting_utils.c
 void	clean_buf_with_zero(t_mlx_struct *mlx, int x);
+int	take_tex_num(t_mlx_struct *mlx);
 
 //dda.c
 void	dda_loop_with_check_hit(t_mlx_struct *mlx);
