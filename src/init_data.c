@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/01 14:28:46 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:35:50 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,8 @@ void	set_camera_plane_vector(t_data *data)
 
 void	init_ray_parameters(t_data *data)
 {
-	printf("posição inicial: (line: %i, col: %i)\n", data->map_data.starting_position.line, data->map_data.starting_position.column);
-	data->ray.pos_x = 4; // linkar com validacao do mapa dps
-	data->ray.pos_y = 18; // linkar com validacao do mapa dps
+	data->ray.pos_x = data->map_data.starting_position.line;
+	data->ray.pos_y = data->map_data.starting_position.column;
 	data->map_data.floor_colour_hex = encode_rgb_to_hex(data->map_data.colours_rgb[FLOOR][R_VALUE],
 														data->map_data.colours_rgb[FLOOR][G_VALUE],
 														data->map_data.colours_rgb[FLOOR][B_VALUE]);
