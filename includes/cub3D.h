@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/01 11:34:29 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:23:21 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ enum e_err_codes {
 
 // ------------------------------------------------		PROTOTYPES	-----------
 // colour_encode_util.c
-int		encode_rgb(u_int8_t red, u_int8_t green, u_int8_t blue);
+int		encode_rgb_to_hex(u_int8_t red, u_int8_t green, u_int8_t blue);
 
 // error_handling.c
 void	print_err_exit(int errcode, t_data *data);
