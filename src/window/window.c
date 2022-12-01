@@ -12,19 +12,10 @@
 
 #include "cub3D.h"
 
-static	void	init_img(t_mlx_struct *mlx)
+void	open_window(t_data *data)
 {
-	mlx->img->pointer = mlx_new_image(mlx->pointer, WIDTH, HEIGHT);
-	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->pointer,
-			&mlx->img->bits_per_pixel, &mlx->img->line_lenght,
-			&mlx->img->endian);
-}
-
-void	window(t_mlx_struct *mlx)
-{
-	mlx->window = mlx_new_window(mlx->pointer, WIDTH,
+	data->mlx.window = mlx_new_window(data->mlx.pointer, WIDTH,
 			HEIGHT, "cub3D");
-	init_img(mlx);
-	mlx_hook(mlx->window, 17, 0L, destroy, mlx);
-	mlx_hook(mlx->window, 3, 1L << 1, keystrokes_management, mlx);
+	if (data->mlx.window == NULL)
+		print_err_exit(MLX_ERROR, data);
 }

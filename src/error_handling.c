@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/27 11:28:44 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:08:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,27 @@ static char	*get_error_message(int errcode)
 			" and " UPURPLE "2 colours." RESET, \
 		"Redundant parameter found. Parameter duplicates not allowed.", \
 		"Invalid colour format. Use: " UPURPLE "R, G, B" RESET \
-			", each value ranging from 0 to 255."
+			", each value ranging from 0 to 255.", \
+		"Invalid map.", \
+		"Error allocating memory. Ran out of RAM?", \
+		"Map has invalid char. Valid chars are: " UPURPLE VALID_CHARS RESET, \
+		"Invalid map size.", \
+		"No starting position character found. Valid chars are: " \
+			UPURPLE "N" RESET ", " UPURPLE "S" RESET ", " UPURPLE "E" RESET \
+			", " UPURPLE "W" RESET ".", \
+		"Multiple starting position characters found. Only one allowed.", \
+		"Player starting position is outside the map.", \
+		"MLX error"
 	};
 
 	return (error_messages[errcode]);
 }
 
-void	free_map_params(t_map_parameters *map_params)
+void	print_err_exit(int errcode, t_data *data)
 {
-	ft_free_ptr((void *)&map_params->line);
-	return ;
-}
-
-void	print_err_exit(int errcode, t_map_parameters *map_params)
-{
-	free_map_params(map_params);
+	free_data(data);
 	printf(PURPLEB " ❌ Error " RESET "\n");
-	if (!errno)
+	if (errcode)
 		printf("%s\n", get_error_message(errcode));
 	else
 		perror(NULL);

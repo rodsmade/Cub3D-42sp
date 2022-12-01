@@ -6,115 +6,120 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/16 16:08:42 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:35:50 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	init_tex_parameters(t_mlx_struct *mlx, int i, int j)
+void	init_mlx_struct(t_data *data)
 {
-	clean_buf_with_zero(mlx, 0);
-	mlx->ray->texture = (int **)malloc(sizeof(int *) * 8);
-	i = 0;
-	while (i < 8)
+	data->mlx.pointer = mlx_init();
+	if (data->mlx.pointer == NULL)
+		print_err_exit(MLX_ERROR, data);
+	data->mlx.img.pointer = mlx_new_image(data->mlx.pointer, WIDTH, HEIGHT);
+	data->mlx.img.data = (int *)mlx_get_data_addr(data->mlx.img.pointer,
+			&data->mlx.img.bits_per_pixel, &data->mlx.img.line_lenght,
+			&data->mlx.img.endian);
+	data->mlx.window = NULL;
+	return ;
+}
+
+void	init_tex_parameters(t_data *data)
+{
+	int	i;
+	int	j;
+
+	clean_buf_with_zero(&data->ray);
+	data->ray.texture = (int **)malloc(sizeof(int *) * NB_OF_TEXTURES);
+	i = -1;
+	while (++i < NB_OF_TEXTURES)
 	{
-		j = 0;
-		mlx->ray->texture[i] = (int *)malloc(sizeof(int)
+		data->ray.texture[i] = (int *)malloc(sizeof(int)
 				* (TEX_HEIGHT * TEX_WIDTH));
-		while (j < TEX_HEIGHT * TEX_WIDTH)
-		{
-			mlx->ray->texture[i][j] = 0;
-			j++;
-		}
-		i++;
+		j = -1;
+		while (++j < TEX_HEIGHT * TEX_WIDTH)
+			data->ray.texture[i][j] = 0;
 	}
 }
 
-void	set_facing_direction_vector(t_mlx_struct *mlx)
+void	set_facing_direction_vector(t_data *data)
 {
-	if (mlx->map_data.starting_pos_char == 'N')
+	if (data->map_data.starting_pos_char == 'N')
 	{
-		mlx->ray->dir_x = -1;
-		mlx->ray->dir_y = 0;
+		data->ray.dir_x = -1;
+		data->ray.dir_y = 0;
 	}
-	if (mlx->map_data.starting_pos_char == 'S')
+	if (data->map_data.starting_pos_char == 'S')
 	{
-		mlx->ray->dir_x = 1;
-		mlx->ray->dir_y = 0;
+		data->ray.dir_x = 1;
+		data->ray.dir_y = 0;
 	}
-	if (mlx->map_data.starting_pos_char == 'E')
+	if (data->map_data.starting_pos_char == 'E')
 	{
-		mlx->ray->dir_x = 0;
-		mlx->ray->dir_y = 1;
+		data->ray.dir_x = 0;
+		data->ray.dir_y = 1;
 	}
-	if (mlx->map_data.starting_pos_char == 'W')
+	if (data->map_data.starting_pos_char == 'W')
 	{
-		mlx->ray->dir_x = 0;
-		mlx->ray->dir_y = -1;
+		data->ray.dir_x = 0;
+		data->ray.dir_y = -1;
 	}
 }
 
-void	set_camera_plane_vector(t_mlx_struct *mlx)
+void	set_camera_plane_vector(t_data *data)
 {
-	if (mlx->map_data.starting_pos_char == 'N')
+	if (data->map_data.starting_pos_char == 'N')
 	{
-		mlx->ray->plane_x = 0;
-		mlx->ray->plane_y = 0.66;
+		data->ray.plane_x = 0;
+		data->ray.plane_y = 0.66;
 	}
-	if (mlx->map_data.starting_pos_char == 'S')
+	if (data->map_data.starting_pos_char == 'S')
 	{
-		mlx->ray->plane_x = 0;
-		mlx->ray->plane_y = -0.33;
+		data->ray.plane_x = 0;
+		data->ray.plane_y = -0.33;
 	}
-	if (mlx->map_data.starting_pos_char == 'E')
+	if (data->map_data.starting_pos_char == 'E')
 	{
-		mlx->ray->plane_x = 0.33;
-		mlx->ray->plane_y = 0;
+		data->ray.plane_x = 0.33;
+		data->ray.plane_y = 0;
 	}
-	if (mlx->map_data.starting_pos_char == 'W')
+	if (data->map_data.starting_pos_char == 'W')
 	{
-		mlx->ray->plane_x = -0.66;
-		mlx->ray->plane_y = 0;
+		data->ray.plane_x = -0.66;
+		data->ray.plane_y = 0;
 	}
 }
 
-void	init_ray_parameters(t_mlx_struct *mlx)
+void	init_ray_parameters(t_data *data)
 {
-	mlx->img = malloc(sizeof(t_mlx_img));
-	mlx->ray = malloc(sizeof(t_ray));
-	mlx->ray->pos_x = 5;
-	mlx->ray->pos_y = 10.5;
-	// mlx->ray->dir_x = -1;
-	// mlx->ray->dir_y = 0;
-	// mlx->ray->plane_x = 0;
-	// mlx->ray->plane_y = 0.66;
-	mlx->map_data.starting_pos_char = 'W'; // linkar com validacao do mapa dps
-	mlx->map_data.floor_colour_hex = 0xFF4F79; // linkar com validacao do mapa dps
-	mlx->map_data.ceiling_colour_hex = 0xA11692; // linkar com validacao do mapa dps
-	// mlx->map_data.floor_colour_hex = 16732025; // linkar com validacao do mapa dps
-	// mlx->map_data.ceiling_colour_hex = 10557074; // linkar com validacao do mapa dps
-	set_facing_direction_vector(mlx);
-	set_camera_plane_vector(mlx);
-	mlx->ray->re_buf = 0;
-	mlx->ray->hit = 0;
-	mlx->ray->move_speed = 0.1;
-	mlx->ray->rot_speed = 0.05;
-	init_tex_parameters(mlx, 0, 0);
+	data->ray.pos_x = data->map_data.starting_position.line;
+	data->ray.pos_y = data->map_data.starting_position.column;
+	data->map_data.floor_colour_hex = encode_rgb_to_hex(data->map_data.colours_rgb[FLOOR][R_VALUE],
+														data->map_data.colours_rgb[FLOOR][G_VALUE],
+														data->map_data.colours_rgb[FLOOR][B_VALUE]);
+	data->map_data.ceiling_colour_hex = encode_rgb_to_hex(data->map_data.colours_rgb[CEILING][R_VALUE],
+														data->map_data.colours_rgb[CEILING][G_VALUE],
+														data->map_data.colours_rgb[CEILING][B_VALUE]);
+	set_facing_direction_vector(data);
+	set_camera_plane_vector(data);
+	data->ray.re_buf = 0;
+	data->ray.hit = 0;
+	data->ray.move_speed = 0.1;
+	data->ray.rot_speed = 0.05;
 }
 
-void	init_map_parameters(t_map_parameters *map_parameters)
+void	init_map_data(t_map_data *map_parameters)
 {
-	map_parameters->fds[NO] = -42;
-	map_parameters->fds[SO] = -42;
-	map_parameters->fds[EA] = -42;
-	map_parameters->fds[WE] = -42;
-	map_parameters->colours[FLOOR][0] = -42;
-	map_parameters->colours[FLOOR][1] = -42;
-	map_parameters->colours[FLOOR][2] = -42;
-	map_parameters->colours[CEILING][0] = -42;
-	map_parameters->colours[CEILING][1] = -42;
-	map_parameters->colours[CEILING][2] = -42;
+	map_parameters->texture_paths[NO] = NULL;
+	map_parameters->texture_paths[SO] = NULL;
+	map_parameters->texture_paths[EA] = NULL;
+	map_parameters->texture_paths[WE] = NULL;
+	map_parameters->colours_rgb[FLOOR][0] = -42;
+	map_parameters->colours_rgb[FLOOR][1] = -42;
+	map_parameters->colours_rgb[FLOOR][2] = -42;
+	map_parameters->colours_rgb[CEILING][0] = -42;
+	map_parameters->colours_rgb[CEILING][1] = -42;
+	map_parameters->colours_rgb[CEILING][2] = -42;
 	map_parameters->params_count = 0;
-	map_parameters->line = NULL;
 }

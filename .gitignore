@@ -1,5 +1,13 @@
-# debug
+.ignore
+
+# mlx
+./libs/minilibx-linux/
+
+# debugger
 .vscode
+
+# end-to-end tests
+tests/logs/
 
 # Prerequisites
 *.d

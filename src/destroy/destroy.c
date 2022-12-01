@@ -12,14 +12,15 @@
 
 #include "cub3D.h"
 
-int	destroy(t_mlx_struct *mlx)
+int	destroy(t_data *data)
 {
 	printf("Closing the game...\n");
-	mlx_loop_end(mlx->pointer);
-	mlx_clear_window(mlx->pointer, mlx->window);
-	mlx_destroy_image(mlx->pointer, mlx->img->pointer);
-	mlx_destroy_window(mlx->pointer, mlx->window);
-	mlx_destroy_display(mlx->pointer);
-	free(mlx->pointer);
+	mlx_loop_end(data->mlx.pointer);
+	mlx_clear_window(data->mlx.pointer, data->mlx.window);
+	mlx_destroy_image(data->mlx.pointer, data->mlx.img.pointer);
+	mlx_destroy_window(data->mlx.pointer, data->mlx.window);
+	mlx_destroy_display(data->mlx.pointer);
+	free(data->mlx.pointer);
+	free_data(data);
 	exit (42);
 }
