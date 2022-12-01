@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/01 14:23:21 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:52:37 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,7 @@ void	calc_raycasting(t_data *data, int x);
 
 //ray_casting_utils.c
 void	clean_buf_with_zero(t_ray *ray);
+int		take_tex_num(t_mlx_struct *mlx);
 
 //dda.c
 void	dda_loop_with_check_hit(t_data *data);

@@ -45,7 +45,7 @@ static void	display_and_text_calcs(t_data *data, int x)
 	data->ray.draw_end = data->ray.line_height / 2 + HEIGHT / 2;
 	if (data->ray.draw_end >= HEIGHT)
 		data->ray.draw_end = HEIGHT - 1;
-	data->ray.tex_num = 1;
+	data->ray.tex_num = take_tex_num(data);
 	data->ray.wall_x = wall_x_calc(data);
 	data->ray.tex_x = take_x_coord_on_texture(data);
 	data->ray.step = pixel_perscreen(data);
