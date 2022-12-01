@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:18:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 12:44:47 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:14:11 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	find_player_starting_position(t_data *data)
 	data->map_data.starting_position.line = i;
 	data->map_data.starting_position.column = j;
 	data->map_data.starting_pos_char = data->map_data.map[i][j];
+	data->map_data.map[i][j] = '0';
 	return ;
 }
 

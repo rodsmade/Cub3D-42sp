@@ -24,7 +24,6 @@ static void	display_draw(t_data *data, int x, int y)
 	{
 		data->ray.tex_y = conv_text_coord_to_int(data);
 		data->ray.tex_pos += data->ray.step;
-		// deu segfault aqui por algum motivo movendo a tela pro lado:
 		data->ray.color = data->ray.texture[data->ray.tex_num][TEX_HEIGHT
 			* data->ray.tex_y + data->ray.tex_x];
 		color_more_dark_to_y_sides(data);
@@ -46,7 +45,7 @@ static void	display_and_text_calcs(t_data *data, int x)
 	data->ray.draw_end = data->ray.line_height / 2 + HEIGHT / 2;
 	if (data->ray.draw_end >= HEIGHT)
 		data->ray.draw_end = HEIGHT - 1;
-	data->ray.tex_num = data->map_data.map[data->ray.map_x][data->ray.map_y] - 48;
+	data->ray.tex_num = 1;
 	data->ray.wall_x = wall_x_calc(data);
 	data->ray.tex_x = take_x_coord_on_texture(data);
 	data->ray.step = pixel_perscreen(data);

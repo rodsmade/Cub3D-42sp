@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:15:26 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/01 11:34:53 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:12:48 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	dda_loop_with_check_hit(t_data *data)
 			data->ray.map_y += data->ray.step_y;
 			data->ray.side = 1;
 		}
-		if (data->map_data.map[data->ray.map_x][data->ray.map_y] > '0')
+		if (data->map_data.map[data->ray.map_x][data->ray.map_y] == '1')
 			data->ray.hit = 1;
 	}
 }
