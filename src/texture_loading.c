@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:42:40 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 11:35:15 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:01:15 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	load_image(t_data *data, int *texture, char *path)
 
 void	load_textures(t_data *data)
 {
-	load_image(data, data->ray.texture[0], "./assets/textures/eagle.xpm");
-	load_image(data, data->ray.texture[1], "./assets/textures/redbrick.xpm");
-	load_image(data, data->ray.texture[2], "./assets/textures/purplestone.xpm");
-	load_image(data, data->ray.texture[3], "./assets/textures/greystone.xpm");
+	load_image(data, data->ray.texture[NO], "./assets/textures/bluestone.xpm");
+	load_image(data, data->ray.texture[SO], "./assets/textures/redbrick.xpm");
+	load_image(data, data->ray.texture[EA], "./assets/textures/purplestone.xpm");
+	load_image(data, data->ray.texture[WE], "./assets/textures/greystone.xpm");
 }
