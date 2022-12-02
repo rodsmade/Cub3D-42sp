@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_padding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 05:57:00 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 12:44:47 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 22:47:07 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	pad_columns(int map_length, t_data *data)
 	{
 		if ((int) ft_strlen(data->map_data.map[i]) < map_length)
 			pad_line_with_spaces(&(data->map_data.map[i]), map_length, data);
-		add_leading_and_trailing_spaces(&(data->map_data.map[i]), map_length, data);
+		add_leading_and_trailing_spaces(&(data->map_data.map[i]),
+			map_length, data);
 	}
 	return ;
 }

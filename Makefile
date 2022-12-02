@@ -61,6 +61,7 @@ SRCS			=	cub3D.c									\
 					$(UTILS_PATH)colour_encoding_util.c		\
 					$(UTILS_PATH)params_utils.c					\
 					$(UTILS_PATH)t_position_utils.c					\
+					$(UTILS_PATH)ray_casting_utils.c					\
 					$(WINDOW_PATH)window.c					\
 
 OBJS			:=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))

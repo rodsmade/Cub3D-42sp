@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_player_position.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:18:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/01 14:14:11 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 22:46:30 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	find_player_starting_position(t_data *data)
 		while (data->map_data.map[i][++j])
 			if (ft_strchr(STARTING_CHARS, data->map_data.map[i][j]))
 				break ;
-		if (data->map_data.map[i][j] && ft_strchr(STARTING_CHARS, data->map_data.map[i][j]))
+		if (data->map_data.map[i][j]
+			&& ft_strchr(STARTING_CHARS, data->map_data.map[i][j]))
 			break ;
 	}
 	data->map_data.starting_position.line = i;
@@ -67,7 +68,8 @@ void	check_player_is_inside_map(t_data *data)
 	{
 		if (data->map_data.map[i][j] != '1')
 			continue ;
-		if (data->map_data.map[i][j] == '1' && data->map_data.map[i][j + 1] != '1')
+		if (data->map_data.map[i][j] == '1'
+			&& data->map_data.map[i][j + 1] != '1')
 			intersection_count++;
 		else
 		{

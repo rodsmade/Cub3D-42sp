@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/18 12:44:47 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 22:46:43 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ void	validate_characters(t_data *data)
 
 void	validate_map_size(t_data *data)
 {
-	if (ft_matrixlen(data->map_data.map) < 3 || ft_strlen(data->map_data.map[0]) < 5)
+	if (ft_matrixlen(data->map_data.map) < 3
+		|| ft_strlen(data->map_data.map[0]) < 5)
 		print_err_exit(INVALID_MAP_SIZE, data);
 	return ;
 }

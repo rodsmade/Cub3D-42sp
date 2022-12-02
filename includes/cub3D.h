@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/01 15:58:00 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 22:41:17 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,10 @@ void	init_ray_parameters(t_data *data);
 void	init_tex_parameters(t_data *data);
 void	init_img(t_data *data);
 void	init_mlx_struct(t_data *data);
+
+// ray_casting_utils.c
+void	set_facing_direction_vector(t_data *data);
+void	set_camera_plane_vector(t_data *data);
 
 // input_validation_utils.c
 char	*get_next_line_trimmed(int input_fd);

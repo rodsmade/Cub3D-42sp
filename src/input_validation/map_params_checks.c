@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_params_checks.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:36:31 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/01 11:28:11 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/01 22:48:12 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	check_for_valid_path(t_data *data)
 	int	i;
 	int	fd;
 
-	if (data->map_data.texture_paths[get_direction_index(data->map_data.line[0])] == NULL)
+	if (data->map_data.texture_paths[get_direction_index
+			(data->map_data.line[0])] == NULL)
 		(data->map_data.params_count)++;
 	else
 		print_err_exit(REDUNDANT_PARAMETER_FOUND, data);
@@ -33,7 +34,8 @@ void	check_for_valid_path(t_data *data)
 
 void	check_duplicate_parameter(t_data *data)
 {
-	if (data->map_data.colours_rgb[get_colour_index(data->map_data.line[0])][0] == -42)
+	if (data->map_data.colours_rgb[get_colour_index
+			(data->map_data.line[0])][0] == -42)
 		(data->map_data.params_count)++;
 	else
 		print_err_exit(REDUNDANT_PARAMETER_FOUND, data);
@@ -73,7 +75,8 @@ void	check_for_valid_colour(t_data *data)
 	check_colour_params_count(colours_array, data);
 	i = -1;
 	while (colours_array[++i])
-		data->map_data.colours_rgb[get_colour_index(data->map_data.line[0])][i] = \
+		data->map_data.colours_rgb[get_colour_index
+			(data->map_data.line[0])][i] = \
 			convert_colour_to_int(colours_array[i], data);
 	ft_free_ptr((void *)&colours_array);
 	return ;
