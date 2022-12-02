@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/02 00:27:14 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/02 02:05:27 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,8 +208,14 @@ void	open_window(t_data *data);
 // destroy.c
 int		destroy(t_data *data);
 
-// key_press.c
+// keystrokes.c
 int		keystrokes_management(int keycode, t_data *data);
+
+// move_player.c
+void	move_player(int keycode, t_data *data);
+
+// rotate.c
+void		rotate_view(int keycode, t_data *data);
 
 // map_padding.c
 void		pad_map(t_data *data);
@@ -277,9 +283,5 @@ t_position	t_position_create_tuple(int line, int column);
 bool		t_position_compare(t_position a, t_position b);
 bool		t_position_compare_ptr(t_position *a, t_position *b);
 void		t_position_copy(t_position *destination, const t_position source);
-
-// rotate.c
-void		rotate_view(int keycode, t_data *data);
-
 
 #endif
