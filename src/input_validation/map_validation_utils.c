@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:49:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 10:34:58 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:42:24 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ bool	try_to_move_in_direction(t_position next_move, t_position *prev_pos,
 		if (t_position_compare_ptr(&next_move, prev_pos) == false)
 		{
 			t_position_copy(next_pos, next_move);
+			data->map_data.map[next_move.line][next_move.col] = 'x';
 			return (true);
 		}
 	}

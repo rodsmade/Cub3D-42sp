@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 10:32:59 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:47:10 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	trace_outer_walls(t_data *data)
 	goes_to = malloc(sizeof(*goes_to));
 	pivot = malloc(sizeof(*pivot));
 	if (!came_from || !goes_to || !pivot)
-		return print_err_exit(MEMORY_ALLOCATION, data);
+		return (print_err_exit(MEMORY_ALLOCATION, data));
 	find_starting_point(&starting_point, data);
 	decide_where_to_go_next(data, NULL, starting_point, goes_to);
 	t_position_copy(pivot, starting_point);

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:18:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 10:10:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:44:47 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	check_for_inflection_point(int i, int j, t_data *data)
 	int	in;
 	int	out;
 
-	if (data->map_data.map[i - 1][j] == '1')
+	if (data->map_data.map[i - 1][j] == 'x')
 		in = UP;
 	else
 		in = DOWN;
-	while (data->map_data.map[i][++j] == '1')
+	while (data->map_data.map[i][++j] == 'x')
 		continue ;
-	if (data->map_data.map[i - 1][j - 1] == '1')
+	if (data->map_data.map[i - 1][j - 1] == 'x')
 		out = UP;
 	else
 		out = DOWN;
@@ -66,15 +66,15 @@ void	check_player_is_inside_map(t_data *data)
 	j = data->map_data.starting_position.col;
 	while (data->map_data.map[i][++j])
 	{
-		if (data->map_data.map[i][j] != '1')
+		if (data->map_data.map[i][j] != 'x')
 			continue ;
-		if (data->map_data.map[i][j] == '1'
-			&& data->map_data.map[i][j + 1] != '1')
+		if (data->map_data.map[i][j] == 'x'
+			&& data->map_data.map[i][j + 1] != 'x')
 			intersection_count++;
 		else
 		{
 			intersection_count += check_for_inflection_point(i, j, data);
-			while (data->map_data.map[i][++j] == '1')
+			while (data->map_data.map[i][++j] == 'x')
 				continue ;
 		}
 	}
@@ -102,6 +102,6 @@ void	check_player_position(t_data *data)
 {
 	find_player_starting_position(data);
 	check_player_is_inside_map(data);
-	// revert_contour_chars_to_walls(data);
+	revert_contour_chars_to_walls(data);
 	return ;
 }
