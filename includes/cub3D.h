@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/02 02:05:27 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/02 02:22:09 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ typedef struct s_mlx_img
 
 typedef struct s_map_data
 {
-	char	starting_pos_char;
-	int		floor_colour_hex;
-	int		ceiling_colour_hex;
-	int		input_fd;
-	char	*texture_paths[4];
-	int		colours_rgb[2][3];
-	int		params_count;
-	char	*line;
-	char			**map;
-	t_position		starting_position;
+	int			input_fd;
+	int			params_count;
+	int			floor_colour_hex;
+	char		starting_pos_char;
+	int			ceiling_colour_hex;
+	int			colours_rgb[2][3];
+	char		*texture_paths[4];
+	char		*line;
+	char		**map;
+	t_position	starting_position;
 }			t_map_data;
 
 typedef struct s_ray
@@ -171,48 +171,53 @@ enum e_err_codes {
 	MLX_ERROR
 };
 
-
 // ------------------------------------------------		PROTOTYPES	-----------
+// t_position_utils.c
+t_position	t_position_create_tuple(int line, int column);
+bool		t_position_compare(t_position a, t_position b);
+bool		t_position_compare_ptr(t_position *a, t_position *b);
+void		t_position_copy(t_position *destination, const t_position source);
+
 // colour_encode_util.c
-int		encode_rgb_to_hex(u_int8_t red, u_int8_t green, u_int8_t blue);
+int			encode_rgb_to_hex(u_int8_t red, u_int8_t green, u_int8_t blue);
 
 // error_handling.c
-void	print_err_exit(int errcode, t_data *data);
+void		print_err_exit(int errcode, t_data *data);
 
 // hooks.c
-void	set_hooks(t_data *data);
+void		set_hooks(t_data *data);
 
 // init_data.c
-void	init_map_data(t_map_data *map_parameters);
-void	init_ray_parameters(t_data *data);
-void	init_tex_parameters(t_data *data);
-void	init_img(t_data *data);
-void	init_mlx_struct(t_data *data);
+void		init_map_data(t_map_data *map_parameters);
+void		init_ray_parameters(t_data *data);
+void		init_tex_parameters(t_data *data);
+void		init_img(t_data *data);
+void		init_mlx_struct(t_data *data);
 
 // ray_casting_utils.c
-void	set_facing_direction_vector(t_data *data);
-void	set_camera_plane_vector(t_data *data);
+void		set_facing_direction_vector(t_data *data);
+void		set_camera_plane_vector(t_data *data);
 
 // input_validation_utils.c
-char	*get_next_line_trimmed(int input_fd);
-int		jump_spaces(const char *str);
-int		convert_colour_to_int(char *colour, t_data *data);
+char		*get_next_line_trimmed(int input_fd);
+int			jump_spaces(const char *str);
+int			convert_colour_to_int(char *colour, t_data *data);
 
 // input_validation.c
-void	validate_args(int argc, char *argv[], t_data *data);
-void	validate_input_file(t_data *data);
+void		validate_args(int argc, char *argv[], t_data *data);
+void		validate_input_file(t_data *data);
 
 // window.c
-void	open_window(t_data *data);
+void		open_window(t_data *data);
 
 // destroy.c
-int		destroy(t_data *data);
+int			destroy(t_data *data);
 
 // keystrokes.c
-int		keystrokes_management(int keycode, t_data *data);
+int			keystrokes_management(int keycode, t_data *data);
 
 // move_player.c
-void	move_player(int keycode, t_data *data);
+void		move_player(int keycode, t_data *data);
 
 // rotate.c
 void		rotate_view(int keycode, t_data *data);
@@ -243,45 +248,39 @@ void		find_starting_point(t_position *starting_point, t_data *data);
 void		check_player_position(t_data *data);
 
 // memory_release.c
-void	free_data(t_data *data);
+void		free_data(t_data *data);
 
 // params_utils.c
-bool	is_direction_identifier(char identifier[2]);
-int		get_direction_index(char d);
-int		get_colour_index(char c);
-bool	is_valid_parameter_char(char c);
-bool	has_valid_param_identifier(char *str);
+bool		is_direction_identifier(char identifier[2]);
+int			get_direction_index(char d);
+int			get_colour_index(char c);
+bool		is_valid_parameter_char(char c);
+bool		has_valid_param_identifier(char *str);
 
 // raycasting.c
-int		raycasting(t_data *data);
-void	calc_raycasting(t_data *data, int x);
+int			raycasting(t_data *data);
+void		calc_raycasting(t_data *data, int x);
 
 //ray_casting_utils.c
-void	clean_buf_with_zero(t_ray *ray);
-int		take_tex_num(t_data *data);
+void		clean_buf_with_zero(t_ray *ray);
+int			take_tex_num(t_data *data);
 
 //dda.c
-void	dda_loop_with_check_hit(t_data *data);
-void	calc_perp_wall_dist_from_camera_plane(t_data *data);
-void	calc_ray_side_distance_and_next_block_step(t_data *data);
+void		dda_loop_with_check_hit(t_data *data);
+void		calc_perp_wall_dist_from_camera_plane(t_data *data);
+void		calc_ray_side_distance_and_next_block_step(t_data *data);
 
 // texture_calcs_0.c
-double	tex_coordinate(t_data *data);
-int		conv_text_coord_to_int(t_data *data);
-void	color_more_dark_to_y_sides(t_data *data);
+double		tex_coordinate(t_data *data);
+int			conv_text_coord_to_int(t_data *data);
+void		color_more_dark_to_y_sides(t_data *data);
 
 // texture_calcs_1.c
-double	wall_x_calc(t_data *data);
-int		take_x_coord_on_texture(t_data *data);
-double	pixel_perscreen(t_data *data);
+double		wall_x_calc(t_data *data);
+int			take_x_coord_on_texture(t_data *data);
+double		pixel_perscreen(t_data *data);
 
 //texture_load.c
-void	load_textures(t_data *data);
-
-// t_position_utils.c
-t_position	t_position_create_tuple(int line, int column);
-bool		t_position_compare(t_position a, t_position b);
-bool		t_position_compare_ptr(t_position *a, t_position *b);
-void		t_position_copy(t_position *destination, const t_position source);
+void		load_textures(t_data *data);
 
 #endif

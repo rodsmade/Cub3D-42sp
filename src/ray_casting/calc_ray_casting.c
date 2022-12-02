@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_ray_casting.c                                  :+:      :+:    :+:   */
+/*   calc_ray_casting.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 15:26:28 by gusalves          #+#    #+#             */
-/*   Updated: 2022/11/18 11:46:31 by roaraujo         ###   ########.fr       */
+/*   Created: 2022/12/02 02:09:04 by gusalves          #+#    #+#             */
+/*   Updated: 2022/12/02 02:09:14 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 static void	display_draw(t_data *data, int x, int y)
-// x = coordenada x da linha vertical sendo desenhada; y = draw_start.
 {
 	int	i;
 
