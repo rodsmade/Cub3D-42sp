@@ -18,6 +18,8 @@ static void	display_draw(t_data *data, int x, int y)
 	int	i;
 
 	i = -1;
+	if (data->ray.draw_start == 0)
+		data->ray.draw_end = HEIGHT;
 	while (++i < y)
 		data->ray.buf[i][x] = data->map_data.ceiling_colour_hex;
 	while (y < data->ray.draw_end)
@@ -40,7 +42,7 @@ static void	display_and_text_calcs(t_data *data, int x)
 {
 	data->ray.line_height = (int)(HEIGHT / data->ray.perp_wall_dist);
 	data->ray.draw_start = -data->ray.line_height / 2 + HEIGHT / 2;
-	if (data->ray.draw_start < 0)
+	if (data->ray.draw_start < 0 || data->ray.draw_start > HEIGHT)
 		data->ray.draw_start = 0;
 	data->ray.draw_end = data->ray.line_height / 2 + HEIGHT / 2;
 	if (data->ray.draw_end >= HEIGHT)
