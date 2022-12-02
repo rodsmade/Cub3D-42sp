@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/01 22:40:30 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:10:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_tex_parameters(t_data *data)
 void	init_ray_parameters(t_data *data)
 {
 	data->ray.pos_x = data->map_data.starting_position.line;
-	data->ray.pos_y = data->map_data.starting_position.column;
+	data->ray.pos_y = data->map_data.starting_position.col;
 	data->map_data.floor_colour_hex = encode_rgb_to_hex
 		(data->map_data.colours_rgb[FLOOR][R_VALUE],
 			data->map_data.colours_rgb[FLOOR][G_VALUE],

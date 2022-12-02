@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/02 02:22:09 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:35:30 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,15 @@
 typedef struct s_position
 {
 	int		line;
-	int		column;
+	int		col;
 }		t_position;
+
+typedef struct s_map_cursor
+{
+	t_position	*prev_pos;
+	t_position	*curr_pos;
+	t_position	*next_pos;
+}				t_map_cursor;
 
 typedef struct s_mlx_img
 {
@@ -173,7 +180,7 @@ enum e_err_codes {
 
 // ------------------------------------------------		PROTOTYPES	-----------
 // t_position_utils.c
-t_position	t_position_create_tuple(int line, int column);
+t_position	t_position_create_tuple(int line, int col);
 bool		t_position_compare(t_position a, t_position b);
 bool		t_position_compare_ptr(t_position *a, t_position *b);
 void		t_position_copy(t_position *destination, const t_position source);

@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/01 10:47:34 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:34:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@ void	validate_map_parameters(t_data *data)
 }
 
 void	validate_input_file(t_data *data)
-/*
-	idealmente vai ter tb as funçoes:
-		open_texture_files()
-		validate_map()
-*/
 {
 	validate_map_parameters(data);
 	validate_map(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/01 22:46:43 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:32:59 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	trace_outer_walls(t_data *data)
 	goes_to = malloc(sizeof(*goes_to));
 	pivot = malloc(sizeof(*pivot));
 	if (!came_from || !goes_to || !pivot)
-		return ;
+		return print_err_exit(MEMORY_ALLOCATION, data);
 	find_starting_point(&starting_point, data);
 	decide_where_to_go_next(data, NULL, starting_point, goes_to);
 	t_position_copy(pivot, starting_point);
@@ -100,11 +100,6 @@ void	validate_map_size(t_data *data)
 }
 
 void	validate_map(t_data *data)
-/*
-	funções de debug q puxei pra cá pra ñ deletar e perder a ref:
-		debug_print_map_read(data);
-		debug_copy_map(data);
-*/
 {
 	save_map(data);
 	validate_map_size(data);

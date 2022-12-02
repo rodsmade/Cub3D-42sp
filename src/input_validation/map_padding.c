@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_padding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 05:57:00 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/01 22:47:07 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:34:20 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,6 @@ void	pad_columns(int map_length, t_data *data)
 }
 
 void	pad_map(t_data *data)
-/*
-	debug_print_map_read(data->map_data.map);
-*/
 {
 	int		map_length;
 

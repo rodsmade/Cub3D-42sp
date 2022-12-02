@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_player_position.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:18:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/01 22:46:30 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:10:36 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	find_player_starting_position(t_data *data)
 			break ;
 	}
 	data->map_data.starting_position.line = i;
-	data->map_data.starting_position.column = j;
+	data->map_data.starting_position.col = j;
 	data->map_data.starting_pos_char = data->map_data.map[i][j];
 	data->map_data.map[i][j] = '0';
 	return ;
@@ -63,7 +63,7 @@ void	check_player_is_inside_map(t_data *data)
 
 	intersection_count = 0;
 	i = data->map_data.starting_position.line;
-	j = data->map_data.starting_position.column;
+	j = data->map_data.starting_position.col;
 	while (data->map_data.map[i][++j])
 	{
 		if (data->map_data.map[i][j] != '1')
@@ -83,9 +83,25 @@ void	check_player_is_inside_map(t_data *data)
 	return ;
 }
 
+void	revert_contour_chars_to_walls(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (data->map_data.map[++i])
+	{
+		j = -1;
+		while (data->map_data.map[i][++j])
+			if (data->map_data.map[i][j] == 'x')
+				data->map_data.map[i][j] = '1';
+	}
+}
+
 void	check_player_position(t_data *data)
 {
 	find_player_starting_position(data);
 	check_player_is_inside_map(data);
+	// revert_contour_chars_to_walls(data);
 	return ;
 }
