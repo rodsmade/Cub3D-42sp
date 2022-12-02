@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 02:12:33 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/02 09:25:57 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static char	*get_error_message(int errcode)
 			", " UPURPLE "W" RESET ".", \
 		"Multiple starting position characters found. Only one allowed.", \
 		"Player starting position is outside the map.", \
-		"MLX error"
-	};
+		"MLX error"};
 
 	return (error_messages[errcode]);
 }
