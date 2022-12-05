@@ -88,7 +88,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(RAYCASTING_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(UTILS_PATH))
 	@mkdir -p $(addprefix $(OBJ_DIR)/,$(WINDOW_PATH))
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	make clean -C $(MLIBX_PATH)
