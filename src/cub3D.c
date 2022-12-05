@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/01 13:45:11 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:40:30 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	null_mallocable_pointers(t_data *data)
-{
-	data->map_data.line = NULL;
-	data->map_data.map = NULL;
-	data->ray.texture = NULL;
-	data->mlx.pointer = NULL;
-	data->mlx.window = NULL;
-}
 
 void	init_data(t_data *data)
 {

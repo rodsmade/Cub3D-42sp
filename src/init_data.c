@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 10:10:36 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:40:47 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,6 @@ void	init_ray_parameters(t_data *data)
 
 void	init_map_data(t_map_data *map_parameters)
 {
-	map_parameters->texture_paths[NO] = NULL;
-	map_parameters->texture_paths[SO] = NULL;
-	map_parameters->texture_paths[EA] = NULL;
-	map_parameters->texture_paths[WE] = NULL;
 	map_parameters->colours_rgb[FLOOR][0] = -42;
 	map_parameters->colours_rgb[FLOOR][1] = -42;
 	map_parameters->colours_rgb[FLOOR][2] = -42;
@@ -76,4 +72,17 @@ void	init_map_data(t_map_data *map_parameters)
 	map_parameters->colours_rgb[CEILING][1] = -42;
 	map_parameters->colours_rgb[CEILING][2] = -42;
 	map_parameters->params_count = 0;
+}
+
+void	null_mallocable_pointers(t_data *data)
+{
+	data->map_data.line = NULL;
+	data->map_data.map = NULL;
+	data->ray.texture = NULL;
+	data->mlx.pointer = NULL;
+	data->mlx.window = NULL;
+	data->map_data.texture_paths[NO] = NULL;
+	data->map_data.texture_paths[SO] = NULL;
+	data->map_data.texture_paths[EA] = NULL;
+	data->map_data.texture_paths[WE] = NULL;
 }

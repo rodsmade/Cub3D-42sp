@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/02 10:35:30 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:41:39 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,8 @@ void		set_hooks(t_data *data);
 void		init_map_data(t_map_data *map_parameters);
 void		init_ray_parameters(t_data *data);
 void		init_tex_parameters(t_data *data);
-void		init_img(t_data *data);
 void		init_mlx_struct(t_data *data);
+void		null_mallocable_pointers(t_data *data);
 
 // ray_casting_utils.c
 void		set_facing_direction_vector(t_data *data);
