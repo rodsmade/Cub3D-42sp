@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_player_position.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:18:25 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 10:44:47 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/06 18:04:21 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,16 @@ void	check_player_position(t_data *data)
 {
 	find_player_starting_position(data);
 	check_player_is_inside_map(data);
+	// printf map
+	int i, j;
+	i = -1;
+	while (data->map_data.map[++i])
+	{
+		j = -1;
+		while (data->map_data.map[i][++j])
+			printf("%c", data->map_data.map[i][j]);
+		printf("\n");
+	}
 	revert_contour_chars_to_walls(data);
 	return ;
 }

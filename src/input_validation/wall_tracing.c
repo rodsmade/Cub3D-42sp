@@ -1,0 +1,226 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wall_tracing.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/01 11:49:02 by roaraujo          #+#    #+#             */
+/*   Updated: 2022/12/08 00:50:34 by coder            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3D.h"
+
+bool	try_to_move_in_direction(t_position next_move, t_position *prev_pos,
+	t_position *next_pos, t_data *data)
+{
+	if ((data->map_data.map)[next_move.line][next_move.col] == '1')
+	{
+		if (t_position_compare_ptr(&next_move, prev_pos) == false)
+		{
+			t_position_copy(next_pos, next_move);
+			data->map_data.map[next_move.line][next_move.col] = 'x';
+			return (true);
+		}
+	}
+	return (false);
+}
+
+bool	check_tile_locale(t_position next_move, char **map)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < 3)
+	{
+		j = -1;
+		while (++j < 3)
+			if (map[(next_move.line - 1) + i][(next_move.col - 1) + j] == ' ')
+				return (true);
+	}
+	return (false);
+}
+
+bool is_valid_move_direction(t_position position, char **map)
+{
+	if (map[position.line][position.col] != '1')
+		return (false);
+	return (check_tile_locale(position, map));
+}
+
+t_position	find_next_move(t_position *curr_pos, int direction)
+{
+	if (direction == NO)
+		return (t_position_create_tuple(curr_pos->line - 1, curr_pos->col));
+	else if (direction == EA)
+		return (t_position_create_tuple(curr_pos->line, curr_pos->col + 1));
+	else if (direction == SO)
+		return (t_position_create_tuple(curr_pos->line + 1, curr_pos->col));
+	else
+		return (t_position_create_tuple(curr_pos->line, curr_pos->col - 1));
+}
+
+void	prioritise_clockwise_movement(t_position *next_move, bool *move_dir,
+			t_position *curr_pos)
+{
+	if (move_dir[NO])
+		t_position_copy(next_move, find_next_move(curr_pos, NO));
+	else if (move_dir[EA])
+		t_position_copy(next_move, find_next_move(curr_pos, EA));
+	else if (move_dir[SO])
+		t_position_copy(next_move, find_next_move(curr_pos, SO));
+	else if (move_dir[WE])
+		t_position_copy(next_move, find_next_move(curr_pos, WE));
+	return ;
+}
+
+bool 	has_one_around(t_position pos, char **map)
+{
+	printf("tem 1 ao redor de [%i,%i]?\n", pos.line, pos.col);
+	printf("%i\n", map[pos.line - 1][pos.col] == '1'
+		|| map[pos.line][pos.col + 1] == '1'
+		|| map[pos.line + 1][pos.col] == '1'
+		|| map[pos.line][pos.col - 1] == '1');
+	return (map[pos.line - 1][pos.col] == '1'
+		|| map[pos.line][pos.col + 1] == '1'
+		|| map[pos.line + 1][pos.col] == '1'
+		|| map[pos.line][pos.col - 1] == '1');
+}
+
+t_position	find_x_pos(t_position curr_pos, char **map)
+{
+	// printf("in find_x: curr pos: [%i,%i]\n", curr_pos.line, curr_pos.col);
+	// printf("in find_x: curr pos: [%i,%i] = '%c'\n", curr_pos.line - 1, curr_pos.col, map[curr_pos.line - 1][curr_pos.col]);
+	// printf("in find_x: curr pos: [%i,%i] = '%c'\n", curr_pos.line, curr_pos.col + 1, map[curr_pos.line][curr_pos.col + 1]);
+	// printf("in find_x: curr pos: [%i,%i] = '%c'\n", curr_pos.line + 1, curr_pos.col, map[curr_pos.line + 1][curr_pos.col]);
+	// printf("in find_x: curr pos: [%i,%i] = '%c'\n", curr_pos.line, curr_pos.col - 1, map[curr_pos.line][curr_pos.col - 1]);
+	if (map[curr_pos.line - 1][curr_pos.col] == 'x')
+		return (t_position_create_tuple(curr_pos.line - 1, curr_pos.col));
+	if (map[curr_pos.line][curr_pos.col + 1] == 'x')
+		return (t_position_create_tuple(curr_pos.line, curr_pos.col + 1));
+	if (map[curr_pos.line + 1][curr_pos.col] == 'x')
+		return (t_position_create_tuple(curr_pos.line + 1, curr_pos.col));
+	if (map[curr_pos.line][curr_pos.col - 1] == 'x')
+		return (t_position_create_tuple(curr_pos.line, curr_pos.col - 1));
+	return (t_position_create_tuple(0, 0));
+}
+
+bool	can_reverse(t_position *curr_pos, t_data *data, t_position *next_pos)
+{
+	// void	t_position_copy(t_position *destination, const t_position source)
+	t_position	x_pos;
+	char		**map;
+	bool		has_valid_move_direction;
+
+	printf("can reverse?\n");
+	map = data->map_data.map;
+	
+	while (!has_one_around(*curr_pos, map))
+	{
+		printf("curr_pos: [%i,%i]\n", curr_pos->line, curr_pos->col);
+		x_pos = find_x_pos(*curr_pos, map);
+		printf("x_pos: [%i,%i]\n", x_pos.line, x_pos.col);
+		if (x_pos.line == 0 && x_pos.col == 0)
+			return (false);
+		map[curr_pos->line][curr_pos->col] = 'y';
+		t_position_copy(curr_pos, x_pos);
+	}
+	printf("saiu do loop\n");
+	printf("curr_pos: [%i,%i]\n", curr_pos->line, curr_pos->col);
+	has_valid_move_direction = is_valid_move_direction(find_next_move(curr_pos, NO), map)
+		|| is_valid_move_direction(find_next_move(curr_pos, SO), map)
+		|| is_valid_move_direction(find_next_move(curr_pos, EA), map)
+		|| is_valid_move_direction(find_next_move(curr_pos, WE), map);
+	if (has_valid_move_direction)
+	{
+		if (is_valid_move_direction(find_next_move(curr_pos, NO), map))
+			t_position_copy(next_pos, find_next_move(curr_pos, NO));
+		if (is_valid_move_direction(find_next_move(curr_pos, SO), map))
+			t_position_copy(next_pos, find_next_move(curr_pos, SO));
+		if (is_valid_move_direction(find_next_move(curr_pos, EA), map))
+			t_position_copy(next_pos, find_next_move(curr_pos, EA));
+		if (is_valid_move_direction(find_next_move(curr_pos, WE), map))
+			t_position_copy(next_pos, find_next_move(curr_pos, WE));
+	}
+	return (has_valid_move_direction);
+}
+
+void	decide_where_to_go_next(t_data *data,
+			t_position *curr_pos, t_position *next_pos)
+{
+	bool	valid_move_direction[4];
+	int		count_valid_moves;
+
+	valid_move_direction[NO] = is_valid_move_direction(find_next_move(curr_pos, NO), data->map_data.map);
+	valid_move_direction[SO] = is_valid_move_direction(find_next_move(curr_pos, SO), data->map_data.map);
+	valid_move_direction[EA] = is_valid_move_direction(find_next_move(curr_pos, EA), data->map_data.map);
+	valid_move_direction[WE] = is_valid_move_direction(find_next_move(curr_pos, WE), data->map_data.map);
+	count_valid_moves = valid_move_direction[NO] + valid_move_direction[SO] + valid_move_direction[EA] + valid_move_direction[WE];
+	if (count_valid_moves > 0)
+	{
+		prioritise_clockwise_movement(next_pos, valid_move_direction, curr_pos);
+		data->map_data.map[next_pos->line][next_pos->col] = 'x';
+	}
+	else
+	{
+		if (!can_reverse(curr_pos, data, next_pos))
+			next_pos->col = -1;
+	}
+	return ;
+}
+
+void	find_starting_point(t_position *starting_point, t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while ((data->map_data.map)[++(i)])
+	{
+		j = -1;
+		while ((data->map_data.map)[i][++j])
+		{
+			if ((data->map_data.map)[i][j] == '1')
+				break ;
+		}
+		if ((data->map_data.map)[i][j] && (data->map_data.map)[i][j] == '1')
+			break ;
+	}
+	if (!(data->map_data.map)[i][j])
+		print_err_exit(INVALID_MAP, data);
+	starting_point->line = i;
+	starting_point->col = j;
+	return ;
+}
+
+void	trace_outer_walls(t_data *data)
+{
+	t_position	starting_point;
+	t_position	*pivot;
+	t_position	*goes_to;
+
+	goes_to = malloc(sizeof(*goes_to));
+	pivot = malloc(sizeof(*pivot));
+	if (!goes_to || !pivot)
+		return (print_err_exit(MEMORY_ALLOCATION, data));
+	find_starting_point(&starting_point, data);
+	decide_where_to_go_next(data, &starting_point, goes_to);
+	t_position_copy(pivot, starting_point);
+	while (goes_to->col != -1 && !t_position_compare_ptr(goes_to, &starting_point))
+	{
+		t_position_copy(pivot, *goes_to);
+		printf("pivot: [%i,%i]\n", pivot->line, pivot->col);
+		decide_where_to_go_next(data, pivot, goes_to);
+		printf("pivot dps: [%i,%i]\n", pivot->line, pivot->col);
+	}
+	if (t_position_compare_ptr(goes_to, &starting_point) == false)
+	{
+		ft_free_ptr((void *)&goes_to);
+		ft_free_ptr((void *)&pivot);
+		print_err_exit(INVALID_MAP, data);
+	}
+	ft_free_ptr((void *)&goes_to);
+	ft_free_ptr((void *)&pivot);
+}

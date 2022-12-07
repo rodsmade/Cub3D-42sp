@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 09:25:57 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:37:28 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ static char	*get_error_message(int errcode)
 
 void	print_err_exit(int errcode, t_data *data)
 {
+	int i, j;
+	i = -1;
+	while (data->map_data.map[++i])
+	{
+		j = -1;
+		while (data->map_data.map[i][++j])
+			printf("%c", data->map_data.map[i][j]);
+		printf("\n");
+	}
 	free_data(data);
 	printf(PURPLEB " ❌ Error " RESET "\n");
 	if (errcode)

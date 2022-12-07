@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:48:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 10:47:10 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/06 18:12:36 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	trace_outer_walls(t_data *data)
-{
-	t_position	starting_point;
-	t_position	*pivot;
-	t_position	*came_from;
-	t_position	*goes_to;
-
-	came_from = malloc(sizeof(*came_from));
-	goes_to = malloc(sizeof(*goes_to));
-	pivot = malloc(sizeof(*pivot));
-	if (!came_from || !goes_to || !pivot)
-		return (print_err_exit(MEMORY_ALLOCATION, data));
-	find_starting_point(&starting_point, data);
-	decide_where_to_go_next(data, NULL, starting_point, goes_to);
-	t_position_copy(pivot, starting_point);
-	while (goes_to && !t_position_compare_ptr(goes_to, &starting_point))
-	{
-		t_position_copy(came_from, *pivot);
-		t_position_copy(pivot, *goes_to);
-		decide_where_to_go_next(data, came_from, *pivot, goes_to);
-	}
-	if (t_position_compare_ptr(goes_to, &starting_point) == false)
-		print_err_exit(INVALID_MAP, data);
-	ft_free_ptr((void *)&came_from);
-	ft_free_ptr((void *)&goes_to);
-	ft_free_ptr((void *)&pivot);
-}
 
 void	save_map(t_data *data)
 {

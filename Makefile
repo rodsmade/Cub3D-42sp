@@ -50,7 +50,7 @@ SRCS			=	cub3D.c									\
 					$(INPUT_VALIDATION_PATH)map_utils.c							\
 					$(INPUT_VALIDATION_PATH)map_validation.c					\
 					$(INPUT_VALIDATION_PATH)map_validation_player_position.c	\
-					$(INPUT_VALIDATION_PATH)map_validation_utils.c				\
+					$(INPUT_VALIDATION_PATH)wall_tracing.c				\
 					$(KEYSTROKES_PATH)keystrokes.c			\
 					$(KEYSTROKES_PATH)rotate.c				\
 					$(KEYSTROKES_PATH)move_player.c			\

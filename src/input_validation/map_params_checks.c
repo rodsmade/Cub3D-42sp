@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_params_checks.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:36:31 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/01 22:48:12 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/06 20:53:22 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ void	check_for_valid_path(t_data *data)
 
 	if (data->map_data.texture_paths[get_direction_index
 			(data->map_data.line[0])] == NULL)
+	{
 		(data->map_data.params_count)++;
+	}
 	else
+	{
 		print_err_exit(REDUNDANT_PARAMETER_FOUND, data);
+	}
 	i = 2 + jump_spaces(&(data->map_data.line[2]));
 	fd = open(&(data->map_data.line[i]), O_RDONLY);
 	if (fd == -1)

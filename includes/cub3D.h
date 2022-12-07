@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/05 20:41:39 by coder            ###   ########.fr       */
+/*   Updated: 2022/12/07 20:34:17 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ enum e_rgb_values {
 
 enum e_directions {
 	NO,
-	SO,
 	EA,
+	SO,
 	WE
 };
 
@@ -244,12 +244,8 @@ int			find_longest_line_length(char **map);
 // map_validation.c
 void		validate_map(t_data *data);
 
-// map_validation_utils.c
-bool		try_to_move_in_direction(t_position next_move, t_position *prev_pos,
-				t_position *next_pos, t_data *data);
-void		decide_where_to_go_next(t_data *data, t_position *prev_pos,
-				t_position curr_pos, t_position *next_pos);
-void		find_starting_point(t_position *starting_point, t_data *data);
+// wall_tracing.c
+void		trace_outer_walls(t_data *data);
 
 // map_validation_player_position.c
 void		check_player_position(t_data *data);

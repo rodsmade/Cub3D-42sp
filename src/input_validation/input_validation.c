@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 10:34:35 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:49:03 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ void	validate_args(int argc, char *argv[], t_data *data)
 
 void	retrieve_parameter(t_data *data)
 {
-	char	identifier[2];
+	char	identifier[3];
 
 	if (!has_valid_param_identifier(data->map_data.line))
 		print_err_exit(INVALID_TEXTURE_PARAMS, data);
 	ft_strlcpy(identifier, data->map_data.line, 3);
 	if (is_direction_identifier(identifier))
+	{
 		check_for_valid_path(data);
+	}
 	else
 		check_for_valid_colour(data);
 }
@@ -45,7 +47,9 @@ void	validate_map_parameters(t_data *data)
 		if ((data->map_data.line)[0])
 		{
 			if (is_valid_parameter_char((data->map_data.line)[0]))
+			{
 				retrieve_parameter(data);
+			}
 			else
 				break ;
 		}
@@ -58,6 +62,10 @@ void	validate_map_parameters(t_data *data)
 
 void	validate_input_file(t_data *data)
 {
+	// printf("DEBUG: entrou na validate_map_parameters\n");
 	validate_map_parameters(data);
+	// printf("DEBUG: saiu da validate_map_parameters\n");
+	// printf("DEBUG: entrou na validate_map\n");
 	validate_map(data);
+	// printf("DEBUG: saiu da validate_map\n");
 }
