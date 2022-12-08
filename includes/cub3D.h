@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/07 20:34:17 by coder            ###   ########.fr       */
+/*   Updated: 2022/12/08 18:56:03 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,8 +244,18 @@ int			find_longest_line_length(char **map);
 // map_validation.c
 void		validate_map(t_data *data);
 
+// pathfinding.c
+void	decide_where_to_go_next(t_data *data, t_position *curr_pos,
+			t_position *next_pos);
 // wall_tracing.c
 void		trace_outer_walls(t_data *data);
+
+// wall_tracing_utils.c
+t_position	find_x_pos(t_position curr_pos, char **map);
+bool		has_neighbouring_one(t_position pos, char **map);
+t_position	find_next_move(t_position *curr_pos, int direction);
+bool		is_valid_move_direction(t_position position, char **map);
+bool		check_tile_locale(t_position next_move, char **map);
 
 // map_validation_player_position.c
 void		check_player_position(t_data *data);

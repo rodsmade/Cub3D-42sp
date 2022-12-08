@@ -36,13 +36,13 @@ LIBFT_FLAGS		=	-L$(LIBFT_PATH) -lft
 LIBMATH_FLAGS	=	-lm
 
 ## source files
-SRCS			=	cub3D.c									\
-					error_handling.c						\
-					hooks.c								\
-					init_data.c								\
-					memory_release.c						\
-					texture_loading.c						\
-					$(DESTROY_PATH)destroy.c				\
+SRCS			=	cub3D.c														\
+					error_handling.c											\
+					hooks.c														\
+					init_data.c													\
+					memory_release.c											\
+					texture_loading.c											\
+					$(DESTROY_PATH)destroy.c									\
 					$(INPUT_VALIDATION_PATH)input_validation_utils.c			\
 					$(INPUT_VALIDATION_PATH)input_validation.c					\
 					$(INPUT_VALIDATION_PATH)map_padding.c						\
@@ -50,21 +50,23 @@ SRCS			=	cub3D.c									\
 					$(INPUT_VALIDATION_PATH)map_utils.c							\
 					$(INPUT_VALIDATION_PATH)map_validation.c					\
 					$(INPUT_VALIDATION_PATH)map_validation_player_position.c	\
-					$(INPUT_VALIDATION_PATH)wall_tracing.c				\
-					$(KEYSTROKES_PATH)keystrokes.c			\
-					$(KEYSTROKES_PATH)rotate.c				\
-					$(KEYSTROKES_PATH)move_player.c			\
-					$(RAYCASTING_PATH)dda.c					\
-					$(RAYCASTING_PATH)ray_casting.c			\
-					$(RAYCASTING_PATH)ray_casting_utils.c	\
-					$(RAYCASTING_PATH)calc_ray_casting.c		\
-					$(RAYCASTING_PATH)texture_calcs_0.c		\
-					$(RAYCASTING_PATH)texture_calcs_1.c		\
-					$(UTILS_PATH)colour_encoding_util.c		\
-					$(UTILS_PATH)params_utils.c					\
-					$(UTILS_PATH)t_position_utils.c					\
-					$(UTILS_PATH)ray_casting_utils.c					\
-					$(WINDOW_PATH)window.c					\
+					$(INPUT_VALIDATION_PATH)pathfinding.c						\
+					$(INPUT_VALIDATION_PATH)wall_tracing_utils.c				\
+					$(INPUT_VALIDATION_PATH)wall_tracing.c						\
+					$(KEYSTROKES_PATH)keystrokes.c								\
+					$(KEYSTROKES_PATH)rotate.c									\
+					$(KEYSTROKES_PATH)move_player.c								\
+					$(RAYCASTING_PATH)dda.c										\
+					$(RAYCASTING_PATH)ray_casting.c								\
+					$(RAYCASTING_PATH)ray_casting_utils.c						\
+					$(RAYCASTING_PATH)calc_ray_casting.c						\
+					$(RAYCASTING_PATH)texture_calcs_0.c							\
+					$(RAYCASTING_PATH)texture_calcs_1.c							\
+					$(UTILS_PATH)colour_encoding_util.c							\
+					$(UTILS_PATH)params_utils.c									\
+					$(UTILS_PATH)t_position_utils.c								\
+					$(UTILS_PATH)ray_casting_utils.c							\
+					$(WINDOW_PATH)window.c										\
 
 OBJS			:=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 SRCS			:=	$(addprefix $(SRC_DIR)/,$(SRCS))
