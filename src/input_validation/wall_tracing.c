@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:49:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/08 18:20:48 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:24:13 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,21 @@ bool	has_valid_move_direction(t_position *curr_pos, char **map)
 		|| is_valid_move_direction(find_next_move(curr_pos, WE), map));
 }
 
+t_position	get_next_move(t_position *curr_pos, char **map)
+{
+	t_position	next_move;
+
+	if (is_valid_move_direction(find_next_move(curr_pos, NO), map))
+		next_move = find_next_move(curr_pos, NO);
+	if (is_valid_move_direction(find_next_move(curr_pos, SO), map))
+		next_move = find_next_move(curr_pos, SO);
+	if (is_valid_move_direction(find_next_move(curr_pos, EA), map))
+		next_move = find_next_move(curr_pos, EA);
+	if (is_valid_move_direction(find_next_move(curr_pos, WE), map))
+		next_move = find_next_move(curr_pos, WE);
+	return (next_move);
+}
+
 bool	can_reverse(t_position *curr_pos, t_data *data, t_position *next_pos)
 {
 	t_position	x_pos;
@@ -121,14 +136,7 @@ bool	can_reverse(t_position *curr_pos, t_data *data, t_position *next_pos)
 	}
 	if (has_valid_move_direction(curr_pos, map))
 	{
-		if (is_valid_move_direction(find_next_move(curr_pos, NO), map))
-			t_position_copy(next_pos, find_next_move(curr_pos, NO));
-		if (is_valid_move_direction(find_next_move(curr_pos, SO), map))
-			t_position_copy(next_pos, find_next_move(curr_pos, SO));
-		if (is_valid_move_direction(find_next_move(curr_pos, EA), map))
-			t_position_copy(next_pos, find_next_move(curr_pos, EA));
-		if (is_valid_move_direction(find_next_move(curr_pos, WE), map))
-			t_position_copy(next_pos, find_next_move(curr_pos, WE));
+		*next_pos = get_next_move(curr_pos, map);
 		data->map_data.map[next_pos->line][next_pos->col] = 'x';
 		return (true);
 	}
