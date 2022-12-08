@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:49:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/08 18:24:13 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:42:23 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	check_tile_locale(t_position next_move, char **map)
 	return (false);
 }
 
-bool is_valid_move_direction(t_position position, char **map)
+bool	is_valid_move_direction(t_position position, char **map)
 {
 	if (map[position.line][position.col] != '1')
 		return (false);
@@ -76,7 +76,7 @@ void	prioritise_clockwise_movement(t_position *next_move, bool *move_dir,
 	return ;
 }
 
-bool 	has_neighbouring_one(t_position pos, char **map)
+bool	has_neighbouring_one(t_position pos, char **map)
 {
 	return (map[pos.line - 1][pos.col] == '1'
 		|| map[pos.line][pos.col + 1] == '1'
@@ -99,7 +99,7 @@ t_position	find_x_pos(t_position curr_pos, char **map)
 
 bool	has_valid_move_direction(t_position *curr_pos, char **map)
 {
-		return (is_valid_move_direction(find_next_move(curr_pos, NO), map)
+	return (is_valid_move_direction(find_next_move(curr_pos, NO), map)
 		|| is_valid_move_direction(find_next_move(curr_pos, SO), map)
 		|| is_valid_move_direction(find_next_move(curr_pos, EA), map)
 		|| is_valid_move_direction(find_next_move(curr_pos, WE), map));
@@ -111,11 +111,11 @@ t_position	get_next_move(t_position *curr_pos, char **map)
 
 	if (is_valid_move_direction(find_next_move(curr_pos, NO), map))
 		next_move = find_next_move(curr_pos, NO);
-	if (is_valid_move_direction(find_next_move(curr_pos, SO), map))
-		next_move = find_next_move(curr_pos, SO);
-	if (is_valid_move_direction(find_next_move(curr_pos, EA), map))
+	else if (is_valid_move_direction(find_next_move(curr_pos, EA), map))
 		next_move = find_next_move(curr_pos, EA);
-	if (is_valid_move_direction(find_next_move(curr_pos, WE), map))
+	else if (is_valid_move_direction(find_next_move(curr_pos, SO), map))
+		next_move = find_next_move(curr_pos, SO);
+	else
 		next_move = find_next_move(curr_pos, WE);
 	return (next_move);
 }
@@ -143,21 +143,16 @@ bool	can_reverse(t_position *curr_pos, t_data *data, t_position *next_pos)
 	return (false);
 }
 
-void	decide_where_to_go_next(t_data *data,
-			t_position *curr_pos, t_position *next_pos)
+void	decide_where_to_go_next(t_data *data, t_position *curr_pos,
+			t_position *next_pos)
 {
-	bool	valid_move_direction[4];
-	int		count_valid_moves;
+	char	**map;
 
-	valid_move_direction[NO] = is_valid_move_direction(find_next_move(curr_pos, NO), data->map_data.map);
-	valid_move_direction[SO] = is_valid_move_direction(find_next_move(curr_pos, SO), data->map_data.map);
-	valid_move_direction[EA] = is_valid_move_direction(find_next_move(curr_pos, EA), data->map_data.map);
-	valid_move_direction[WE] = is_valid_move_direction(find_next_move(curr_pos, WE), data->map_data.map);
-	count_valid_moves = valid_move_direction[NO] + valid_move_direction[SO] + valid_move_direction[EA] + valid_move_direction[WE];
-	if (count_valid_moves > 0)
+	map = data->map_data.map;
+	if (has_valid_move_direction(curr_pos, map))
 	{
-		prioritise_clockwise_movement(next_pos, valid_move_direction, curr_pos);
-		data->map_data.map[next_pos->line][next_pos->col] = 'x';
+		*next_pos = get_next_move(curr_pos, map);
+		map[next_pos->line][next_pos->col] = 'x';
 	}
 	else
 	{
@@ -204,7 +199,8 @@ void	trace_outer_walls(t_data *data)
 	find_starting_point(&starting_point, data);
 	decide_where_to_go_next(data, &starting_point, goes_to);
 	t_position_copy(pivot, starting_point);
-	while (goes_to->col != -1 && !t_position_compare_ptr(goes_to, &starting_point))
+	while (goes_to->col != -1
+		&& !t_position_compare_ptr(goes_to, &starting_point))
 	{
 		t_position_copy(pivot, *goes_to);
 		decide_where_to_go_next(data, pivot, goes_to);
