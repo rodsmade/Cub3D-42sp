@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/08 18:56:03 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:58:51 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,8 +245,8 @@ int			find_longest_line_length(char **map);
 void		validate_map(t_data *data);
 
 // pathfinding.c
-void	decide_where_to_go_next(t_data *data, t_position *curr_pos,
-			t_position *next_pos);
+void		decide_where_to_go_next(t_data *data, t_position *curr_pos,
+				t_position *next_pos);
 // wall_tracing.c
 void		trace_outer_walls(t_data *data);
 
