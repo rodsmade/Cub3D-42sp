@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/07 22:49:03 by coder            ###   ########.fr       */
+/*   Updated: 2022/12/08 15:34:31 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ void	validate_map_parameters(t_data *data)
 
 void	validate_input_file(t_data *data)
 {
-	// printf("DEBUG: entrou na validate_map_parameters\n");
 	validate_map_parameters(data);
-	// printf("DEBUG: saiu da validate_map_parameters\n");
-	// printf("DEBUG: entrou na validate_map\n");
 	validate_map(data);
-	// printf("DEBUG: saiu da validate_map\n");
 }

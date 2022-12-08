@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_tracing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:49:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/08 00:50:34 by coder            ###   ########.fr       */
+/*   Updated: 2022/12/08 15:35:37 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ void	prioritise_clockwise_movement(t_position *next_move, bool *move_dir,
 
 bool 	has_one_around(t_position pos, char **map)
 {
-	printf("tem 1 ao redor de [%i,%i]?\n", pos.line, pos.col);
-	printf("%i\n", map[pos.line - 1][pos.col] == '1'
-		|| map[pos.line][pos.col + 1] == '1'
-		|| map[pos.line + 1][pos.col] == '1'
-		|| map[pos.line][pos.col - 1] == '1');
 	return (map[pos.line - 1][pos.col] == '1'
 		|| map[pos.line][pos.col + 1] == '1'
 		|| map[pos.line + 1][pos.col] == '1'
@@ -91,11 +86,6 @@ bool 	has_one_around(t_position pos, char **map)
 
 t_position	find_x_pos(t_position curr_pos, char **map)
 {
-	// printf("in find_x: curr pos: [%i,%i]\n", curr_pos.line, curr_pos.col);
-	// printf("in find_x: curr pos: [%i,%i] = '%c'\n", curr_pos.line - 1, curr_pos.col, map[curr_pos.line - 1][curr_pos.col]);
-	// printf("in find_x: curr pos: [%i,%i] = '%c'\n", curr_pos.line, curr_pos.col + 1, map[curr_pos.line][curr_pos.col + 1]);
-	// printf("in find_x: curr pos: [%i,%i] = '%c'\n", curr_pos.line + 1, curr_pos.col, map[curr_pos.line + 1][curr_pos.col]);
-	// printf("in find_x: curr pos: [%i,%i] = '%c'\n", curr_pos.line, curr_pos.col - 1, map[curr_pos.line][curr_pos.col - 1]);
 	if (map[curr_pos.line - 1][curr_pos.col] == 'x')
 		return (t_position_create_tuple(curr_pos.line - 1, curr_pos.col));
 	if (map[curr_pos.line][curr_pos.col + 1] == 'x')
@@ -109,26 +99,19 @@ t_position	find_x_pos(t_position curr_pos, char **map)
 
 bool	can_reverse(t_position *curr_pos, t_data *data, t_position *next_pos)
 {
-	// void	t_position_copy(t_position *destination, const t_position source)
 	t_position	x_pos;
 	char		**map;
 	bool		has_valid_move_direction;
 
-	printf("can reverse?\n");
 	map = data->map_data.map;
-	
 	while (!has_one_around(*curr_pos, map))
 	{
-		printf("curr_pos: [%i,%i]\n", curr_pos->line, curr_pos->col);
 		x_pos = find_x_pos(*curr_pos, map);
-		printf("x_pos: [%i,%i]\n", x_pos.line, x_pos.col);
 		if (x_pos.line == 0 && x_pos.col == 0)
 			return (false);
 		map[curr_pos->line][curr_pos->col] = 'y';
 		t_position_copy(curr_pos, x_pos);
 	}
-	printf("saiu do loop\n");
-	printf("curr_pos: [%i,%i]\n", curr_pos->line, curr_pos->col);
 	has_valid_move_direction = is_valid_move_direction(find_next_move(curr_pos, NO), map)
 		|| is_valid_move_direction(find_next_move(curr_pos, SO), map)
 		|| is_valid_move_direction(find_next_move(curr_pos, EA), map)
@@ -144,6 +127,7 @@ bool	can_reverse(t_position *curr_pos, t_data *data, t_position *next_pos)
 		if (is_valid_move_direction(find_next_move(curr_pos, WE), map))
 			t_position_copy(next_pos, find_next_move(curr_pos, WE));
 	}
+	data->map_data.map[next_pos->line][next_pos->col] = 'x';
 	return (has_valid_move_direction);
 }
 
@@ -211,9 +195,7 @@ void	trace_outer_walls(t_data *data)
 	while (goes_to->col != -1 && !t_position_compare_ptr(goes_to, &starting_point))
 	{
 		t_position_copy(pivot, *goes_to);
-		printf("pivot: [%i,%i]\n", pivot->line, pivot->col);
 		decide_where_to_go_next(data, pivot, goes_to);
-		printf("pivot dps: [%i,%i]\n", pivot->line, pivot->col);
 	}
 	if (t_position_compare_ptr(goes_to, &starting_point) == false)
 	{
