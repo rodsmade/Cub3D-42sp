@@ -6,7 +6,7 @@
 /*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:39:13 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/01 22:40:35 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:17:17 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	set_facing_direction_vector(t_data *data)
 		data->ray.dir_x = -1;
 		data->ray.dir_y = 0;
 	}
-	if (data->map_data.starting_pos_char == 'S')
+	if (data->map_data.starting_pos_char == 'E')
 	{
 		data->ray.dir_x = 1;
 		data->ray.dir_y = 0;
 	}
-	if (data->map_data.starting_pos_char == 'E')
+	if (data->map_data.starting_pos_char == 'S')
 	{
 		data->ray.dir_x = 0;
 		data->ray.dir_y = 1;
@@ -43,12 +43,12 @@ void	set_camera_plane_vector(t_data *data)
 		data->ray.plane_x = 0;
 		data->ray.plane_y = 0.66;
 	}
-	if (data->map_data.starting_pos_char == 'S')
+	if (data->map_data.starting_pos_char == 'E')
 	{
 		data->ray.plane_x = 0;
 		data->ray.plane_y = -0.33;
 	}
-	if (data->map_data.starting_pos_char == 'E')
+	if (data->map_data.starting_pos_char == 'S')
 	{
 		data->ray.plane_x = 0.33;
 		data->ray.plane_y = 0;

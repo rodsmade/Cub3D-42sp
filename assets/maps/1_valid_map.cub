@@ -1,7 +1,7 @@
-NO ./assets/textures/bluestone.xpm
-SO ./assets/textures/redbrick.xpm
-EA ./assets/textures/purplestone.xpm
-WE ./assets/textures/greystone.xpm
+NO ./assets/textures/eagle.xpm
+SO ./assets/textures/wood.xpm
+EA ./assets/textures/colorstone.xpm
+WE ./assets/textures/mossy.xpm
 F 89, 65, 169
 C 29, 17, 40
 
