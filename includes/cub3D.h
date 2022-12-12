@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:42 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/08 18:58:51 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/12 20:15:48 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_map_data
 	char		*texture_paths[4];
 	char		*line;
 	char		**map;
+	bool		finished_reading_file;
 	t_position	starting_position;
 }			t_map_data;
 
@@ -208,7 +209,7 @@ void		set_camera_plane_vector(t_data *data);
 // input_validation_utils.c
 char		*get_next_line_trimmed(int input_fd);
 int			jump_spaces(const char *str);
-int			convert_colour_to_int(char *colour, t_data *data);
+int			convert_colour_to_int(char *colour);
 
 // input_validation.c
 void		validate_args(int argc, char *argv[], t_data *data);

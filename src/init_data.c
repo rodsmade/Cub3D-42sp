@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/11 22:13:32 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:01:29 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	init_map_data(t_map_data *map_parameters)
 	map_parameters->colours_rgb[CEILING][1] = -42;
 	map_parameters->colours_rgb[CEILING][2] = -42;
 	map_parameters->params_count = 0;
+	map_parameters->finished_reading_file = false;
 }
 
 void	null_mallocable_pointers(t_data *data)

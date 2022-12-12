@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_release.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 22:15:24 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/11 22:54:10 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:06:57 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 
 void	free_map_data(t_map_data *map)
 {
+	if (!map->finished_reading_file)
+	{
+		ft_free_ptr((void *)&map->line);
+		map->line = get_next_line(map->input_fd);
+		while (map->line)
+		{
+			ft_free_ptr((void *)&map->line);
+			map->line = get_next_line(map->input_fd);
+		}
+		ft_free_ptr((void *)&map->line);
+	}
+	close(map->input_fd);
 	ft_free_ptr((void *)&map->texture_paths[NO]);
 	ft_free_ptr((void *)&map->texture_paths[SO]);
 	ft_free_ptr((void *)&map->texture_paths[EA]);
