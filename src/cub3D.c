@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/12 13:18:19 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/12 20:47:13 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	validate_args(argc, argv, &data);
 	validate_input_file(&data);
-	// init_mlx_struct(&data);
-	// init_ray_parameters(&data);
-	// init_tex_parameters(&data);
-	// load_textures(&data);
-	// open_window(&data);
-	// set_hooks(&data);
-	// mlx_loop(data.mlx.pointer);
+	init_mlx_struct(&data);
+	init_ray_parameters(&data);
+	init_tex_parameters(&data);
+	load_textures(&data);
+	open_window(&data);
+	set_hooks(&data);
+	mlx_loop(data.mlx.pointer);
 	free_data(&data);
 	return (0);
 }
