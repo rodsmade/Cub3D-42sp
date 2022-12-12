@@ -44,12 +44,19 @@ LOG_FILE=$4
 
 # ASSERT
 ../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
-if [[ $? -eq EXPECTED_EXIT_CODE ]]; then
-	printf "$BGRN[OK]$RESET"
+ACTUAL_EXIT_CODE=$?
+if [[ ACTUAL_EXIT_CODE -eq EXPECTED_EXIT_CODE ]]; then
+	printf "$BGRN [OK] $RESET"
 else
-	printf "$BRED[NOK]$RESET"
+	printf "$BRED[NOK] $RESET"
 fi
-printf " $TEST_NAME\n"
+VALGRIND_RESULT=$(valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck ../cub3D $INPUT_FILE 2>&1 >/dev/null | wc -l)
+if [[ VALGRIND_RESULT -gt 0 ]]; then
+	printf "$BRED [NOK] $RESET"
+else
+	printf "$BGRN [OK] $RESET"
+fi
+printf "\t$TEST_NAME\n"
 }
 
 ##########################################################	EXECUTE TESTS	####
@@ -77,18 +84,20 @@ else
 		printf "\n${BYEL}${REDB}${BHWHT}Error: Name of executable is wrong! [Correct naming \"cub3D\"]${BYEL}\n${RESET}"
 		exit 1
 	else
-		printf "\n${BGRN}Cub3D successfully built!\n\n${RESET}"
+		printf "\n${BGRN}Cub3D successfully built!${RESET}"
 	fi
 fi
 
-printf "\n${BHWHT}Copying cub3D binary to current directory...\n"
-printf "cp ../cub3D ./cub3D" && cp ../cub3D ./cub3D
+printf "\n\n${BHWHT}Copying cub3D binary to current directory...${RESET}"
+printf "\n$ cp ../cub3D ./cub3D" && cp ../cub3D ./cub3D
 
 # CREATE LOGS FOLDER
-printf "\n${BHWHT}Making logs directory...\n"
-echo "$ mkdir -p logs" && mkdir -p logs
+printf "\n\n${BHWHT}Making logs directory...${RESET}"
+printf "\n$ mkdir -p logs" && mkdir -p logs
 
 # RUN TESTS
+printf "\n\n${BHWHT}Running tests...${RESET}"
+printf "\n  EC    VG  \n" && mkdir -p logs
 ## test_case 'test_description' 'input_path' expected_return_code 'log_path'
 test_case '00_test_texture_params_format_ID_space_VALID_PATH_must_return_exit_code_0' './maps/valid/00_valid_texture_parameters.cub' 0 'test_00_err'
 test_case '01_test_texture_params_format_ID_many_spaces_VALID_PATH_must_return_exit_code_0' './maps/valid/01_texture_ids_separated_by_many_spaces.cub' 0 'test_01_err'
