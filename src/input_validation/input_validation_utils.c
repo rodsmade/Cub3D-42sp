@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:52:15 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/11/17 12:15:55 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/11 22:51:20 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

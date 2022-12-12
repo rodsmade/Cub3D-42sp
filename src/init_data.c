@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:14:48 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/05 20:40:47 by coder            ###   ########.fr       */
+/*   Updated: 2022/12/11 22:13:32 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_mlx_struct(t_data *data)
 {
 	data->mlx.pointer = mlx_init();
-	if (data->mlx.pointer == NULL)
+	if (!data->mlx.pointer)
 		print_err_exit(MLX_ERROR, data);
 	data->mlx.img.pointer = mlx_new_image(data->mlx.pointer, WIDTH, HEIGHT);
 	data->mlx.img.data = (int *)mlx_get_data_addr(data->mlx.img.pointer,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:52:14 by gusalves          #+#    #+#             */
-/*   Updated: 2022/12/08 15:34:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:13:01 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	init_data(t_data *data)
 {
 	null_mallocable_pointers(data);
-	init_mlx_struct(data);
 	init_map_data(&data->map_data);
 }
 
@@ -26,6 +25,7 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	validate_args(argc, argv, &data);
 	validate_input_file(&data);
+	init_mlx_struct(&data);
 	init_ray_parameters(&data);
 	init_tex_parameters(&data);
 	load_textures(&data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:24:02 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/08 15:34:31 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:27:01 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	validate_args(int argc, char *argv[], t_data *data)
 	if (argc != 2)
 		print_err_exit(WRONG_ARGS_NO, data);
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
+	{
 		print_err_exit(FILE_EXTENSION_ERROR, data);
+	}
 	data->map_data.input_fd = open(argv[1], O_RDONLY);
 	if (data->map_data.input_fd == -1)
 		print_err_exit(SYSCALL_ERROR, data);
@@ -47,9 +49,7 @@ void	validate_map_parameters(t_data *data)
 		if ((data->map_data.line)[0])
 		{
 			if (is_valid_parameter_char((data->map_data.line)[0]))
-			{
 				retrieve_parameter(data);
-			}
 			else
 				break ;
 		}

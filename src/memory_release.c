@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_release.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 22:15:24 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/02 10:32:22 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/11 22:54:10 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void	free_data(t_data *data)
 			ft_free_ptr((void *)&data->ray.texture[i]);
 		ft_free_ptr((void *)&data->ray.texture);
 	}
+	if (data->map_data.line)
+		ft_free_ptr((void *)data->map_data.line);
 	return ;
 }
