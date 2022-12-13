@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 22:15:24 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/12 13:06:57 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:43:19 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_map_data(t_map_data *map)
 {
-	if (!map->finished_reading_file)
+	if (map->input_fd && !map->finished_reading_file)
 	{
 		ft_free_ptr((void *)&map->line);
 		map->line = get_next_line(map->input_fd);
