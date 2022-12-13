@@ -98,6 +98,7 @@ printf "\n$ mkdir -p logs" && mkdir -p logs
 # RUN TESTS
 printf "\n\n${BHWHT}Running tests...${RESET}"
 printf "\n  EC    VG  \n" && mkdir -p logs
+
 ## test_case 'test_description' 'input_path' expected_return_code 'log_path'
 test_case '00_test_texture_params_format_ID_space_VALID_PATH_must_return_exit_code_0' './maps/valid/00_valid_texture_parameters.cub' 0 'test_00_err'
 test_case '01_test_texture_params_format_ID_many_spaces_VALID_PATH_must_return_exit_code_0' './maps/valid/01_texture_ids_separated_by_many_spaces.cub' 0 'test_01_err'
@@ -153,6 +154,10 @@ test_case '50_test_map_with_two_starting_position_characters_must_return_exit_co
 test_case '51_test_bumpy_map_with_starting_position_within_must_return_exit_code_0' './maps/valid/51_starting_position_within_bumpy_map.cub' 0 'test_51_err'
 test_case '52_test_circle_map_with_hole_and_starting_position_within_must_return_exit_code_0' './maps/valid/52_starting_position_within_map_with_hole.cub' 0 'test_52_err'
 test_case '53_test_bumpy_map_with_starting_position_outside_must_return_exit_code_1' './maps/invalid/53_starting_position_outside_bumpy_map.cub' 1 'test_53_err'
+test_case '54_test_passing_no_args_must_return_exit_code_1' '' 1 'test_54_err'
+test_case '55_test_passing_non_existing_input_file_must_return_exit_code_1' 'void.cub' 1 'test_55_err'
+test_case '56_test_passing_wrong_file_format_must_return_exit_code_1' 'cube.pdf' 1 'test_56_err'
+test_case '57_test_passing_misleading_file_format_must_return_exit_code_1' 'cube.cube' 1 'test_57_err'
 
 # ESQUECI DE ESCREVER TESTE DE FORMATO ERRADO D: .cub
 
