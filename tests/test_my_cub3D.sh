@@ -46,15 +46,15 @@ LOG_FILE=$4
 ../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
 ACTUAL_EXIT_CODE=$?
 if [[ ACTUAL_EXIT_CODE -eq EXPECTED_EXIT_CODE ]]; then
-	printf "$BGRN [OK] $RESET"
+	sleep .1 && printf "$BGRN [OK] $RESET"
 else
-	printf "$BRED[NOK] $RESET"
+	sleep .1 && printf "$BRED[NOK] $RESET"
 fi
 VALGRIND_RESULT=$(valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck ../cub3D $INPUT_FILE 2>&1 >/dev/null | grep "==" | wc -l)
 if [[ VALGRIND_RESULT -gt 0 ]]; then
-	printf "$BRED [NOK] $RESET"
+	sleep .1 && printf "$BRED [NOK] $RESET"
 else
-	printf "$BGRN [OK] $RESET"
+	sleep .1 && printf "$BGRN [OK] $RESET"
 fi
 printf "\t$TEST_NAME\n"
 }
@@ -64,40 +64,40 @@ printf "\t$TEST_NAME\n"
 clear
 
 # PRINT HEADER
-printf "\n${BYEL}+%.50s+" $double_dashed_line
-printf "\n${BYEL}+               ${REDB} ${BHWHT}CUB3D DESTROYER ${RESET}${BYEL}                  +"
-printf "\n${BYEL}+          ${REDB} ${BHWHT}LET'S BREAK YOUR PARSER! ${RESET}${BYEL}              +"
-printf "\n${BYEL}+              ${REDB} ${BHWHT}42 São Paulo 2022 ${RESET}${BYEL}                 +"
-printf "\n${BYEL}+                ${REDB} ${BHWHT}by roaraujo ${RESET}${BYEL}                     +"
-printf "\n${BYEL}+%.50s+\n${RESET}" $double_dashed_line
+sleep .1 && printf "\n${BYEL}+%.50s+" $double_dashed_line
+sleep .1 && printf "\n${BYEL}+               ${REDB} ${BHWHT}CUB3D DESTROYER ${RESET}${BYEL}                  +"
+sleep .1 && printf "\n${BYEL}+          ${REDB} ${BHWHT}LET'S BREAK YOUR PARSER! ${RESET}${BYEL}              +"
+sleep .1 && printf "\n${BYEL}+              ${REDB} ${BHWHT}42 São Paulo 2022 ${RESET}${BYEL}                 +"
+sleep .1 && printf "\n${BYEL}+                ${REDB} ${BHWHT}by roaraujo ${RESET}${BYEL}                     +"
+sleep .1 && printf "\n${BYEL}+%.50s+\n${RESET}" $double_dashed_line
 
 # COMPILE cub3D
-printf "\n${BHWHT}Attempting to make cub3D in parent directory...\n"
-echo "$ make -C ../ &>/dev/null" && make -C ../ &>/dev/null
+sleep .1 && printf "\n${BHWHT}Attempting to make cub3D in parent directory...\n"
+sleep .1 && echo "$ make -C ../ &>/dev/null" && make -C ../ &>/dev/null
 
 if [[ $? -ne 0 ]]; then
-	printf "\n${BYEL}${REDB}${BHWHT}Error: Failed to make cub3D in parent directory!${BYEL}\n${RESET}"
+	sleep .1 && printf "\n${BYEL}${REDB}${BHWHT}Error: Failed to make cub3D in parent directory!${BYEL}\n${RESET}"
 	exit 1
 else
 	ls .. | grep -q "cub3D$"
 	if [[ $? -ne 0 ]]; then
-		printf "\n${BYEL}${REDB}${BHWHT}Error: Name of executable is wrong! [Correct naming \"cub3D\"]${BYEL}\n${RESET}"
+		sleep .1 && printf "\n${BYEL}${REDB}${BHWHT}Error: Name of executable is wrong! [Correct naming \"cub3D\"]${BYEL}\n${RESET}"
 		exit 1
 	else
-		printf "\n${BGRN}Cub3D successfully built!${RESET}"
+		sleep .1 && printf "\n${BGRN}Cub3D successfully built!${RESET}"
 	fi
 fi
 
-printf "\n\n${BHWHT}Copying cub3D binary to current directory...${RESET}"
-printf "\n$ cp ../cub3D ./cub3D" && cp ../cub3D ./cub3D
+sleep .1 && printf "\n\n${BHWHT}Copying cub3D binary to current directory...${RESET}"
+sleep .1 && printf "\n$ cp ../cub3D ./cub3D" && cp ../cub3D ./cub3D
 
 # CREATE LOGS FOLDER
-printf "\n\n${BHWHT}Making logs directory...${RESET}"
-printf "\n$ mkdir -p logs" && mkdir -p logs
+sleep .1 && printf "\n\n${BHWHT}Making logs directory...${RESET}"
+sleep .1 && printf "\n$ mkdir -p logs" && mkdir -p logs
 
 # RUN TESTS
-printf "\n\n${BHWHT}Running tests...${RESET}"
-printf "\n  EC    VG  \n" && mkdir -p logs
+sleep .1 && printf "\n\n${BHWHT}Running tests...${RESET}"
+sleep .1 && printf "\n  EC    VG  \n" && mkdir -p logs
 
 ## test_case 'test_description' 'input_path' expected_return_code 'log_path'
 test_case '00_test_texture_params_format_ID_space_VALID_PATH_must_return_exit_code_0' './maps/valid/00_valid_texture_parameters.cub' 0 'test_00_err'
