@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_charjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 22:11:10 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/09/29 22:13:26 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:41:13 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_charjoin(const char* str, const char c)
+char	*ft_charjoin(const char *str, const char c)
 {
-	int	i;
-	char *joined_str;
+	int		i;
+	char	*joined_str;
 
 	if (!str)
 		return (NULL);
