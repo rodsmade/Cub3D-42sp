@@ -13,6 +13,15 @@ A tester was written for this project in TDD fashion for the input file validati
 
 ![testing7sped](https://user-images.githubusercontent.com/49699403/208161582-2c70208d-76f9-4923-bd87-50780d13d2ef.gif)
 
+- [Cub3D](#cub3d)
+	- [Files](#files)
+	- [Configuration file syntax](#configuration-file-syntax)
+	- [Dependencies](#dependencies)
+	- [Tests](#tests)
+		- [Using the tester in my project](#using-the-tester-in-my-project)
+		- [I want to add a new config file test case](#i-want-to-add-a-new-config-file-test-case)
+
+
 ## Files 
 * ```assets/maps/valid_map.cub```
 	an example valid configuration file to run the program with
@@ -44,7 +53,7 @@ The tester considers both valid and invalid scenarios (too many arguments, too l
 1. Does the program exit with the proper exit code?
 2. Are there any leaks or other valgrind warnings?
 
-For simplicity's sake, I consider that whatever exit code returned that is **different than 0** means that your program decided that the input file is **invalid**. That is to say that the tester is not looking for any particular exit code when an error occurs. As long as the program returns anything other than 0, the tester should be able to identify it.
+For simplicity's sake, I consider that whatever exit code returned **different than 0** means that your program decided that the input file is **invalid**. That is to say that the tester is not looking for any particular exit code when an error occurs. As long as the program returns anything other than 0, the tester should be able to identify it.
 
 For instance, in the case of a config file with duplicate parameters - which is considered an invalid input -, the test case in the shell script is written as:
 
@@ -54,5 +63,21 @@ test_case '42_test_duplicate_EA_texture_parameter_must_return_exit_code_1' './ma
 
 The `1` in this function call (3rd parameter passed onto `test_case`) means that the tester is expecting your program to output something other than 0. If that is the case, the tester should print `[OK]` in the first column (EC).
 
+### Using the tester in my project
+
+> :warning: Beware!
+> 
+> It is important to know that at the time of writing these tests, *none of the graphics part had been coded as of yet*. So if your code is already using mlx and opening windows, I suggest you **comment out** this part of your code before using this tester.
+
+Simply copy the `tests` folder to the same level as your binary `./cub3D` is found. Then, it is important to `cd` into `tests`, and then simply run `./test_my_cub3D.sh`. You may need to add execution permission to the script, in order to do that, simply run  `chmod +x ./test_my_cub3D` and you're good to go.
+
+``` shell
+git clone https://github.com/rodsmade/Cub3D-42sp.git
+cp -R Cub3D-42sp/tests <destination_folder>
+cd <destination_folder>/tests
+chmod +x ./test_my_cub3D.sh
+./test_my_cub3D.sh
+```
+
 ### I want to add a new config file test case
-All you need to do is to duplicate the last line in the `# RUN TESTS` sectino of the bash script! Write a description for the test you want to add, make sure you create a new configuration file that represents the scenatio you want to test, decide whether this is a valid (0) or an invalid (1) config map and insert the destined log file name for this test. *Don't forget to update the number of the test case!*
+All you need to do is to duplicate the last line in the `# RUN TESTS` section of the bash script! Write a description for the test you want to add (arg 1), make sure you create a new configuration file that represents the scenario you want to test (arg 2), decide whether this is a valid (0) or an invalid (1) config file (arg 3), and insert the destined log file name for this test (arg 4)	. *Don't forget to update the number of the test case!*

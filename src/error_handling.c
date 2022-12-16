@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 19:38:43 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/12/15 23:00:05 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:45:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,5 @@ void	print_err_exit(int errcode, t_data *data)
 		printf("%s\n", get_error_message(errcode));
 	else
 		perror(NULL);
-	printf("sai com: %i\n", errcode + errno);
 	exit(errcode + errno);
 }
