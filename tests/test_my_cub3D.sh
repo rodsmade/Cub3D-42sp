@@ -4,10 +4,6 @@
 # PATHS
 LOGS_PATH='./logs'
 
-# LINES
-double_dashed_line="=================================================="
-
-
 ##########################################################	PRINT COLOURS	####
 #Regular bold text
 BRED="\e[1;31m"
@@ -44,7 +40,7 @@ LOG_FILE=$4
 
 # ASSERT
 ../cub3D $INPUT_FILE > $LOGS_PATH/$LOG_FILE 2>&1
-ACTUAL_EXIT_CODE=$?
+ACTUAL_EXIT_CODE=$(($? != 0))
 if [[ ACTUAL_EXIT_CODE -eq EXPECTED_EXIT_CODE ]]; then
 	sleep .1 && printf "$BGRN [OK] $RESET"
 else
@@ -64,12 +60,12 @@ printf "\t$TEST_NAME\n"
 clear
 
 # PRINT HEADER
-sleep .1 && printf "\n${BYEL}+%.50s+" $double_dashed_line
-sleep .1 && printf "\n${BYEL}+               ${REDB} ${BHWHT}CUB3D DESTROYER ${RESET}${BYEL}                  +"
-sleep .1 && printf "\n${BYEL}+          ${REDB} ${BHWHT}LET'S BREAK YOUR PARSER! ${RESET}${BYEL}              +"
-sleep .1 && printf "\n${BYEL}+              ${REDB} ${BHWHT}42 São Paulo 2022 ${RESET}${BYEL}                 +"
-sleep .1 && printf "\n${BYEL}+                ${REDB} ${BHWHT}by roaraujo ${RESET}${BYEL}                     +"
-sleep .1 && printf "\n${BYEL}+%.50s+\n${RESET}" $double_dashed_line
+sleep .1 && printf "\n${BYEL}~                                                                           ~"
+sleep .1 && printf "\n${BYEL}~                             ${YELB} ${BHWHT}TEST_MY_CUB3D ${RESET}${BYEL}                               ~"
+sleep .1 && printf "\n${BYEL}~                       ${YELB} ${BHWHT}A tester written à la TDD ${RESET}${BYEL}                         ~"
+sleep .1 && printf "\n${BYEL}~                            ${YELB} ${BHWHT}42 São Paulo 2022 ${RESET}${BYEL}                            ~"
+sleep .1 && printf "\n${BYEL}~                              ${YELB} ${BHWHT}by roaraujo ${RESET}${BYEL}                                ~"
+sleep .1 && printf "\n${BYEL}~                                                                           ~\n${RESET}"
 
 # COMPILE cub3D
 sleep .1 && printf "\n${BHWHT}Attempting to make cub3D in parent directory...\n"
