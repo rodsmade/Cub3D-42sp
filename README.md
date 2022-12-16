@@ -1,6 +1,8 @@
 # Cub3D
 A first-person perspective 3D raycaster written in C.
 
+![testing4](https://user-images.githubusercontent.com/49699403/208158472-4bafd027-2c6e-43eb-b08e-ec07bae98721.gif)
+
 This project is the second in the school's common core to have a graphic interface. It takes a configuration file as input, which describes a level map in a hypothetical 3D first-person game.
 
 This project comprises two main parts:
@@ -8,6 +10,8 @@ This project comprises two main parts:
 2. a **raycasting engine**, that is, the actual drawing of said 3D perspective on a window based off the instructions found in the valid configuration file.
 
 A tester was written for this project in TDD fashion for the input file validation! If you'd like to use it to test your project, follow the instructions below.
+
+![testing7sped](https://user-images.githubusercontent.com/49699403/208161582-2c70208d-76f9-4923-bd87-50780d13d2ef.gif)
 
 ## Files 
 * ```assets/maps/valid_map.cub```
