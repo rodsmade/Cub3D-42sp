@@ -81,3 +81,9 @@ chmod +x ./test_my_cub3D.sh
 
 ### I want to add a new config file test case
 All you need to do is to duplicate the last line in the `# RUN TESTS` section of the bash script! Write a description for the test you want to add (arg 1), make sure you create a new configuration file that represents the scenario you want to test (arg 2), decide whether this is a valid (0) or an invalid (1) config file (arg 3), and insert the destined log file name for this test (arg 4)	. *Don't forget to update the number of the test case!*
+
+
+## Final note
+If you're a 42 student struggling to understand this project, I got your back! Please refer to this Notion page that I wrote covering the general concepts related to this project! It's in Portuguese :cactus:
+
+> [Acelera — Cub3D](https://rodsmade.notion.site/Acelera-Cub3D-em-constru-o-52f9487742664765bf9071abed26553d)
