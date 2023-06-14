@@ -22,5 +22,5 @@ int	destroy(t_data *data)
 	mlx_destroy_display(data->mlx.pointer);
 	free(data->mlx.pointer);
 	free_data(data);
-	exit (42);
+	exit (0);
 }
